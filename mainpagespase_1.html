@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        #evwnt1{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <div>
+        <ul id="item_li">
+            
+        </ul>
+        <button onclick="addListItem()">
+            리스트 추가 하기 버튼을  
+        </button>
+    </div>
+    <script>
+        function addListItem() {
+            var list = document.getElementById("item_li");
+            var newListItem = document.createElement("li");
+            newListItem.className = "custom_li"; // 클래스 이름 설정
+            
+            // innerHTML을 사용하여 HTML 콘텐츠를 추가
+            newListItem.innerHTML = `
+                <style>
+                    .custom_li{
+                        list-style: none;
+                    }
+                    div{
+                        float: left;
+                    }
+                </style>
+                <div>
+                    <textarea>목록</textarea>
+                </div>
+                <div>
+                    <textarea>값</textarea>
+                </div>`;
+            
+            list.appendChild(newListItem);
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>커피매니아</title>
+        <meta name="coffeemania">
+        
+
+    </head>
+    <body>
+        <style>
+            #main_logo_page{
+                width: 100%;
+                height: 80px;
+                background-color: pink;
+            }
+            #baanner_page{
+                width: 100%;
+                height: 560px;
+                padding: auto;
+                margin: 0;
+                }
+            #main_first_top{
+                width: 100%;
+                height: auto;
+                display:flex;
+            }
+            #mainspace{
+                width: 100%;
+                height: fit-content;
+                display: flex;
+                justify-content : center;
+                margin-top: 30px;
+                margin-bottom: 30px;
+            }
+            #company_info{
+                width: 100%;
+                height: 500px;
+                background-color: pink;
+            }
+        </style>
+        <div id="main_logo_page">
+            <style>
+                #mian_logo_page_left{
+                    width: 85%;
+                    float: left;
+                    text-align: center;
+                }
+                #mian_logo_page_right{
+                    width: 15%;
+                    float: left;
+                    text-align: center;
+                }
+            </style>
+            <div id="mian_logo_page_left">
+                <a id="btn_login_page_move" onclick="location.href='coffeemania.html'">
+                    커피매니아
+                </a>
+            </div>
+            <div id="mian_logo_page_right">
+                <a id="btn_login_page_move" onclick="location.href='/login'">
+                    로그인
+                </a>
+            </div>
+        </div>
+        <div id="main_first_top">
+            <style>
+                #main_first_top_ul{
+                    list-style: none;
+                    text-align: center;
+                    width: 100%;
+                    height: max-content;
+                }
+                #main_first_top_li{
+                    float: left;
+                    width: 150px;
+                    height: max-content;
+                    
+                    
+                }
+                #main_first_top_sub_ul{
+                    list-style: none;
+                    text-align: center;
+                    width: auto;
+                    height: max-content;
+                    display: none;
+                }
+                #main_first_top_sub_li{
+                    width: min-content;
+                    height: max-content;
+                }
+                /* li에 마우스를 올렸을 때만 하위 ul을 표시합니다 */
+                ul#main_first_top_ul li:hover > ul {
+                    display: block;
+                }
+            </style>
+            <ul id="main_first_top_ul">
+                <li id="main_first_top_li">
+                    커핑 이야기
+                    <ul id="main_first_top_sub_ul">
+                        <li class="main_first_top_sub_li">
+                            브랜드 스토리
+                        </li>
+                        <li class="main_first_top_sub_li">
+                            위치
+                        </li>
+                        <li class="main_first_top_sub_li">
+                            바리스타
+                        </li>
+                        <li class="main_first_top_sub_li">
+                            
+                        </li>
+                        <li class="main_first_top_sub_li">
+                            
+                        </li>
+                    </ul>
+                <li id="main_first_top_li">
+                    커피
+                    <ul id="main_first_top_sub_ul">
+                        <li>
+                            생두
+                        </li>
+                        <li>
+                            원두
+                        </li>
+                        <li>
+                            시럽
+                        </li>
+                        <li>
+                            티
+                        </li>
+                    </ul>
+                </li>
+                <li id="main_first_top_li">
+                    악세서리
+                </li>
+                <li id="main_first_top_li" >
+                    <a onclick="href.location='buisness_page()'">
+                        비즈니스 문의
+                    </a>
+                </li>
+                <li id="main_first_top_li">
+                    EVENT
+                </li>
+            </ul>
+            <script>
+                function buisness_page(){
+                    document.getElementById("banner_img_link").href="https://www.softoasis.org"
+                }
+            </script>
+        </div>
+        <div id="baanner_page">
+            <style>
+                #banner_page_img{
+                    width: 100%;
+                    height: 500px;
+                }
+            </style>
+            <script>
+                function hello1()  {
+                    document.getElementById("banner_img").src = "https://firebasestorage.googleapis.com/v0/b/softoasis-c684c.appspot.com/o/cafe1.jpg?alt=media&token=15ab46cf-3099-457c-b4b4-ba89fa459e7b"
+                    document.getElementById("banner_img_link").href="https://map.naver.com/p/entry/place/1923188087?c=15.00,0,0,0,dh"
+                }
+                function hello2()  {
+                    document.getElementById("banner_img").src = "https://firebasestorage.googleapis.com/v0/b/softoasis-c684c.appspot.com/o/cafe2.jpg?alt=media&token=8809e2b8-3a05-4272-9211-520f8a0701d3"
+                    document.getElementById("banner_img_link").href="https://map.naver.com/p/entry/place/1042910752?c=15.00,0,0,0,dh"
+                }
+                function hello3()  {
+                    document.getElementById("banner_img").src="https://firebasestorage.googleapis.com/v0/b/softoasis-c684c.appspot.com/o/cafe3.jpg?alt=media&token=f6a59706-05a3-4e73-a6ce-4e3d1ff0f7a2"
+                    document.getElementById("banner_img_link").href="https://map.naver.com/p/entry/place/1965997995?c=15.00,0,0,0,dh"
+                }
+                function hello4()  {
+                    document.getElementById("banner_img").src = "https://firebasestorage.googleapis.com/v0/b/softoasis-c684c.appspot.com/o/cafe4.jpg?alt=media&token=921bf699-d736-4281-8279-cd4f7713c26f"
+                    document.getElementById("banner_img_link").href="https://map.naver.com/p/entry/place/1695760291?c=15.00,0,0,0,dh"
+                }
+            </script>
+            <div id="banner_page_img">
+                <style>
+                    #banner_img{
+                        width: 100%;
+                        height: max-content;
+                        text-align: center;
+                    }
+                </style>
+                <a id="banner_img_link" style="width: max-content; height: max-content;" onclick="hello1()" >
+                    <img id="banner_img" style="width: 100%; height: 100%;" src="https://firebasestorage.googleapis.com/v0/b/softoasis-c684c.appspot.com/o/cafe1.jpg?alt=media&token=15ab46cf-3099-457c-b4b4-ba89fa459e7b" href="https://map.naver.com/p/entry/place/1923188087?c=15.00,0,0,0,dh">
+                </a>
+            </div>
+
+            <div style="width: 100%; height: 20px;">
+                <style>
+                    #banner_page_move{
+                        width: 100%;
+                        height: 60px;
+                        text-align: center;
+                        display: flex;
+                    }
+                    #btn_banner_page_move{
+                        background-color: white;
+                        width: 40px;
+                        height: 40px;
+                        margin: auto;
+                        float: left;
+                        border-radius: 10px 10px 10px 10px;
+                        border: 1px solid black;
+                        margin: 10px;
+                    }
+                </style>
+                <div id="banner_page_move">
+                    <div style="width: 300px; height: 60px; margin: auto;">
+                        <a style="margin: auto; padding : 10px 0;" onclick="hello1()">
+                            <div id="btn_banner_page_move" style="width: 40px; height: 40px; " >
+                                <p style=" width: 30px; height: 30px; margin-top: 7px; margin-left: 5px;">
+                                    1
+                                </p>
+                            </div>
+                        </a>
+                        <a style="margin: auto; padding : 10px 0;" onclick="hello2()">
+                            <div id="btn_banner_page_move" style="width: 40px; height: 40px; " >
+                                <p style=" width: 30px; height: 30px; margin-top: 7px; margin-left: 5px;">
+                                    2
+                                </p>
+                            </div>
+                        </a>
+                        <a style="margin: auto; padding : 10px 0;" onclick="hello3()">
+                            <div id="btn_banner_page_move" style="width: 40px; height: 40px; " >
+                                <p style=" width: 30px; height: 30px; margin-top: 7px; margin-left: 5px;">
+                                    3
+                                </p>
+                            </div>
+                        </a>
+                        <a style="margin: auto; padding : 10px 0;" onclick="hello4()">
+                            <div id="btn_banner_page_move" style="width: 40px; height: 40px; " >
+                                <p style=" width: 30px; height: 30px; margin-top: 7px; margin-left: 5px;">
+                                    4
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="mainspace">
+            <style>
+                #mainspace_left{
+                    width: 200px;
+                    height: fit-content;
+                    display: flex;
+                    justify-content: center;
+                }
+                #mainspace_center{
+                    width: 1000px;
+                    height: max-content;
+                }
+                #mainspace_right{
+                    width: 200px;
+                    height: fit-content;
+                    display: flex;
+                    justify-content: center;
+                }
+            </style>
+            <div id="mainspace_left">
+                <div style="background-color: aqua; width: 150px; height: 700px;">
+                    안녕
+                </div>
+            </div>
+            <div id="mainspace_center">
+                
+            </div>
+            <div id="mainspace_right">
+                <div style="background-color: aqua; width: 150px; height: 700px;">
+                    안녕
+                </div>
+            </div>
+        </div>
+        <div id="company_info">
+            <style>
+                #company_info_sub{
+                    width: 30%;
+                    height: 100%;
+                    float: left;
+                    background-color: pink;
+                }
+            </style>
+            <div id="company_info_sub">
+                <div id="ADDRESS">
+                    <p style="font-size: x-large; margin: 0;">
+                        ADDRESS
+                    </p>
+                    <p style="font-size:small; margin: 0">
+                        대전광역시 대덕대로 223 대우토피아 1415호
+                    </p>
+                </div>
+                <div>
+                    <p style="font-size: x-large;">
+                        고객센터
+                    </p>
+                    <p style="font-size:medium;">
+                        010-4517-1684
+                    </p>
+                    <p style="font-size:medium;">
+                        상담 운영 시간 : 월 ~ 금    AM 09 : 00 ~ PM 18 : 00 
+                    </p>
+                </div>
+                <div>
+                    <p style="font-size: x-large;">
+                        SNS
+                    </p>
+                    <a href="https://www.instagram.com/life_para3/">
+                        <img src="website/insta.jpg" style="width: 40px; height: 40px; margin: 6px;">
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61552411303231">
+                        <img src="website/facebook.jpg" style="width: 40px; height: 40px; margin: 6px;">
+                    </a>
+                    <a href="https://open.kakao.com/o/sxTCML7f">
+                        <img src="website/kakao.jpg" style="width: 40px; height: 40px; margin: 6px;">
+                    </a>
+                    <p>
+                        네이버 블로그
+                    </p>
+                </div>
+            </div>
+            <div id="company_info_sub">
+                <style>
+                    #notice{
+                        width: 100%;
+                        height: 200px;
+                    }
+                </style>
+                <div id="notice">
+                    <div style="width: 100%; height: 60px;">
+                        <div style="width: 75%; height: 100%; float: left;" >
+                            <p style="font-size: large;">
+                                공지사항
+                            </p>
+                        </div>
+                        <div style="width: 25%; height: 100%; float: left;">
+                            <p style="font-size: small;"> 
+                                더보기 +
+                            </p>
+                        </div>
+                    </div>
+                    <div style="padding: 0; margin: 0 ;">
+                        <style>
+                            #notice_info_ul{
+                                list-style: none;
+                                margin: 0;
+                                margin-block-end: 0px;
+                                margin-block-start: 0px;
+                                padding-inline-start: 0px
+                            }
+                        </style>
+                        <ul id="notice_info_ul">
+                            <style>
+                                #notice_info_li{
+                                    margin-left: 0;
+                                    font-size: small;
+                                    margin: 6px;
+                                }
+
+                            </style>
+                            <li id="notice_info_li" >
+                                1. 
+                                <a id="notice_info_link">
+                                    공지1
+                                </a>
+                            </li>
+                            <li id="notice_info_li">
+                                2. 
+                                <a id="notice_info_link">
+                                    공지2
+                                </a>
+                            </li>
+                            <li id="notice_info_li">
+                                3. 
+                                <a id="notice_info_link">
+                                    공지3
+                                </a>
+                            </li>
+                            <li id="notice_info_li">
+                                4. 
+                                <a id="notice_info_link">
+                                    공지4
+                                </a>
+                            </li>
+                            <li id="notice_info_li">
+                                5. 
+                                <a id="notice_info_link">
+                                    공지5
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="company_info_sub">
+                <div>
+                    <p>
+                        buisness 문의
+                    </p>
+                    <a href="https://open.kakao.com/o/grwHIL7f">
+                        <img src="kakao.jpg" style="width: 40px; height: 40px;">
+                    </a>
+                </div>
+                <div>
+                    <p>
+                        테스트 스페이스
+                    </p>
+                    <div style="width: 100px; height: 100px; background-color: black;" onclick="location.href='coffeemania_pay.html'">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
