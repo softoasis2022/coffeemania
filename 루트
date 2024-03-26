@@ -1,0 +1,24 @@
+coffeemania
+  ㄴuser
+    ㄴ일반유저
+      ㄴ유저 고유번호(uid)
+        ㄴ이름
+        ㄴ닉네임
+        ㄴ주문
+          ㄴ주문번호
+   ㄴ사업자유저
+  ㄴimage
+  ㄴjs
+    ㄴmainpageroad.js(서버메인 코드)
+  ㄴmainpage
+    ㄴtamplate
+      ㄴcoffeemainpagetample.html
+    ㄴcoffeemania.html(메인페이지)
+    ㄴcoffeemania_buisness.html(비즈니스 문의 페이지)
+    ㄴcoffeemania_login.html(로그인페이지)
+    ㄴcoffeemania_operation.html
+    ㄴcoffeemania_pay.html(결제페이지)
+    ㄴcoffeemania_event.html(이벤트페이지)
+    ㄴcoffeemania
+  ㄴcrolling
+    ㄴ크롤링코드
