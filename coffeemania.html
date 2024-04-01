@@ -31,7 +31,7 @@
                 width: 100%;
                 height: fit-content;
                 display: flex;
-                justify-content : center;
+                justify-content : left;
                 margin-top: 30px;
                 margin-bottom: 30px;
             }
@@ -39,6 +39,19 @@
                 width: 100%;
                 height: 500px;
                 background-color: pink;
+            }
+            #item_category{
+                width: 100%;
+                height: fit-content;
+                border-top: 1px solid black;
+            }
+            #bestseller{
+                justify-content : center;
+                display: flex;
+            }
+            #naver_view{
+                justify-content : center;
+                display: flex;
             }
         </style>
         <div id="main_logo_page">
@@ -144,10 +157,15 @@
                 <li id="main_first_top_li">
                     EVENT
                 </li>
+                <li id="main_first_top_li">
+                    <div onclick="">
+                        프로젝트 참여
+                    </div>
+                </li>
             </ul>
             <script>
                 function buisness_page(){
-                    document.getElementById("banner_img_link").href="https://www.softoasis.org"
+                    document.getElementById("banner_img_link").href="https://www.softoasis.org:3000/buisness"
                 }
             </script>
         </div>
@@ -251,8 +269,9 @@
                     justify-content: center;
                 }
                 #mainspace_center{
-                    width: 1000px;
-                    height: max-content;
+                    width: 100%;
+                    height: fit-content;
+                    display: flex;
                 }
                 #mainspace_right{
                     width: 200px;
@@ -261,18 +280,512 @@
                     justify-content: center;
                 }
             </style>
-            <div id="mainspace_left">
-                <div style="background-color: aqua; width: 150px; height: 700px;">
-                    안녕
-                </div>
-            </div>
             <div id="mainspace_center">
+                <style>
+                    #mainspace_center_item_li{
+                        width: 25%;
+                        height: 700px;
+                        padding: 20px;
+                        margin-left: 30px;
+                    }
+                    #mainspace_center_item_li_main{
+                        width: 250px;
+                        height: 350px;
+                        padding: 20px;
+                        margin: auto;
+                        justify-content: center;
+                        background-color: lightskyblue;
+                        border-radius: 30px;
+                    }
+                </style>
+                <div id="mainspace_center_item_li">
+                    <div id="mainspace_center_item_li_main" style="margin-top: +150px;">
+                        <img src="./../image/3d_porter_filter.jpg" style="width: 100%; height: 100%;">
+                    </div>
+                </div>
+                <div id="mainspace_center_item_li">
+                    <div id="mainspace_center_item_li_main" style="margin-top: +310px;">
+                        <img src="./../image/3d_porter_filter.jpg" style="width: 100%; height: 100%;">
+                    </div>
+                </div>
+                <div id="mainspace_center_item_li">
+                    <div id="mainspace_center_item_li_main">
+                        <img src="./../image/3d_porter_filter.jpg" style="width: 100%; height: 100%;">
+                    </div>
+                </div>
+                <div id="mainspace_center_item_li">
+                    <div id="mainspace_center_item_li_main" style="margin-top: +200px;">
+                        <img src="./../image/3d_porter_filter.jpg" style="width: 100%; height: 100%;">
+                    </div>
+                </div>
+                <script>
+                    
+                </script>
+            </div>
+        </div>
+        <div id="bestseller">
+            <style>
+                #warp{
+                    width: 300px;
+                    height: fit-content;
+                    
+                }
+            </style>
+            <div id="warp">
+                <style>
+                    #bestseller_li{
+                        width: 100%;
+                        height: 50px;
+                        display: flex;
+                        
+                    }
+                </style>
+                <div>
+                    인기 상품 카테 고리 네임 (전체 그림자 적용)
+                </div>
+                <ul>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+
+                </ul>
+            </div>
+            <div id="warp">
+                <style>
+                    #bestseller_li{
+                        width: 100%;
+                        height: 50px;
+                        display: flex;
+                        
+                    }
+                </style>
+                <div>
+                    인기 상품 카테 고리 네임 (전체 그림자 적용)
+                </div>
+                <ul>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+
+                </ul>
+            </div>
+            <div id="warp">
+                <style>
+                    #bestseller_li{
+                        width: 100%;
+                        height: 50px;
+                        display: flex;
+                        
+                    }
+                </style>
+                <div>
+                    인기 상품 카테 고리 네임 (전체 그림자 적용)
+                </div>
+                <ul>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+                    <div id="bestseller_li">
+                        <div>
+                            <p id="bestseller_li_number">
+                                1
+                            </p>
+                        </div>
+                        <div id="bestseller_li_keyword">
+                            <p id="bestseller_li_keyword_txt">
+                                인기상품 이름
+                            </p>
+                        </div>
+                    </div>
+
+                </ul>
+            </div>
+        </div>
+        <div id="naver_view">
+            <style>
+                #view_left{
+                    width: 500px;
+                    height: fit-content;
+                }
+                #view_center{
+                    width: 500px;
+                    height: fit-content;
+                }
+                #view_right{
+                    width: 500px;
+                    height: fit-content;
+                }
+            </style>
+            <div id="view_left">
+                <ul id="">
+                    
+                    <li id="view_left_li">
+                        <div>
+                            <p>
+                                네이바 블로그 제목
+                            </p>
+                        </div>
+                        <div>
+                            <p>
+                                본문 미리 보기
+                            </p>
+                        </div>
+                        <div>
+                            <img id="naver_blog_img">
+                        </div>
+                    </li>
+                    <li>
+                        
+                    </li>
+                    <li>
+                        
+                    </li>
+                </ul>
+            </div>
+            <div id="view_center">
                 
             </div>
-            <div id="mainspace_right">
-                <div style="background-color: aqua; width: 150px; height: 700px;">
-                    안녕
-                </div>
+            <div id="view_right">
+                
             </div>
         </div>
         <div id="company_info">
