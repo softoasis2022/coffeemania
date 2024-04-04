@@ -1,854 +1,444 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>커피메니아 인재 채용 및 프리렌서 모집</title>
-    <style>
-        #mian_logo_page{
-            width: 100%;
-            height: 80px;
-            background-color: pink;
+'use strict';
+
+const express = require('express');
+const main = express();
+const login_main = express();
+const app = express();
+
+const cheerio = require('cheerio');
+const http = require('http');
+const fs = require('fs');  // 파일 시스템 모듈 불러오기
+const path = require('path');
+
+//임시 로그인 데이터 처리 서버 완성
+
+login_main.use(express.json());
+app.listen(200,function(){
+    console.log("서버가동") //터미널에 출력
+});
+main.use(express.json());
+main.listen(3001,function(){
+    console.log("서버가동") //터미널에 출력
+});
+main.set("views", "./mainpage")
+
+main.get("/login", (req, res) => {  // 로그인 으로 인입이 되면 러 
+    //기능 또는 동작
+    fs.readFile(__dirname + "/../mainpage/coffeemania_login.html", 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Server Error');
+            return;
         }
-        #main_first_top{
-            width: 100%;
-            height: auto;
-            display:flex;
-        }
-        #company_info{
-            width: 100%;
-            height: 500px;
-            background-color: pink;
-        }
-    </style>
-        <style>
-            #operation_page_main_info{
-                width: fit-content;
-                height: fit-content;
-                margin: 50px;
-            }
-            #operation_page_main_info_li{
-                margin-top: 30px;
-                margin-bottom: 30px;
-            }
-            #operation_ul{
-                list-style: none;
-                height: fit-content;
-            }
-            #operation_li{
-                width: fit-content;
-                height: fit-content;
-                border: 2px solid black;
-                margin-top: 10px;
-                padding: 10px;
-            }
-            #operation_info_ul{
-                list-style: none;
-                height: fit-content;
-                padding: 0px;
-            }
-            #operation_info_li{
-                width: 1000px;
-                height: fit-content;
-                padding: 20px;
-            }
-            #operation_info{
-                width: 100%;
-            }
-            #operation_info_view{
-                display: flex;
+
+        // 클라이언트에게 수정된 HTML 전송
+        res.send(data);
+    });
     
-            }
-            #operation_info_li_main{
-                display: flex;
-            }
-            #operation_input{
-                width: 100%;
-                height: fit-content;
-                border: 1px solid black;
-            }
-        </style>
-    <script>
-        let page_info = document.getElementById("psgeinfo")
+    // 뒤에 로그인 시도 정보가 없다면 로그인 기본 페이지 로그인 시도 정보가 있으면 로그인 기능 실행
+    console.log("로그인페이지확인")
+});
+main.get("/", (req, res) => {  // 로그인 으로 인입이 되면 러 
+    //기능 또는 동작
+    //console.log(req.url)
+    
+    
+    fs.readFile(__dirname + "/../mainpage/coffeemania.html", 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Server Error');
+            return;
+        }
+        
+        // HTML 파일을 cheerio로 로드
+        const $ = cheerio.load(data);
 
-        page_info.insertAdjacentHTML(``)
-    </script>
-</head>
-<body>
-    <div id="mian_logo_page">
-        <style>
-            #mian_logo_page_left{
-                width: 85%;
-                float: left;
-                text-align: center;
-            }
-            #mian_logo_page_right{
-                width: 15%;
-                float: left;
-                text-align: center;
-            }
-        </style>
-        <div id="mian_logo_page_left">
-            <a id="btn_login_page_move" onclick="location.href='coffeemania.html'">
-                커피매니아
-            </a>
-        </div>
-        <div id="mian_logo_page_right">
-            <a id="btn_login_page_move" onclick="location.href='coffeemania_login.html'">
-                로그인
-            </a>
-        </div>
-    </div>
-    <div id="main_first_top">
-        <style>
-            
-            #main_first_top_ui{
-            list-style: none;
-            text-align: center;
-            width: 100%;
-            height: min-content;
-            }
-            #main_first_top_li{
-                float: left;
-                width: 150px;
-                height: min-content;
-            }
-            #main_first_top > ul > li :hover > ul{
-            display: block;
-            }
-            #main_first_top_sub_ul{
-                list-style: none;
-                text-align: center;
-                width: auto;
-                height: auto;
-                display: none;
-            }
-            #main_first_top_sub_li{
-                width: min-content;
-                height: min-content;
-            }
-        </style>
-        <ul id="main_first_top_ui">
-            <li id="main_first_top_li">
-                커핑 이야기
-                <ul id="main_first_top_sub_ul">
-                    <li class="main_first_top_sub_li">
-                        브랜드 스토리
-                    </li>
-                    <li class="main_first_top_sub_li">
-                        위치
-                    </li>
-                    <li class="main_first_top_sub_li">
-                        바리스타
-                    </li>
-                    <li class="main_first_top_sub_li">
-                        
-                    </li>
-                    <li class="main_first_top_sub_li">
-                        
-                    </li>
-                </ul>
-            <li id="main_first_top_li">
-                커피
-                <ul id="main_first_top_sub_ul">
-                    <li>
-                        생두
-                    </li>
-                    <li>
-                        원두
-                    </li>
-                    <li>
-                        시럽
-                    </li>
-                    <li>
-                        티
-                    </li>
-                </ul>
-            </li>
-            <li id="main_first_top_li">
-                악세서리
-            </li>
-            <li id="main_first_top_li">
-                <div onclick="location.href='/buisness'">
-                    프로젝트 참여
-                </div>
-            </li>
-            <li id="main_first_top_li">
-                <a onclick="location.href='/eventpage'">
-                    EVENT
-                </a>
-            </li>
-            <li id="main_first_top_li">
-                <div onclick="location.href='/operation'">
-                    프로젝트 참여
-                </div>
-            </li>
-        </ul>
-    </div>
-    <div id="operation_page_main_info">
-        <div id="operation_page_main_info_li">
-            <div>
-                프로젝트 형식
-            </div>
-            <div>
-                포트폴리오용 프로젝트, 수익형 프로젝트
-            </div>
-        </div>
-        <div id="operation_page_main_info_li">
-            <div>
-                프로젝트 간단 설명
-            </div>
-            <div>
-                홈카페 관련 제품을 판매하는 쇼핑몰입니다.  일반적인 프렌차이즈에서 판매 하는 프랜치커피가 아닌 스페셜티에 속하는 커피를 프렌치 커피 가격으로 더욱 맛있는 커피르 즐길수있다는 모티브로 시작하게 되었습니다.  본 프로젝트는 포트폴리오 뿐만아니라 채용에도 고려 해볼 수있는 프로젝트입니다. 이미 사업자 등록은  완료한 상태이며 상장이후 지분을 참여하신분들에게 집누 2%식 나누어 드릴예정입니다. 또한 오픔이후 매출 1천만원 이상이 나온다면 5프로씩 지급 해 드릴 예정입니다.
-            </div>
-        </div>
-        <div id="operation_page_main_info_li">
-            <div>
-                주요 참여 시간
-            </div>
-            <div>
-                없음, 각 부서별 회의를제외 하고는 고정 시간이 부여 되지 않습니다.
-            </div>
-        </div>
-        <div id="operation_page_main_info_li">
-            <div>
-                신청방법
-            </div>
-            <div>
-                hang05312@softoasis,org로 포트폴리오 및 이력서 발송
-            </div>
-        </div>
-        <div id="operation_page_main_info_li">
-            <div>
-                수익배분 방법
-            </div>
-            <div>
-                <p>
-                    a. 순매출 1000만원 이상 달성시 순매출에 5% 지급
-                </p>
-                <p>
-                    b. 상장시 회사 지분에 2% 지급
-                </p>
-                <p>
-                    c. 원하신 다면 직원 채용
-                </p>
-            </div>
-        </div>
-        <div id="operation_page_main_info_li">
-            <div>
-                오픈 예정일
-            </div>
-            <div>
-                24년 하반기
-            </div>
-        </div>
-        <div id="operation_page_main_info_li">
-            <div>
-                문의사항
-            </div>
-            <div>
-                <a href="https://open.kakao.com/o/sxTCML7f" >카카오톡 오픈채팅</a>
-            </div>
-        </div>
-    </div>
-    <div>
-        <ul id="operation_ul">
-            <li id="operation_li">
-                <ul id="operation_info_ul">
-                    <style>
-                        #operation_info_li{
-                                border: 1px solid black;
-                                margin-top: 10px;
-                            }
-                    </style>
-                    <div id="operation_info_view">
-                        <div>개발</div>
-                        <div>
-                            <button id="btn_operation_info_plus" onclick="operationinfoplus()">
-                                더보기
-                            </button>
-                        </div>
-                    </div>
-                    <li id="operation_info_li">
-                        <style>
-                            #title{
-                                padding: 10px;
-                            }
-                            #operation_info_li_main{
-                                padding: 20px;
-                            }
-                        </style>
-                        <div id="operation_info">
-                            <div id="title">크롤링 및 데이터 관리 가능 하신분</div>
-                            <div id="operation_info_li_main">
-                                <style>
-                                    #sub1{
-                                        margin-right: 10px;
-                                    }
-                                </style>
-                                <div id="sub1">
-                                    필요 기술
-                                </div>
-                                <div id="sub2">
-                                    파이썬 크롤링 경헙자
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    
-                    <script>
-                        function operationinfoplus(){
-                            alert('더보기 클릭')
-                        }
-                    </script>
-                </ul>
-            </li>
-            <li id="operation_li">
-                <ul id="operation_info_ul">
-                    <div id="operation_info_view">
-                        <div id="opername">디자인</div>
-                        <div>
-                            <button id="btn_operation_info_plus" onclick="operationinfoplus()">
-                                더보기
-                            </button>
-                        </div>
-                    </div>
-                    <li id="operation_info_li">
-                        <div id="operation_info">
-                            <div>웹디자이너 모집</div>
-                            <div>
-                                <div>
-                                    필요기술
-                                </div>
-                                <div>
-                                    일러스트레이터, 포토샵, XD, 이펙트ㄴ
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <script>
-                        function operationinfoplus(){
-                            alert('더보기 클릭')
-                        }
-                    </script>
-                </ul>
-            </li>
-            <li id="operation_li">
-                <ul id="operation_info_ul">
-                    <div id="operation_info_view">
-                        <div id="opername">기획</div>
-                        <div>
-                            <button id="btn_operation_info_plus" onclick="operationinfoplus()">
-                                더보기
-                            </button>
-                        </div>
-                    </div>
-                    <li id="operation_info_li">
-                        <div id="operation_info">
-                            <div id="title">PM , PO 모집</div>
-                            <div id="technology"></div>
-                        </div>
-                    </li>
-                    <script>
-                        function operationinfoplus(){
-                            alert('더보기 클릭')
-                        }
-                    </script>
-                </ul>
-            </li>
-            <li id="operation_li">
-                <ul id="operation_info_ul">
-                    <div id="operation_info_view">
-                        <div id="opername">세무</div>
-                        <div>
-                            <button id="btn_operation_info_plus" onclick="operationinfoplus()">
-                                더보기
-                            </button>
-                        </div>
-                    </div>
-                    <li id="operation_info_li">
-                        <div id="operation_info">
-                            <div>웹디자이너 모집</div>
-                            <div></div>
-                        </div>
-                    </li>
-                    <script>
-                        function operationinfoplus(){
-                            alert('더보기 클릭')
-                        }
-                    </script>
-                </ul>
-            </li>
-            <li id="operation_li">
-                <ul id="operation_info_ul">
-                    <div id="operation_info_view">
-                        <div id="opername">인사</div>
-                        <div>
-                            <button id="btn_operation_info_plus" onclick="operationinfoplus()">
-                                더보기
-                            </button>
-                        </div>
-                    </div>
-                    <li id="operation_info_li">
-                        <div id="operation_info">
-                            <div>웹디자이너 모집</div>
-                            <div></div>
-                        </div>
-                    </li>
-                    <script>
-                        function operationinfoplus(){
-                            alert('더보기 클릭')
-                        }
-                    </script>
-                </ul>
-            </li>
-            <li id="operation_li">
-                <ul id="operation_info_ul">
-                    <div id="operation_info_view">
-                        <div id="opername">영업</div>
-                        <div>
-                            <button id="btn_operation_info_plus" onclick="operationinfoplus()">
-                                더보기
-                            </button>
-                        </div>
-                    </div>
-                    <li id="operation_info_li">
-                        <div id="operation_info">
-                            <div>웹디자이너 모집</div>
-                            <div></div>
-                        </div>
-                    </li>
-                    <script>
-                        function operationinfoplus(){
-                            alert('더보기 클릭')
-                        }
-                    </script>
-                </ul>
-            </li>
-            <li id="operation_li">
-                <ul id="operation_info_ul">
-                    <div id="operation_info_view">
-                        <div id="opername">마케팅</div>
-                        <div>
-                            <button id="btn_operation_info_plus" onclick="operationinfoplus()">
-                                더보기
-                            </button>
-                        </div>
-                    </div>
-                    <li id="operation_info_li">
-                        <div style="width: 1000px; height: fit-content;">
-                            <div id="operation_info">
-                                <div>웹디자이너 모집</div>
-                                <div></div>
-                            </div>
-                        </div>
-                    </li>
-                    <script>
-                        function operationinfoplus(){
-                            alert('더보기 클릭')
-                        }
-                    </script>
-                </ul>
-            </li>
-            <li id="operation_li">
-                <ul id="operation_info_ul">
-                    <div id="operation_info_view">
-                        <div id="opername">바리스타</div>
-                        <div>
-                            <button id="btn_operation_info_plus" onclick="operationinfoplus()">
-                                더보기
-                            </button>
-                        </div>
-                    </div>
-                    <li id="operation_info_li">
-                        <div style="width: 1000px; height: fit-content;">
-                            <div id="operation_info">
-                                <div>웹디자이너 모집</div>
-                                <div></div>
-                            </div>
-                        </div>
-                    </li>
-                    <script>
-                        function operationinfoplus(){
-                            alert('더보기 클릭')
-                        }
-                    </script>
-                </ul>
-            </li>
-            <li id="operation_li">
-                <ul id="operation_info_ul">
-                    <div id="operation_info_view">
-                        <div id="opername">로스터</div>
-                        <div>
-                            <button id="btn_operation_info_plus" onclick="operationinfoplus()">
-                                더보기
-                            </button>
-                        </div>
-                    </div>
-                    <li id="operation_info_li">
-                        <div style="width: 1000px; height: fit-content;">
-                            <div id="operation_info">
-                                <div>웹디자이너 모집</div>
-                                <div></div>
-                            </div>
-                        </div>
-                    </li>
-                    <script>
-                        function operationinfoplus(){
-                            alert('더보기 클릭')
-                        }
-                    </script>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    <div id="operation_input">
-        <style>
-            #operation_input_sub{
-                display: flex;
-                width: 100%;
-                height: fit-content;
-                border-bottom: 1px solid black;
-            }
-            #operation_input_sub_main{
-                width: fit-content;
-                height: fit-content;
-                
-            }
-        </style>
-        <div style="border-bottom: 1px solid black;">
-            <p style="font-size: 25px; margin: 10px;">
-                프로 젝트 지원
-            </p>
-        </div>
-        <div id="operation_input_sub">
-            <div id="operation_input_sub_main">
-                <p style="width: 150px; margin-left: 50px;">
-                    이름
-                </p>
-            </div>
-            <div id="operation_input_sub_main">
-                <input id="name" style="width: 500px; height: 30px; font-size: 15px; text-align: left; margin-top: 10px;" maxlength="4" value="실명을 입력해주세요 최대 4글자" onclick="value=``">
-            </div>
-        </div>
-        <div id="operation_input_sub">
-            <div id="operation_input_sub_main">
-                <p style="width: 150px; margin-left: 50px;">
-                    활동 닉네임
-                </p>
-            </div>
-            <div id="operation_input_sub_main">
-                <input id="nickname" style="width: 500px; height: 30px; font-size: 15px; text-align: left; margin-top: 10px;" value="영어 일경우 한글도 입력해 주세요 EX. lape`(라페)`" onclick="value=``">
-                <script>
+        // id가 'mainitem'인 div 태그 내부에 id가 'text'인 p 태그 추가
 
-                </script>
-            </div>
-        </div>
-        <div id="operation_input_sub">
-            <div id="operation_input_sub_main">
-                <p style="width: 150px; margin-left: 50px;">
-                    지원 부서
-                </p>
-            </div>
-            <div id="operation_input_sub_main" style="display: flex; ">
-                <input id="infomation" style="width: 500px; height: 30px; font-size: 15px; text-align: left; margin-top: 10px;" maxlength="10" value="지원 하는 부서를 입력해 주세요" onclick="value=``">
-                <div style="width: 30px; height: 30px; margin-top: 10px; margin-left: 10px; border: 1px solid black; text-align: center;" onclick="infomation_sellect()">
-                     더
-                     <style>
-                        #pl_li{
-                            border: 1px solid black;
-                            width: 80px;
-                            height: fit-content;
-                        }
-                     </style>
-                     <ul id="pl" style="display: none; list-style: none;">
-                        <li id="pl_li"  onclick="infomation_sellect_on(this.textContent)">개발</li>
-                        <li id="pl_li" onclick="infomation_sellect_on(this.textContent)">디자인</li>
-                        <li id="pl_li" onclick="infomation_sellect_on(this.textContent)">기획</li>
-                        <li id="pl_li" onclick="infomation_sellect_on(this.textContent)">세무</li>
-                        <li id="pl_li" onclick="infomation_sellect_on(this.textContent)">인사</li>
-                        <li id="pl_li" onclick="infomation_sellect_on(this.textContent)">영업</li>
-                        <li id="pl_li" onclick="infomation_sellect_on(this.textContent)">마케팅</li>
-                        <li id="pl_li" onclick="infomation_sellect_on(this.textContent)">바리스타</li>
-                        <li id="pl_li" onclick="infomation_sellect_on(this.textContent)">로스터</li>
-                     </ul>
-                </div>
-                <script>
-                    function infomation_sellect(){
-                        pls = document.getElementById('pl');
-                        if(pls.style.display == 'block'){
-                            pls.style.display = 'none';
-                        }
-                        else{
-                            pls.style.display = 'block';
-                        }
-                    }
-                    function infomation_sellect_on(oper){
-                        console.log(oper);
-                        document.getElementById("infomation").value= oper;
-                    }
-                </script>
-            </div>
-        </div>
-        <div id="operation_input_sub">
-            <div id="operation_input_sub_main">
-                <p style="width: 150px; margin-left: 50px;">
-                    전화 번호
-                </p>
-            </div>
-            <div id="operation_input_sub_main">
-                <input id="phonenumber1" style="width: 100px; height: 30px; font-size: 15px; text-align: left; margin-top: 10px;" maxlength="3" value="010" onclick="value=``">
-            </div>
-            <div id="operation_input_sub_main" style="margin-left: 30px;">
-                <input id="phonenumber2" style="width: 100px; height: 30px; font-size: 15px; text-align: left; margin-top: 10px;" maxlength="4" value="0000" onclick="value=``">
-            </div>
-            <div id="operation_input_sub_main" style="margin-left: 30px;">
-                <input id="phonenumber3" style="width: 100px; height: 30px; font-size: 15px; text-align: left; margin-top: 10px;" maxlength="4" value="0000" onclick="value=``">
-            </div>
-        </div>
-        <div style="border-bottom: 1px solid black;">
-            <div id="operation_input_sub_main"  style="width: 100%;">
-                <p style="width: 150px; margin-left: 50px;">
-                    포트폴리오
-                </p>
-            </div>
-            <div id="operation_input_sub_main_sub" style="margin: 10px;">
-                <div id="portpolio_input">
-                    <p></p>
-                    <input id="platform" style="width: 150px; height: 30px; font-size: 15px; text-align: left; margin-top: 10px; margin-left: 50px;" value="플렛폼 ex.깃허브" onclick="value=``">
-                    <input id="link" style="width: 300px; height: 30px; font-size: 15px; text-align: left; margin-top: 10px; margin-left: 30px;" value="LINK" onclick="value=''">
-                    <button onclick="portpoliolink_plus()">항목 추가</button>
-                </div>
-            </div>
-            <script>
-                function portpoliolink_plus(){
-                    // 새로운 div 요소 생성
-                    var newDiv = document.createElement("div");
-                    newDiv.id = "portpolio_input";
+        // 수정된 HTML을 문자열로 변환
+        const modifiedHtml = $.html();
 
-                    // 새로운 input 요소 생성 (width: 150px)
-                    var input1 = document.createElement("input");
-                    input1.id = "platform";
-                    input1.style.width = "150px";
-                    input1.style.height = "30px";
-                    input1.style.fontSize = "15px";
-                    input1.style.textAlign = "left";
-                    input1.style.marginTop = "10px";
-                    input1.style.marginLeft = "50px";
-                    input1.value = "플렛폼 ex.깃허브";
-                    input1.onclick = function() { this.value = ""; };
+        // 클라이언트에게 수정된 HTML 전송
+        res.send(modifiedHtml);
 
-                    // 새로운 input 요소 생성 (width: 300px)
-                    var input2 = document.createElement("input");
-                    input2.id = "link";
-                    input2.style.width = "300px";
-                    input2.style.height = "30px";
-                    input2.style.fontSize = "15px";
-                    input2.style.textAlign = "left";
-                    input2.style.marginTop = "10px";
-                    input2.style.marginLeft = "35px";
-                    input2.value = "LINK";
-                    input2.onclick = function() { this.value = ""; };
+        console.log("방문자확인")
+    });
+});
+main.get("/main_event", (req, res) => {  // 로그인 으로 인입이 되면 러 
+    //기능 또는 동작
+    fs.readFile(__dirname + "/../mainpage/mainpagespase_1.html", 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Server Error');
+            return;
+        }
+        // 클라이언트에게 수정된 HTML 전송
+        const $ = cheerio.load(data);
+    
+            // id가 'mainitem'인 div 태그 내부에 id가 'text'인 p 태그 추가
+        $('#mainspace_center').append('<iframe src="main_event" width="100%" height="max-content"></iframe>');
 
-                    // "항목 추가" 버튼 생성
-                    var button = document.createElement("button");
-                    button.textContent = "항목 추가";
-                    button.onclick = portpoliolink_plus;
-                    button.style.marginLeft = "6px";
+        // 수정된 HTML을 문자열로 변환
+        const modifiedHtml = $.html();
 
-                    // div 요소에 input 요소와 버튼 추가
-                    newDiv.appendChild(input1);
-                    newDiv.appendChild(input2);
-                    newDiv.appendChild(button);
+        // 클라이언트에게 수정된 HTML 전송
+        res.send(modifiedHtml);
+        
+    });
+});
+function login(email,pw){
+    //user,id,pw 값을 localhost:5000/loginpass 로 전송
+    // 같은 폴더 안에 userinfo/user/userdata.json을 찾아 pw이 일치하는지 확인후 콘솔에 출력
+    
+    
+    //console.log(`email: ${email} , pw : ${pw} `)
 
-                    // operation_input_sub_main 요소에 새로운 div 요소 추가
-                    document.getElementById("operation_input_sub_main_sub").appendChild(newDiv);
-                }
-                
-            </script>
-        </div>
-        <div style="width: 100%; width: 1000px; height: fit-content; padding: 20px; text-align: center;">
-            <a>
-                <button id="btn_operation_api" style="width: 500px; height: 50px;" onclick="operationdata_input()">지원 하기</button>
-            </a>
-            <script>
-                function operationdata_input(){
-                    console.log('로그인버튼클릭 이벤트');
-                    const operation_input_name = document.getElementById('name').value; // 아이디에 해장 하는 테그를 찾아 value값을 찾는다
-                    const operation_input_nickname = document.getElementById('nickname').value;
-                    const operation_input_infomation = document.getElementById('infomation').value;
-                    const operation_input_phonenumber1 = document.getElementById('phonenumber1').value;
-                    const operation_input_phonenumber2 = document.getElementById('phonenumber2').value;
-                    const operation_input_phonenumber3 = document.getElementById('phonenumber3').value;
-                    // 추가 안된 항목 : 포트폴리오 항목
-                    
-                    fetch('http://www.coffeemanias.com:3001/operation', {
-                        method: 'POST', // POST 요청을 사용
-                        headers: {'Content-Type': 'application/json' // 요청의 본문이 JSON 형태임을 명시
-                        },
-                        body: JSON.stringify({
-                            name : operation_input_name, // 지원자 이름 데이터
-                            nickname : operation_input_nickname, // 지원자 이름 데이터
-                            operation : operation_input_infomation, // 지원자 이름 데이터
-                            phonenumber1 : operation_input_phonenumber1, // 지원자 이름 데이터
-                            phonenumber2 : operation_input_phonenumber2, // 지원자 이름 데이터
-                            phonenumber3 : operation_input_phonenumber3, // 지원자 이름 데이터
-                        })
-                        })
-                        .then(response => response.json()) // 서버로부터의 응답을 JSON 형태로 파싱
-                        .then(data => {
-                            console.log(data); // 응답 결과를 콘솔에 출력
-                            if (data.message === '지원완료') {
-                                // 메시지가 '로그인 정보를 성공적으로 받았습니다.' 일 때, 페이지를 이동
-                                window.location.href = 'http://www.coffeemanias.com:3001/';
-                            }
-                            if(data.message === '지원 실패'){
-                                console.log('지원 실패');
-                            }
-                        })
-                        .catch(error => console.error('Error:', error)); // 에러가 발생한 경우 콘솔에 에러를 출력
-                }
-            </script>
-        </div>
-    </div>
-    <div id="company_info">
-        <style>
-            #company_info_sub{
-                width: 30%;
-                height: 100%;
-                float: left;
-                background-color: pink;
-            }
-        </style>
-        <div id="company_info_sub">
-            <div id="ADDRESS">
-                <p style="font-size: x-large; margin: 0;">
-                    ADDRESS
-                </p>
-                <p style="font-size:small; margin: 0">
-                    대전광역시 대덕대로 223 대우토피아 1415호
-                </p>
-            </div>
-            <div>
-                <p style="font-size: x-large;">
-                    고객센터
-                </p>
-                <p style="font-size:medium;">
-                    010-4517-1684
-                </p>
-                <p style="font-size:medium;">
-                    상담 운영 시간 : 월 ~ 금    AM 09 : 00 ~ PM 18 : 00 
-                </p>
-            </div>
-            <div>
-                <p style="font-size: x-large;">
-                    SNS
-                </p>
-                <a href="https://www.instagram.com/life_para3/">
-                    <img src="insta.jpg" style="width: 40px; height: 40px; margin: 6px;">
-                </a>
-                <a href="https://www.facebook.com/profile.php?id=61552411303231">
-                    <img src="facebook.jpg" style="width: 40px; height: 40px; margin: 6px;">
-                </a>
-                <a href="https://open.kakao.com/o/sxTCML7f">
-                    <img src="kakao.jpg" style="width: 40px; height: 40px; margin: 6px;">
-                </a>
-                <p>
-                    네이버 블로그
-                </p>
-            </div>
-        </div>
-        <div id="company_info_sub">
-            <style>
-                #notice{
-                    width: 100%;
-                    height: 200px;
-                }
-            </style>
-            <div id="notice">
-                <div style="width: 100%; height: 60px;">
-                    <div style="width: 75%; height: 100%; float: left;" >
-                        <p style="font-size: large;">
-                            공지사항
-                        </p>
-                    </div>
-                    <div style="width: 25%; height: 100%; float: left;">
-                        <p style="font-size: small;"> 
-                            더보기 +
-                        </p>
-                    </div>
-                </div>
-                <div style="padding: 0; margin: 0 ;">
-                    <style>
-                        #notice_info_ul{
-                            list-style: none;
-                            margin: 0;
-                            margin-block-end: 0px;
-                            margin-block-start: 0px;
-                            padding-inline-start: 0px
-                        }
-                    </style>
-                    <ul id="notice_info_ul">
-                        <style>
-                            #notice_info_li{
-                                margin-left: 0;
-                                font-size: small;
-                                margin: 6px;
-                            }
+    // 보낼 데이터
+    const data = JSON.stringify({
+        email: email,
+        pw : pw
+    });
+    
+    // 요청 옵션 설정
+    const options = {
+        hostname: '192.168.0.3',
+        port: 3001,
+        path: '/login_pass', // 요청을 보낼 경로
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': data.length
+        }
+    };
+    
+    // 요청 생성
+    const req = http.request(options, (res) => {
+        //console.log(`Status Code: ${res.statusCode}`);
+    
+        res.on('data', (d) => {
+            //process.stdout.write(d);
+            const dd = JSON.parse(d);
+            //console.log({'message' : dd.message,'email': email,'pw': pw});
+            return data
+        });
+    });
+    
+    // 요청 에러 핸들링
+    req.on('error', (error) => {
+        console.error(`Error: ${error.message}`);
+    });
+    
+    // 데이터 전송
+    req.write(data);
+    req.end();
+}
+main.post('/login_pass', (req, res) => {
+    // 클라이언트로부터 전송받은 이메일과 비밀번호를 추출
+    const { email, password } = req.body;
 
-                        </style>
-                        <li id="notice_info_li" >
-                            1. 
-                            <a id="notice_info_link">
-                                공지1
-                            </a>
-                        </li>
-                        <li id="notice_info_li">
-                            2. 
-                            <a id="notice_info_link">
-                                공지2
-                            </a>
-                        </li>
-                        <li id="notice_info_li">
-                            3. 
-                            <a id="notice_info_link">
-                                공지3
-                            </a>
-                        </li>
-                        <li id="notice_info_li">
-                            4. 
-                            <a id="notice_info_link">
-                                공지4
-                            </a>
-                        </li>
-                        <li id="notice_info_li">
-                            5. 
-                            <a id="notice_info_link">
-                                공지5
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div id="company_info_sub">
-            <div>
-                <p>
-                    buisness 문의
-                </p>
-                <a href="https://open.kakao.com/o/grwHIL7f">
-                    <img src="kakao.jpg" style="width: 40px; height: 40px;">
-                </a>
-            </div>
-            <div>
-                <p>
-                    테스트 스페이스
-                </p>
-                <div style="width: 100px; height: 100px; background-color: black;" onclick="location.href='coffeemania_pay.html'">
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+    // 서버 콘솔에 이메일과 비밀번호 출력
+    console.log('이메일:', email);
+    console.log('비밀번호:', password);
+
+    // 추가기능 리스트
+    // 1.이메일과 테스워드를 확인하고 로그이
+    //console.log(`email: ${email} , pw : ${password} `)
+
+    //login2(email,password) //로그인 작업 테스트 서버
+    login(email,password)  // 로그인 함수에서 받은 데이터 뱐수저장
+
+
+    res.status(200).json({ message: '로그인성공' });
+    // 클라이언트에 응답 전송
+    console.log(res.json('message'))
+});
+function join(email){
+    //user,id,pw 값을 localhost:5000/loginpass 로 전송
+    // 같은 폴더 안에 userinfo/user/userdata.json을 찾아 pw이 일치하는지 확인후 콘솔에 출력
+    console.log(`email: ${email}`)
+
+    // 보낼 데이터
+    const data = JSON.stringify({
+        email: email,
+    });
+    
+    // 요청 옵션 설정
+    const options = {
+        hostname: '192.168.0.3',
+        port: 3001,
+        path: '/login_pass', // 요청을 보낼 경로
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': data.length
+        }
+    };
+    
+    // 요청 생성
+    const req = http.request(options, (res) => {
+        console.log(`Status Code: ${res.statusCode}`);
+    
+        res.on('data', (d) => {
+            process.stdout.write(d);
+        });
+    });
+    
+    // 요청 에러 핸들링
+    req.on('error', (error) => {
+        console.error(`Error: ${error.message}`);
+    });
+    
+    // 데이터 전송
+    req.write(data);
+    req.end();
+
+}
+main.post('/join_pass', (req, res) => {
+    // 클라이언트로부터 전송받은 이메일과 비밀번호를 추출
+    const { email} = req.body;
+
+    // 서버 콘솔에 이메일과 비밀번호 출력
+    //console.log('이메일:', email);
+    //console.log('비밀번호:', password);
+
+    // 추가기능 리스트
+    // 1.이메일과 테스워드를 확인하고 로그인  
+    //console.log(`email: ${email} , pw : ${password} `)
+
+    join(email)
+
+    res.status(200).json({ message: '로그인 정보를 성공적으로 받았습니다.' });
+    // 클라이언트에 응답 전송
+});
+main.get("/buisness", (req, res) => {  // 로그인 으로 인입이 되면 러 
+    //기능 또는 동작
+    console.log(req.url)
+    fs.readFile(__dirname + "/../mainpage/coffeemania_buisness.html", 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Server Error');
+            return;
+        }
+
+        // 클라이언트에게 수정된 HTML 전송
+        res.send(data);
+
+        console.log("비즈니스 요청 페이지 확인")
+    });
+    
+    // 뒤에 로그인 시도 정보가 없다면 로그인 기본 페이지 로그인 시도 정보가 있으면 로그인 기능 실행
+
+});
+main.post('/check', (req, res) => {
+    // 클라이언트로부터 전송받은 이메일과 비밀번호를 추출
+    const { email} = req.body;
+    console.log(req.params)
+
+    // 서버 콘솔에 이메일과 비밀번호 출력
+    console.log('이메일:', email);
+    //console.log('비밀번호:', password);
+
+    // 추가기능 리스트
+    // 1.이메일과 테스워드를 확인하고 로그인  
+    //console.log(`email: ${email} , pw : ${password} `)
+
+    
+
+    res.status(200).json({ message: '로그인 정보를 성공적으로 받았습니다.' });
+    // 클라이언트에 응답 전송
+});
+// 서버가동 함수
+function server_open_to_close() {
+    const port = 3002;
+    const server = http.createServer((req, res) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'text/plain');
+        res.end('Server is running!');
+    });
+
+    const currentTime = new Date().getHours();
+    const isWorkingHours = currentTime >= 9 && currentTime <= 18;
+
+    if (isWorkingHours) {
+        server.listen(port, () => {
+            console.log(`Server is running at http://localhost:${port}`);
+        });
+    } else {
+        console.log('It is outside of working hours. Server will not be started.');
+    }
+}
+// 사업자 정보 입력 기능
+main.post('/buinessinfo', (req, res) => {
+    const { buisnessname, buisnesscategory, produnctername, address, info, phonenumber, industnumber, industinfo1, industinfo2 } = req.body;
+
+    const businessInfo = `
+        Business Name: ${buisnessname}
+        Business Category: ${buisnesscategory}
+        Producer Name: ${produnctername}
+        Address: ${address}
+        Info: ${info}
+        Phone Number: ${phonenumber}
+        Industry Number: ${industnumber}
+        Industry Info 1: ${industinfo1}
+        Industry Info 2: ${industinfo2}
+    `;
+    res.send("문의 내용이 전송 되었습니다")
+    //buisness(businessInfo, res);
+});
+// 사업자 정보 저장 함수
+function buisness(businessInfo, res) {
+    const filePath = '드라이브/비즈니스/문의/business_info.txt';
+
+    fs.writeFile(filePath, businessInfo, (err) => {
+        if (err) {
+            console.error('Error writing file:', err);
+            res.status(500).send('Error writing file');
+        } else {
+            console.log('Business info saved successfully');
+            res.status(200).send('저장완료');
+        }
+    });
+}
+// 사업자 정보 입력 기능 (추가 기능인 것으로 보입니다.)
+main.post('/sellerinrut', (req, res) => {
+    const { sellername, storename, sellerphonenumer, sellerindustinfo1, sellerindustinfo2, storeaddresss } = req.body;
+
+    const sellerInfo = `
+        Business Name: ${sellername}
+        Store Name: ${storename}
+        Seller Phone Number: ${sellerphonenumer}
+        Seller Industry Info 1: ${sellerindustinfo1}
+        Seller Industry Info 2: ${sellerindustinfo2}
+        Store Address: ${storeaddresss}
+    `;
+
+    sellerinput(sellerInfo, res);
+});
+// 사업자 정보 입력 함수
+function sellerinput(sellerInfo, res) {
+    console.log(sellerInfo);
+}
+// 서버 가동
+main.get("/operation", (req, res) => {  // 로그인 으로 인입이 되면 러 
+    //기능 또는 동작
+    console.log(req.url)
+    fs.readFile(__dirname + "/../mainpage/coffeemania_operation.html", 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Server Error');
+            return;
+        }
+
+        // 클라이언트에게 수정된 HTML 전송
+        res.send(data);
+
+        console.log("프로젝트지원자 페이지 확인")
+    });
+
+});
+
+main.post('/operation', (req, res) => {
+    const { name, nickname, operation, phonenumber1, phonenumber2, phonenumber3, portfolio, skill } = req.body;
+
+    const operation_input_data = `
+        name: ${name}
+        nickname: ${nickname}
+        operation: ${operation}
+        phonenumber1: ${phonenumber1}
+        phonenumber2: ${phonenumber2}
+        phonenumber3: ${phonenumber3}
+        portpolio: ${portfolio}
+        skill: ${skill}
+    `;
+
+    // 현재 시간을 이용하여 파일 이름 생성 (예: 2022-01-01T12:00:00_operation.json)
+    const timestamp = new Date().toISOString().replace(/:/g, '-');
+    const fileName = `${name}.json`;
+
+    // 파일 저장 경로 설정 (예: d드라이브 안에 있는 파일 루트 지원자/opration)
+    const directory = path.join('D:', '지원자', operation);
+
+    // 파일 경로 설정
+    const filePath = path.join(directory, fileName);
+
+    // 폴더가 없으면 생성
+    if (!fs.existsSync(directory)) {
+        fs.mkdirSync(directory, { recursive: true });
+    }
+
+    // 데이터를 JSON 형식으로 파일에 쓰기
+    fs.writeFile(filePath, JSON.stringify(operation_input_data, null, 4), (err) => {
+        if (err) {
+            console.error('파일 저장 중 오류 발생:', err);
+            res.status(500).send('파일 저장 중 오류 발생');
+        } else {
+            console.log('데이터가 파일에 성공적으로 저장되었습니다.');
+            res.status(200).json({ message: '지원완료' });
+        }
+    });
+});
+
+// 뷰 설정
+main.set("views", "./mainpage")
+main.set("view engine", "ejs")
+// 홈페이지 라우트
+main.get("/eventpage", (req, res) => {
+    fs.readFile(__dirname + "/../mainpage/coffeemania_event.html", 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Server Error');
+            return;
+        }
+
+        // 클라이언트에게 수정된 HTML 전송
+        res.send(data);
+
+        console.log("프로젝트지원자 페이지 확인")
+    });
+});
+function login2(email,pw){
+    //user,id,pw 값을 localhost:5000/loginpass 로 전송
+    // 같은 폴더 안에 userinfo/user/userdata.json을 찾아 pw이 일치하는지 확인후 콘솔에 출력
+    
+    
+    //console.log(`email: ${email} , pw : ${pw} `)
+
+    // 보낼 데이터
+    const data = JSON.stringify({
+        email: email,
+        pw : pw
+    });
+    
+    // 요청 옵션 설정
+    const options = {
+        hostname: '192.168.0.2',
+        port: 200,
+        path: '/login_pass', // 요청을 보낼 경로
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': data.length
+        }
+    };
+    
+    // 요청 생성
+    const req = http.request(options, (res) => {
+        //console.log(`Status Code: ${res.statusCode}`);
+    
+        res.on('data', (d) => {
+            //process.stdout.write(d);
+            const dd = JSON.parse(d);
+            //console.log({'message' : dd.message,'email': email,'pw': pw});
+            return data
+        });
+    });
+    
+    // 요청 에러 핸들링
+    req.on('error', (error) => {
+        console.error(`Error: ${error.message}`);
+    });
+    
+    // 데이터 전송
+    req.write(data);
+    req.end();
+}
