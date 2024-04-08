@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>커피메니아</title>
+    <style>
+        #mian_logo_page{
+            width: 100%;
+            height: 80px;
+            background-color: pink;
+        }
+        #main_first_top{
+            width: 100%;
+            height: auto;
+            display:flex;
+        }
+        #company_info{
+            width: 100%;
+            height: 500px;
+            background-color: pink;
+        }
+    </style>
+    <script>
+        let page_info = document.getElementById("psgeinfo")
+
+        page_info.insertAdjacentHTML(``)
+    </script>
+</head>
+<body>
+    <div id="main_logo_page">
+        <style>
+            #mian_logo_page_left{
+                width: 85%;
+                float: left;
+                text-align: center;
+            }
+            #mian_logo_page_right{
+                width: 15%;
+                float: left;
+                text-align: center;
+            }
+        </style>
+        <div id="mian_logo_page_left">
+            <a id="btn_login_page_move" onclick="location.href='/'">
+                커피매니아
+            </a>
+        </div>
+        <div id="mian_logo_page_right">
+            <a id="btn_login_page_move" onclick="location.href='/login'">
+                로그인
+            </a>
+        </div>
+    </div>
+    <div id="main_first_top">
+        <style>
+            
+            #main_first_top_ui{
+            list-style: none;
+            text-align: center;
+            width: 100%;
+            height: min-content;
+            }
+            #main_first_top_li{
+                float: left;
+                width: 150px;
+                height: min-content;
+            }
+            #main_first_top > ul > li :hover > ul{
+            display: block;
+            }
+            #main_first_top_sub_ul{
+                list-style: none;
+                text-align: center;
+                width: auto;
+                height: auto;
+                display: none;
+            }
+            #main_first_top_sub_li{
+                width: min-content;
+                height: min-content;
+            }
+        </style>
+        <ul id="main_first_top_ui">
+            <li id="main_first_top_li">
+                커핑 이야기
+                <ul id="main_first_top_sub_ul">
+                    <li class="main_first_top_sub_li">
+                        브랜드 스토리
+                    </li>
+                    <li class="main_first_top_sub_li">
+                        위치
+                    </li>
+                    <li class="main_first_top_sub_li">
+                        바리스타
+                    </li>
+                    <li class="main_first_top_sub_li">
+                        
+                    </li>
+                    <li class="main_first_top_sub_li">
+                        
+                    </li>
+                </ul>
+            <li id="main_first_top_li">
+                커피
+                <ul id="main_first_top_sub_ul">
+                    <li>
+                        생두
+                    </li>
+                    <li>
+                        원두
+                    </li>
+                    <li>
+                        시럽
+                    </li>
+                    <li>
+                        티
+                    </li>
+                </ul>
+            </li>
+            <li id="main_first_top_li">
+                악세서리
+            </li>
+            <li id="main_first_top_li">
+                <div onclick="location.href='/buisness'">
+                    
+                </div>
+            </li>
+            <li id="main_first_top_li">
+                <a onclick="location.href='/eventpage'">
+                    EVENT
+                </a>
+            </li>
+            <li id="main_first_top_li">
+                <div onclick="location.href='/operation'">
+                    프로젝트 참여
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div id="mainpage">
+        <div>
+            <p>아이디</p>
+            <input id="email_input">
+        </div>
+        <div>
+            <p>비밀번호</p>
+            <input id="pw_input">
+        </div>
+        <div>
+            <button onclick="login_pass()">
+                이메일 가입 여부 확인 하기
+            </button>
+        </div>
+        <script>
+            function login_pass(){
+                                console.log('이메일 가입 가능 여부 확인 클릭 이벤트');
+                                const email_wrap = document.getElementById('email_input'); // ID가 'email_input'인 요소를 찾음
+                                const input_email = email_wrap.value; // email 입력 필드의 값을 가져옴
+                                console.log(input_email); // 콘솔에 이메일과 비밀번호를 출력
+                                
+                                fetch('http://www.coffeemanias.com:3001/login_pass', {
+                                    method: 'POST', // POST 요청을 사용
+                                    headers: {'Content-Type': 'application/json' // 요청의 본문이 JSON 형태임을 명시
+                                    },
+                                    body: JSON.stringify({
+                                        email: input_email, // 이메일 데이터
+                                    })
+                                    })
+                                    .then(response => response.json()) // 서버로부터의 응답을 JSON 형태로 파싱
+                                    .then(data => {
+                                        if (data.token == 'no_user') {
+                                            alert("아이디 또는 비밀번호를 확인해 주세요");
+                                            console.log(data.token);
+                                        }
+                                        else{
+                                            window.location.href = '/';
+                                            console.log(data.token);
+                                        }
+                                    })
+                                    .catch(error => console.error('Error:', error)); // 에러가 발생한 경우 콘솔에 에러를 출력
+                                }
+        </script>
+    </div>
+    <div id="company_info">
+        <style>
+            #company_info_sub{
+                width: 30%;
+                height: 100%;
+                float: left;
+                background-color: pink;
+            }
+        </style>
+        <div id="company_info_sub">
+            <div id="ADDRESS">
+                <p style="font-size: x-large; margin: 0;">
+                    ADDRESS
+                </p>
+                <p style="font-size:small; margin: 0">
+                    대전광역시 대덕대로 223 대우토피아 1415호
+                </p>
+            </div>
+            <div>
+                <p style="font-size: x-large;">
+                    고객센터
+                </p>
+                <p style="font-size:medium;">
+                    010-4517-1684
+                </p>
+                <p style="font-size:medium;">
+                    상담 운영 시간 : 월 ~ 금    AM 09 : 00 ~ PM 18 : 00 
+                </p>
+            </div>
+            <div>
+                <p style="font-size: x-large;">
+                    SNS
+                </p>
+                <a href="https://www.instagram.com/life_para3/">
+                    <img src="insta.jpg" style="width: 40px; height: 40px; margin: 6px;">
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61552411303231">
+                    <img src="facebook.jpg" style="width: 40px; height: 40px; margin: 6px;">
+                </a>
+                <a href="https://open.kakao.com/o/sxTCML7f">
+                    <img src="kakao.jpg" style="width: 40px; height: 40px; margin: 6px;">
+                </a>
+                <p>
+                    네이버 블로그
+                </p>
+            </div>
+        </div>
+        <div id="company_info_sub">
+            <style>
+                #notice{
+                    width: 100%;
+                    height: 200px;
+                }
+            </style>
+            <div id="notice">
+                <div style="width: 100%; height: 60px;">
+                    <div style="width: 75%; height: 100%; float: left;" >
+                        <p style="font-size: large;">
+                            공지사항
+                        </p>
+                    </div>
+                    <div style="width: 25%; height: 100%; float: left;">
+                        <p style="font-size: small;"> 
+                            더보기 +
+                        </p>
+                    </div>
+                </div>
+                <div style="padding: 0; margin: 0 ;">
+                    <style>
+                        #notice_info_ul{
+                            list-style: none;
+                            margin: 0;
+                            margin-block-end: 0px;
+                            margin-block-start: 0px;
+                            padding-inline-start: 0px
+                        }
+                    </style>
+                    <ul id="notice_info_ul">
+                        <style>
+                            #notice_info_li{
+                                margin-left: 0;
+                                font-size: small;
+                                margin: 6px;
+                            }
+
+                        </style>
+                        <li id="notice_info_li" >
+                            1. 
+                            <a id="notice_info_link">
+                                공지1
+                            </a>
+                        </li>
+                        <li id="notice_info_li">
+                            2. 
+                            <a id="notice_info_link">
+                                공지2
+                            </a>
+                        </li>
+                        <li id="notice_info_li">
+                            3. 
+                            <a id="notice_info_link">
+                                공지3
+                            </a>
+                        </li>
+                        <li id="notice_info_li">
+                            4. 
+                            <a id="notice_info_link">
+                                공지4
+                            </a>
+                        </li>
+                        <li id="notice_info_li">
+                            5. 
+                            <a id="notice_info_link">
+                                공지5
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="company_info_sub">
+            <div>
+                <p>
+                    buisness 문의
+                </p>
+                <a href="https://open.kakao.com/o/grwHIL7f">
+                    <img src="kakao.jpg" style="width: 40px; height: 40px;">
+                </a>
+            </div>
+            <div>
+                <p>
+                    테스트 스페이스
+                </p>
+                <div style="width: 100px; height: 100px; background-color: black;" onclick="location.href='coffeemania_pay.html'">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

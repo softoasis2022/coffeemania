@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>커피 매니아 비즈니스 센터</title>
+    <style>
+        #mian_logo_page{
+            width: 100%;
+            height: 80px;
+            background-color: pink;
+        }
+        #main_first_top{
+            width: 100%;
+            height: auto;
+            display:flex;
+        }
+        #company_info{
+            width: 100%;
+            height: 500px;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <div id="mian_logo_page">
+        <style>
+            #mian_logo_page_left{
+                width: 85%;
+                float: left;
+                text-align: center;
+            }
+            #mian_logo_page_right{
+                width: 15%;
+                float: left;
+                text-align: center;
+            }
+        </style>
+        <div id="mian_logo_page_left">
+            <a id="btn_login_page_move" onclick="location.href='/'">
+                커피매니아
+            </a>
+        </div>
+        <div id="mian_logo_page_right">
+            <a id="btn_login_page_move" onclick="location.href='coffeemania_login.html'">
+                로그인
+            </a>
+        </div>
+    </div>
+    <div id="main_first_top">
+        <style>
+            
+            #main_first_top_ui{
+            list-style: none;
+            text-align: center;
+            width: 100%;
+            height: min-content;
+            }
+            #main_first_top_li{
+                float: left;
+                width: 150px;
+                height: min-content;
+            }
+            #main_first_top > ul > li :hover > ul{
+            display: block;
+            }
+            #main_first_top_sub_ul{
+                list-style: none;
+                text-align: center;
+                width: auto;
+                height: auto;
+                display: none;
+            }
+            #main_first_top_sub_li{
+                width: min-content;
+                height: min-content;
+            }
+        </style>
+        <ul id="main_first_top_ui">
+            <li id="main_first_top_li">
+                커핑 이야기
+                <ul id="main_first_top_sub_ul">
+                    <li class="main_first_top_sub_li">
+                        브랜드 스토리
+                    </li>
+                    <li class="main_first_top_sub_li">
+                        위치
+                    </li>
+                    <li class="main_first_top_sub_li">
+                        바리스타
+                    </li>
+                    <li class="main_first_top_sub_li">
+                        
+                    </li>
+                    <li class="main_first_top_sub_li">
+                        
+                    </li>
+                </ul>
+            <li id="main_first_top_li">
+                커피
+                <ul id="main_first_top_sub_ul">
+                    <li>
+                        생두
+                    </li>
+                    <li>
+                        원두
+                    </li>
+                    <li>
+                        시럽
+                    </li>
+                    <li>
+                        티
+                    </li>
+                </ul>
+            </li>
+            <li id="main_first_top_li">
+                악세서리
+            </li>
+            <li id="main_first_top_li">
+                <div onclick="location.href='/buisness'">
+                    비즈니스 문의
+                </div>
+            </li>
+            <li id="main_first_top_li">
+                <a onclick="location.href='/eventpage'">
+                    EVENT
+                </a>
+            </li>
+            <li id="main_first_top_li">
+                <div onclick="location.href='/operation'">
+                    프로젝트 참여
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div id="mainpage">
+        <div style="width: 100%; height: fit-content;">
+            <div>
+                <style>
+                    #buisness_info{
+                        list-style: none;
+                        width: fit-content;
+                        height: fit-content;
+                    }
+                    #buisness_info_li{
+                        display: flex;
+                        width: fit-content;
+                        height: fit-content;
+                        margin: 20px;
+                    }
+                    #buisness_info_li_sub1{
+                        width: 150px;
+                        height: fit-content;
+                        margin-left: 10px;
+                    }
+                    #buisness_info_li_sub2{
+                        width: 200px;
+                        height: fit-content;
+                        
+                    }
+                </style>
+                <ul id="buisness_info" class="buisness_info">
+                    <li id="buisness_info_li">
+                        <div id="buisness_info_li_sub1">
+                            매장이름
+                        </div>
+                        <div id="buisness_info_li_sub2">
+                            <input id="market_name" value="간판이름을 입력해 주세요" onclick="this.value = ''">
+                        </div>
+                    </li>
+                    <li id="buisness_info_li">
+                        <div id="buisness_info_li_sub1">
+                            사업자 상호
+                        </div>
+                        <div id="buisness_info_li_sub2">
+                            <input id="market_name" value="사업자 등록증에 있는 상호명을 입력해 주세요" onclick="this.value = ''">
+                        </div>
+                    </li>
+                    <li id="buisness_info_li">
+                        <div id="buisness_info_li_sub1">
+                            업종
+                        </div>
+                        <div id="buisness_info_li_sub2">
+                            <input id="market_name">
+                        </div>
+                    </li>
+                    <li id="buisness_info_li">
+                        <div id="buisness_info_li_sub1">
+                            업태
+                        </div>
+                        <div id="buisness_info_li_sub2">
+                            <input id="market_name">
+                        </div>
+                    </li>
+                    <li id="buisness_info_li">
+                        <div id="buisness_info_li_sub1">
+                            담당자
+                        </div>
+                        <div id="buisness_info_li_sub2">
+                            <input id="market_name" value="담당자 또는 대표님 이름을 입력해 주세요" onclick="this.value = ''">
+                        </div>
+                        <div id="buisness_info_li_sub2" style="width: 150px;">
+                            <input id="market_name" style="margin-left: 0px;" value="직책" onclick="this.value = ''">
+                        </div>
+                    </li>
+                    <li id="buisness_info_li">
+                        <div id="buisness_info_li_sub1">
+                            연락처
+                        </div>
+                        <div id="buisness_info_li_sub2" style="display: flex;">
+                            <input id="market_number1" value="010" onclick="this.value = ''">
+                            <input id="market_number2" style="margin-left: 10px;" value="0000" onclick="this.value = ''">
+                            <input id="market_number3" style="margin-left: 10px;" value="0000" onclick="this.value = ''">
+                        </div>
+                    </li>
+                    <li id="buisness_info_li">
+                        <div id="buisness_info_li_sub1">
+                            주소
+                        </div>
+                        <div id="buisness_info_li_sub2" style="display: flex;">
+                            <div>
+                                <input id="buisness_info_address_first" value="도 지역" onclick="address_sellect_in(document.getElementById('address_sellect_ul').style.display)">
+                                <ul id="address_sellect_ul" style="list-style: none; display: none;">
+                                    <style>
+                                        #address_sellect_li{
+                                            width: fit-content;
+                                            height: fit-content;
+                                            padding: 3px;
+                                            margin: 5px;
+                                            border: 1px solid black;
+                                            border-radius: 5px;
+                                        }
+                                    </style>
+                                    <li id="address_sellect_li" onclick="address_sellect(this.textContent)">서울특별시</li>
+                                    <li id="address_sellect_li" onclick="address_sellect(this.textContent)">경기도</li>
+                                    <li id="address_sellect_li" onclick="address_sellect(this.textContent)">강원도</li>
+                                    <li id="address_sellect_li" onclick="address_sellect(this.textContent)">충청북도</li>
+                                    <li id="address_sellect_li" onclick="address_sellect(this.textContent)">충청남도</li>
+                                    <li id="address_sellect_li" onclick="address_sellect(this.textContent)">대전광역시</li>
+                                    <li id="address_sellect_li" onclick="address_sellect(this.textContent)">광주광역시</li>
+                                    <li id="address_sellect_li" onclick="address_sellect(this.textContent)">경상북도</li>
+                                    <li id="address_sellect_li" onclick="address_sellect(this.textContent)">경상남도</li>
+                                    <li id="address_sellect_li" onclick="address_sellect(this.textContent)">대구광역시</li>
+                                    <li id="address_sellect_li" onclick="address_sellect(this.textContent)">전라북도</li>
+                                    <li id="address_sellect_li" onclick="address_sellect(this.textContent)">전라북도</li>
+                                </ul>
+                                <script>
+                                    function address_sellect_in(sellect_onoff){
+                                        if (sellect_onoff == "none") {
+                                            document.getElementById("address_sellect_ul").style.display = "block";
+                                        } else {
+                                            document.getElementById("address_sellect_ul").style.display = "none";
+                                        }
+                                        document.getElementById("buisness_info_address_first").value = '';
+                                    }
+                                    function address_sellect(address){
+                                        document.getElementById("buisness_info_address_first").value = address;
+                                        document.getElementById("address_sellect_ul").style.display = "none";
+                                    }
+                                </script>
+                            </div>
+                            <input id="market_number2" style="margin-left: 10px; height: 100%;" value="시 , 군 , 구" onclick="this.value = ''">
+                            <input id="market_number3" style="margin-left: 10px; height: 100%;" value="상세 주소 " onclick="this.value = ''">
+                        </div>
+                    </li>
+                    <li id="buisness_info_li">
+                        <div id="buisness_info_li_sub1">
+                            문의 내용
+                        </div>
+                        <div id="buisness_info_li_sub2" style="display: flex; width: 1000px; height: 500px">
+                            <textarea style="width: 100%; height: 100%;"></textarea>
+                        </div>
+                    </li>
+                    <li id="buisness_info_li">
+                        <div id="buisness_info_li_sub1">
+                            연락가능한 시간
+                        </div>
+                        <div id="buisness_info_li_sub2" style="display: flex;">
+                            <div style="display: flex; width: fit-content; height: fit-content; border: 1px solid black;">
+                                <div style="width: 40px;">
+                                    <p>오전</p>
+                                </div>
+                                <div style="width: fit-content; height: fit-content; display: flex; margin-left: 5px;">
+                                    <input id="market_name" style="width: fit-content; height: fit-content; margin-top: 15px;" type="number" max="24" min="0">
+                                    <p style="width: fit-content;">시</p>
+                                </div>
+                                <div style="width: fit-content; height: fit-content; display: flex; margin-left: 5px;">
+                                    <input id="market_name" style="width: fit-content; height: fit-content; margin-top: 15px;" type="number" max="59" min="0">
+                                    <p style="width: fit-content;">분</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; width: fit-content; height: fit-content; border: 1px solid black; margin-left: 20px;">
+                                <div style="width: 40px;">
+                                    <p>오후</p>
+                                </div>
+                                <div style="width: fit-content; height: fit-content; display: flex; margin-left: 5px;">
+                                    <input id="market_name" style="width: fit-content; height: fit-content; margin-top: 15px;" type="number" max="24" min="0">
+                                    <p style="width: fit-content;">시</p>
+                                </div>
+                                <div style="width: fit-content; height: fit-content; display: flex; margin-left: 5px;">
+                                    <input id="market_name" style="width: fit-content; height: fit-content; margin-top: 15px;" type="number" max="59" min="0">
+                                    <p style="width: fit-content;">분</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>제품 카테고리 또는 문의 카테 고리</li>
+                    <li>음료, 디저트</li>
+                </ul>
+                
+            </div>
+        </div>
+        <div style="width: 100%; height: fit-content;">
+            <div onclick="buisness_input()">
+                문의 내용 입력 완료
+            </div>
+            <script>
+                function buisness_input(){
+                    //각 영역 id설정
+                    //각 데이터 변수 설정
+                    //변수에 데이터 저장
+                    //저장된 데이터 서버로 전송
+                }
+            </script>
+        </div>
+    </div>
+    <div id="company_info">
+        <style>
+            #company_info_sub{
+                width: 30%;
+                height: 100%;
+                float: left;
+                background-color: pink;
+            }
+        </style>
+        <div id="company_info_sub">
+            <div id="ADDRESS">
+                <p style="font-size: x-large; margin: 0;">
+                    ADDRESS
+                </p>
+                <p style="font-size:small; margin: 0">
+                    대전광역시 대덕대로 223 대우토피아 1415호
+                </p>
+            </div>
+            <div>
+                <p style="font-size: x-large;">
+                    고객센터
+                </p>
+                <p style="font-size:medium;">
+                    010-4517-1684
+                </p>
+                <p style="font-size:medium;">
+                    상담 운영 시간 : 월 ~ 금    AM 09 : 00 ~ PM 18 : 00 
+                </p>
+            </div>
+            <div>
+                <p style="font-size: x-large;">
+                    SNS
+                </p>
+                <a href="https://www.instagram.com/life_para3/">
+                    <img src="insta.jpg" style="width: 40px; height: 40px; margin: 6px;">
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61552411303231">
+                    <img src="facebook.jpg" style="width: 40px; height: 40px; margin: 6px;">
+                </a>
+                <a href="https://open.kakao.com/o/sxTCML7f">
+                    <img src="kakao.jpg" style="width: 40px; height: 40px; margin: 6px;">
+                </a>
+                <p>
+                    네이버 블로그
+                </p>
+            </div>
+        </div>
+        <div id="company_info_sub">
+            <style>
+                #notice{
+                    width: 100%;
+                    height: 200px;
+                }
+            </style>
+            <div id="notice">
+                <div style="width: 100%; height: 60px;">
+                    <div style="width: 75%; height: 100%; float: left;" >
+                        <p style="font-size: large;">
+                            공지사항
+                        </p>
+                    </div>
+                    <div style="width: 25%; height: 100%; float: left;">
+                        <p style="font-size: small;"> 
+                            더보기 +
+                        </p>
+                    </div>
+                </div>
+                <div style="padding: 0; margin: 0 ;">
+                    <style>
+                        #notice_info_ul{
+                            list-style: none;
+                            margin: 0;
+                            margin-block-end: 0px;
+                            margin-block-start: 0px;
+                            padding-inline-start: 0px
+                        }
+                    </style>
+                    <ul id="notice_info_ul">
+                        <style>
+                            #notice_info_li{
+                                margin-left: 0;
+                                font-size: small;
+                                margin: 6px;
+                            }
+
+                        </style>
+                        <li id="notice_info_li" >
+                            1. 
+                            <a id="notice_info_link">
+                                공지1
+                            </a>
+                        </li>
+                        <li id="notice_info_li">
+                            2. 
+                            <a id="notice_info_link">
+                                공지2
+                            </a>
+                        </li>
+                        <li id="notice_info_li">
+                            3. 
+                            <a id="notice_info_link">
+                                공지3
+                            </a>
+                        </li>
+                        <li id="notice_info_li">
+                            4. 
+                            <a id="notice_info_link">
+                                공지4
+                            </a>
+                        </li>
+                        <li id="notice_info_li">
+                            5. 
+                            <a id="notice_info_link">
+                                공지5
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="company_info_sub">
+            <div>
+                <p>
+                    buisness 문의
+                </p>
+                <a href="https://open.kakao.com/o/grwHIL7f">
+                    <img src="kakao.jpg" style="width: 40px; height: 40px;">
+                </a>
+            </div>
+            <div>
+                <p>
+                    테스트 스페이스
+                </p>
+                <div style="width: 100px; height: 100px; background-color: black;" onclick="location.href='coffeemania_pay.html'">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
