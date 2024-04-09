@@ -10,9 +10,8 @@ const cheerio = require('cheerio');
 const http = require('http');
 const fs = require('fs');  // 파일 시스템 모듈 불러오기
 const path = require('path');
-const { type } = require('os');
 
-const serverstart_port = 3001;
+const serverstart_port = 5000;
 
 //임시 로그인 데이터 처리 서버 완성
 main.use(express.json());
@@ -21,76 +20,231 @@ main.listen(serverstart_port,function(){
 });
 main.set("views", "./mainpage")
 
-const userfile = 'F:' + "유저/";
+const templatePath = path.join(__dirname, "/../mainpage/mainpagetamplete/coffeemainpagetample.html");
 
-main.get("/", (req, res) => {  // 로그인 으로 인입이 되면 러 
-    //기능 또는 동작
-    //console.log(req.url);
+main.get("/", (req, res) => {
+    // 페이지 고정 html 탬플릿 파일경로
     
     
-    fs.readFile(__dirname + "/../mainpage/coffeemania.html", 'utf8', (err, data) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('Server Error');
-            return;
-        }
-        
-        // HTML 파일을 cheerio로 로드
-        const $ = cheerio.load(data);
+    // 탬플릿 안에 넣을 페이지 html파일 경로
+    const pagePath = path.join(__dirname, "/../testhtml/test.html");
 
-        // id가 'mainitem'인 div 태그 내부에 id가 'text'인 p 태그 추가
+    // 페이지 내용을 템플릿에 적용하여 렌더링
+    let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
 
-        // 수정된 HTML을 문자열로 변환
-        const modifiedHtml = $.html();
-
-        // 클라이언트에게 수정된 HTML 전송
-        res.send(modifiedHtml);
-
-        console.log("방문자확인")
-    });
+    // 렌더링된 템플릿을 클라이언트에게 응답
+    res.send(renderedTemplate);
 });
 
-main.post('/operation', (req, res) => {
-    const { name, nickname, operation, phonenumber1, phonenumber2, phonenumber3, portfolio, skill } = req.body;
+function loadTemplate(templatePath) {
+    return fs.readFileSync(templatePath, 'utf-8');
+}
+function loadPage(pagePath) {
+    return fs.readFileSync(pagePath, 'utf-8');
+}
+// 함수: 탬플릿 안에 넣을 페이지 html 적용
+function applyPageToTemplate(templatePath, pagePath) {
+    let template = loadTemplate(templatePath);
+    let pageContent = loadPage(pagePath);
 
-    const operation_input_data = `
-        name: ${name}
-        nickname: ${nickname}
-        operation: ${operation}
-        phonenumber1: ${phonenumber1}
-        phonenumber2: ${phonenumber2}
-        phonenumber3: ${phonenumber3}
-        portpolio: ${portfolio}
-        skill: ${skill}
-    `;
+    const mainPageRegex = /<div id="mainpage"><\/div>/;
+    return template.replace(mainPageRegex, `<div id="mainpage">${pageContent}</div>`);
+}
 
-    // 현재 시간을 이용하여 파일 이름 생성 (예: 2022-01-01T12:00:00_operation.json)
-    const timestamp = new Date().toISOString().replace(/:/g, '-');
-    const fileName = `${name}.json`;
 
-    // 파일 저장 경로 설정 (예: d드라이브 안에 있는 파일 루트 지원자/opration)
-    const directory = path.join('F:', '지원자', operation);
 
-    // 파일 경로 설정
-    const filePath = path.join(directory, fileName);
+function login2(email,pw){
+    //user,id,pw 값을 localhost:5000/loginpass 로 전송
+    // 같은 폴더 안에 userinfo/user/userdata.json을 찾아 pw이 일치하는지 확인후 콘솔에 출력
+    
+    
+    //console.log(`email: ${email} , pw : ${pw} `)
 
-    // 폴더가 없으면 생성
-    if (!fs.existsSync(directory)) {
-        fs.mkdirSync(directory, { recursive: true });
+    // 보낼 데이터
+    const data = JSON.stringify({
+        email: email,
+        pw : pw
+    });
+    
+    // 요청 옵션 설정
+    const options = {
+        hostname: '192.168.0.2',
+        port: 200,
+        path: '/login_pass', // 요청을 보낼 경로
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': data.length
+        }
+    };
+    
+    // 요청 생성
+    const req = http.request(options, (res) => {
+        //console.log(`Status Code: ${res.statusCode}`);
+    
+        res.on('data', (d) => {
+            //process.stdout.write(d);
+            const dd = JSON.parse(d);
+            //console.log({'message' : dd.message,'email': email,'pw': pw});
+            return data
+        });
+    });
+    
+    // 요청 에러 핸들링
+    req.on('error', (error) => {
+        console.error(`Error: ${error.message}`);
+    });
+    
+    // 데이터 전송
+    req.write(data);
+    req.end();
+}
+function login_api(email,pw){
+    //user,id,pw 값을 localhost:5000/loginpass 로 전송
+    // 같은 폴더 안에 userinfo/user/userdata.json을 찾아 pw이 일치하는지 확인후 콘솔에 출력
+    
+    
+    //console.log(`email: ${email} , pw : ${pw} `)
+
+    // 보낼 데이터
+    const data = JSON.stringify({
+        email: email,
+        pw : pw
+    });
+    
+    // 요청 옵션 설정
+    const options = {
+        hostname: '192.168.0.2',
+        port: 3001,
+        path: '/login_pass', // 요청을 보낼 경로
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': data.length
+        }
+    };
+    
+    // 요청 생성
+    const req = http.request(options, (res) => {
+        //console.log(`Status Code: ${res.statusCode}`);
+    
+        res.on('data', (d) => {
+            //process.stdout.write(d);
+            const dd = JSON.parse(d);
+            //console.log({'message' : dd.message,'email': email,'pw': pw});
+            if(data > ''){
+                return data
+            }
+            else {
+                return "계정 정보 없음"
+            }
+            
+        });
+    });
+    
+    // 요청 에러 핸들링
+    req.on('error', (error) => {
+        console.error(`Error: ${error.message}`);
+    });
+    
+    // 데이터 전송
+    req.write(data);
+    req.end();
+}
+function login_api(email,pw){
+    //user,id,pw 값을 localhost:5000/loginpass 로 전송
+    // 같은 폴더 안에 userinfo/user/userdata.json을 찾아 pw이 일치하는지 확인후 콘솔에 출력
+    
+    
+    //console.log(`email: ${email} , pw : ${pw} `)
+
+    // 보낼 데이터
+    const data = JSON.stringify({
+        email: email,
+        pw : pw
+    });
+    
+    // 요청 옵션 설정
+    const options = {
+        hostname: '192.168.0.2',
+        port: 3001,
+        path: '/login_pass', // 요청을 보낼 경로
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': data.length
+        }
+    };
+    
+    // 요청 생성
+    const req = http.request(options, (res) => {
+        //console.log(`Status Code: ${res.statusCode}`);
+    
+        res.on('data', (d) => {
+            //process.stdout.write(d);
+            const dd = JSON.parse(d);
+            //console.log({'message' : dd.message,'email': email,'pw': pw});
+            if(data > ''){
+                return data
+            }
+            else {
+                return "계정 정보 없음"
+            }
+            
+        });
+    });
+    
+    // 요청 에러 핸들링
+    req.on('error', (error) => {
+        console.error(`Error: ${error.message}`);
+    });
+    
+    // 데이터 전송
+    req.write(data);
+    req.end();
+}
+function joinemail_waitsave(){
+    // 파일이 존재하는지 확인
+    const filePath = 'F:/user/'+ +'.json';
+    
+}
+function checkFileExists(filePath) {
+    try {
+        fs.accessSync(filePath, fs.constants.F_OK);
+        return true; // 파일이 존재하는 경우 true 반환
+    } catch (err) {
+        return false; // 파일이 존재하지 않는 경우 false 반환
     }
+}
+function server_open_to_close() {
+    const port = 3002;
+    const server = http.createServer((req, res) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'text/plain');
+        res.end('Server is running!');
+    });
 
-    // 데이터를 JSON 형식으로 파일에 쓰기
-    fs.writeFile(filePath, JSON.stringify(operation_input_data, null, 4), (err) => {
+    const currentTime = new Date().getHours();
+    const isWorkingHours = currentTime >= 9 && currentTime <= 18;
+
+    if (isWorkingHours) {
+        server.listen(port, () => {
+            console.log(`Server is running at http://localhost:${port}`);
+        });
+    } else {
+        console.log('It is outside of working hours. Server will not be started.');
+    }
+}
+function buisness(businessInfo, res) {
+    const filePath = '드라이브/비즈니스/문의/business_info.txt';
+
+    fs.writeFile(filePath, businessInfo, (err) => {
         if (err) {
-            console.error('파일 저장 중 오류 발생:', err);
-            res.status(500).send('파일 저장 중 오류 발생');
+            console.error('Error writing file:', err);
+            res.status(500).send('Error writing file');
         } else {
-            console.log('데이터가 파일에 성공적으로 저장되었습니다.');
-            res.status(200).json({ message: '지원완료' });
+            console.log('Business info saved successfully');
+            res.status(200).send('저장완료');
         }
     });
-});
-
-function user(){
-
 }
