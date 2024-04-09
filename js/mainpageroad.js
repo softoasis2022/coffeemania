@@ -401,3 +401,12 @@ function saveDataToFile(data) {
 //서브서버 또는 메인 서버에서 가입된 이메일이 있는지 확인 (함수 사용 : userfind)
 //없다면 "가입 가능한 아이디 입니다" 전송
 //있다면 "이미 존재하는 아이디 입니다" 전송
+
+function filesave(action,filepath,data){
+    if(action == "비즈니스"){
+
+    }
+    if(action == "프로젝트 참가"){
+
+    }
+}
