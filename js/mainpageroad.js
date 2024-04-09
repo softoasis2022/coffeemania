@@ -2,7 +2,6 @@
 
 const express = require('express');
 const main = express();
-const tamplelate = express();
 
 
 const cheerio = require('cheerio');
@@ -11,7 +10,6 @@ const fs = require('fs');  // 파일 시스템 모듈 불러오기
 const path = require('path');
 
 const serverstart_port = 3001;
-const tamplelate_port = 3001;
 
 main.use(express.json());
 main.listen(serverstart_port,function(){
