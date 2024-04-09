@@ -1,709 +1,392 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>커피매니아</title>
-        <meta name="coffeemania">
-        
 
-    </head>
-    <body>
+<style>
+    #baanner_page{
+        width: 100%;
+        height: fit-content;
+    }
+    #mainspace{
+        width: 100%;
+        height: fit-content;
+    }
+    #bestseller{
+        width: 100%;
+        height: fit-content;
+    }
+    #naver_view{
+        width: 100%;
+        height: fit-content;
+    }
+    #category_view{
+        width: 100%;
+        height: fit-content;
+    }
+</style>
+<div id="baanner_page">
+    <style>
+        #banner_page_img{
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+    <script>
+        function hello1()  {
+            document.getElementById("banner_img").src = "https://firebasestorage.googleapis.com/v0/b/softoasis-c684c.appspot.com/o/cafe1.jpg?alt=media&token=15ab46cf-3099-457c-b4b4-ba89fa459e7b"
+            document.getElementById("banner_img_link").href="https://map.naver.com/p/entry/place/1923188087?c=15.00,0,0,0,dh"
+        }
+        function hello2()  {
+            document.getElementById("banner_img").src = "https://firebasestorage.googleapis.com/v0/b/softoasis-c684c.appspot.com/o/cafe2.jpg?alt=media&token=8809e2b8-3a05-4272-9211-520f8a0701d3"
+            document.getElementById("banner_img_link").href="https://map.naver.com/p/entry/place/1042910752?c=15.00,0,0,0,dh"
+        }
+        function hello3()  {
+            document.getElementById("banner_img").src="https://firebasestorage.googleapis.com/v0/b/softoasis-c684c.appspot.com/o/cafe3.jpg?alt=media&token=f6a59706-05a3-4e73-a6ce-4e3d1ff0f7a2"
+            document.getElementById("banner_img_link").href="https://map.naver.com/p/entry/place/1965997995?c=15.00,0,0,0,dh"
+        }
+        function hello4()  {
+            document.getElementById("banner_img").src = "https://firebasestorage.googleapis.com/v0/b/softoasis-c684c.appspot.com/o/cafe4.jpg?alt=media&token=921bf699-d736-4281-8279-cd4f7713c26f"
+            document.getElementById("banner_img_link").href="https://map.naver.com/p/entry/place/1695760291?c=15.00,0,0,0,dh"
+        }
+    </script>
+    <div id="banner_page_img">
         <style>
-            #main_logo_page{
+            #banner_img{
                 width: 100%;
-                height: fit-content;
-                display: flex;
-                margin-top: 20px;
-                margin-bottom: 20px;
-            }
-            #main_first_top{
-                width: 100%;
-                height: auto;
-                display:flex;
-                border-bottom: 1px solid black;
-                border-top: 1px solid black;
-            }
-            #baanner_page{
-                width: 100%;
-                height: 560px;
-                padding: auto;
-                margin-top: 10px;
-
-            }
-            #mainspace{
-                width: 100%;
-                height: fit-content;
-                display: flex;
-                justify-content : left;
-                margin-top: 30px;
-                margin-bottom: 30px;
-            }
-            #item_category{
-                width: 100%;
-                height: fit-content;
-                border-top: 1px solid black;
-            }
-            #bestseller{
-                justify-content : center;
-                display: flex;
-            }
-            #naver_view{
-                justify-content : center;
-                display: flex;
-            }
-            #company_info{
-                width: 100%;
-                height: 500px;
-                background-color: pink;
+                height: max-content;
+                text-align: center;
             }
         </style>
-        <div id="main_logo_page">
-            <style>
-                #mian_logo_page_left{
-                    width: 85%;
-                    display: flex;
-                    text-align: center;
-                    justify-content : center;
-                    margin: 10px;
-                }
-                #mian_logo_page_right{
-                    width: 25%;
-                    display: flex;
-                    text-align: center;
-                    justify-content : center;
-                }
-                #btn_login_page_move{
-                    margin: 2px;
-                    width: 50%;
-                    height: fit-content;
-                }
-            </style>
-            <div id="mian_logo_page_left">
-                <a id="btn_login_page_move" onclick="location.href='/'">
-                    커피매니아
+        <a id="banner_img_link" style="width: max-content; height: max-content;" onclick="hello1()" >
+            <img id="banner_img" style="width: 100%; height: 100%;" src="https://firebasestorage.googleapis.com/v0/b/softoasis-c684c.appspot.com/o/cafe1.jpg?alt=media&token=15ab46cf-3099-457c-b4b4-ba89fa459e7b" href="https://map.naver.com/p/entry/place/1923188087?c=15.00,0,0,0,dh">
+        </a>
+    </div>
+
+    <div style="width: 100%; height: 20px;">
+        <style>
+            #banner_page_move{
+                width: 100%;
+                height: 60px;
+                text-align: center;
+                display: flex;
+            }
+            #btn_banner_page_move{
+                background-color: white;
+                width: 40px;
+                height: 40px;
+                margin: auto;
+                float: left;
+                border-radius: 10px 10px 10px 10px;
+                border: 1px solid black;
+                margin: 10px;
+            }
+        </style>
+        <div id="banner_page_move">
+            <div style="width: 300px; height: 60px; margin: auto;">
+                <a style="margin: auto; padding : 10px 0;" onclick="hello1()">
+                    <div id="btn_banner_page_move" style="width: 40px; height: 40px; " >
+                        <p style=" width: 30px; height: 30px; margin-top: 7px; margin-left: 5px;">
+                            1
+                        </p>
+                    </div>
+                </a>
+                <a style="margin: auto; padding : 10px 0;" onclick="hello2()">
+                    <div id="btn_banner_page_move" style="width: 40px; height: 40px; " >
+                        <p style=" width: 30px; height: 30px; margin-top: 7px; margin-left: 5px;">
+                            2
+                        </p>
+                    </div>
+                </a>
+                <a style="margin: auto; padding : 10px 0;" onclick="hello3()">
+                    <div id="btn_banner_page_move" style="width: 40px; height: 40px; " >
+                        <p style=" width: 30px; height: 30px; margin-top: 7px; margin-left: 5px;">
+                            3
+                        </p>
+                    </div>
+                </a>
+                <a style="margin: auto; padding : 10px 0;" onclick="hello4()">
+                    <div id="btn_banner_page_move" style="width: 40px; height: 40px; " >
+                        <p style=" width: 30px; height: 30px; margin-top: 7px; margin-left: 5px;">
+                            4
+                        </p>
+                    </div>
                 </a>
             </div>
-            <div id="mian_logo_page_right">
-
-
-                <div id="btn_login_page_move" style="padding: 10px;border: 1px solid black; border-radius: 20px;" onclick="location.href='/login'">
-                    <a id="stl_btn" style="width: 100%; height: 100%;">
-                        로그인
-                    </a>
-                </div>
-                <div id="btn_login_page_move" style="padding: 10px; border: 1px solid black; border-radius: 20px;" onclick="location.href='/join'">
-                    <a id="stl_btn" style="width: 100%; height: 100%;">
-                        회원 가입
-                    </a>
-                </div>
+        </div>
+    </div>
+</div>
+<div id="mainspace">
+    <style>
+        #mainspace_left{
+            width: 200px;
+            height: fit-content;
+            display: flex;
+            justify-content: center;
+        }
+        #mainspace_center{
+            width: 100%;
+            height: fit-content;
+            display: flex;
+        }
+        #mainspace_right{
+            width: 200px;
+            height: fit-content;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+    <div id="mainspace_center">
+        <style>
+            #mainspace_center_item_li{
+                width: 25%;
+                height: 700px;
+                padding: 20px;
+                margin-left: 30px;
+            }
+            #mainspace_center_item_li_main{
+                width: 180px;
+                height: 350px;
+                padding: 20px;
+                margin: auto;
+                justify-content: center;
+                border-radius: 30px;
+            }
+        </style>
+        <div id="mainspace_center_item_li">
+            <div id="mainspace_center_item_li_main" style="margin-top: +150px;">
+                <img src="https://firebasestorage.googleapis.com/v0/b/softoasis-763c2.appspot.com/o/image%2F3d_porter_filter.jpg?alt=media&token=7d237c6e-ab71-4bf6-8aef-211d5d09cb38" style="width: 100%; height: 100%;">
             </div>
         </div>
-        <div id="main_first_top">
-            <style>
-                #main_first_top_ul{
-                    display: flex;
-                    list-style: none;
-                    text-align: center;
-                    width: fit-content;
-                    height: fit-content;
-                    padding-left: 0px;
-                }
-                #main_first_top_li{
-                    width: fit-content;
-                    height: max-content;
-                    border: 1px solid black;
-                    border-radius: 30px;
-                    margin: 5px;
-                    padding: 10px;
-                }
-                #main_first_top_sub_ul{
-                    list-style: none;
-                    text-align: center;
-                    width: fit-content;
-                    height: fit-content;
-                    display: none;
-                    padding-left: 0px;
-                }
-                #main_first_top_sub_li{
-                    width: 150px;
-                    height: fit-content;
-                    border: 0px solid red;
-                    border-radius: 30px;
-                    box-shadow : 5px 5px 5px 5px gray;
-                    padding: 10px;
-                    margin: 10px;
-                    justify-content : center;
-                }
-                /* li에 마우스를 올렸을 때만 하위 ul을 표시합니다 */
-                ul#main_first_top_ul li:hover > ul {
-                    display: block;
-                }
-            </style>
-            <ul id="main_first_top_ul">
-                <li id="main_first_top_li">
-                    커핑 이야기
-                    <ul id="main_first_top_sub_ul">
-                        <li id="main_first_top_sub_li">
-                            <div>
-                                <a>브랜드 스토리</a>
-                            </div>
-                        </li>
-                        <li id="main_first_top_sub_li">
-                            <a>위치</a>
-                        </li>
-                        <li id="main_first_top_sub_li">
-                            <a>바리스타</a>
-                        </li>
-                    </ul>
-                <li id="main_first_top_li">
-                    커피
-                    <ul id="main_first_top_sub_ul">
-                        <li id="main_first_top_sub_li">
-                            생두
-                        </li>
-                        <li id="main_first_top_sub_li">
-                            원두
-                        </li>
-                        <li id="main_first_top_sub_li">
-                            시럽
-                        </li>
-                        <li id="main_first_top_sub_li">
-                            티
-                        </li>
-                    </ul>
-                </li>
-                <li id="main_first_top_li">
-                    악세서리
-                </li>
-                <li id="main_first_top_li" >
-                    <a onclick="location.href='/buisness'">
-                        비즈니스 문의
-                    </a>
-                </li>
-                <li id="main_first_top_li">
-                    <a onclick="location.href='/eventpage'">
-                        EVENT
-                    </a>
-                </li>
-                <li id="main_first_top_li">
-                    <div onclick="location.href='/operation'">
-                        프로젝트 참여
-                    </div>
-                </li>
-            </ul>
-            <script>
-                
-            </script>
-        </div>
-        <div id="baanner_page">
-            <style>
-                #banner_page_img{
-                    width: 100%;
-                    height: 500px;
-                }
-            </style>
-            <script>
-                function hello1()  {
-                    document.getElementById("banner_img").src = "https://firebasestorage.googleapis.com/v0/b/softoasis-c684c.appspot.com/o/cafe1.jpg?alt=media&token=15ab46cf-3099-457c-b4b4-ba89fa459e7b"
-                    document.getElementById("banner_img_link").href="https://map.naver.com/p/entry/place/1923188087?c=15.00,0,0,0,dh"
-                }
-                function hello2()  {
-                    document.getElementById("banner_img").src = "https://firebasestorage.googleapis.com/v0/b/softoasis-c684c.appspot.com/o/cafe2.jpg?alt=media&token=8809e2b8-3a05-4272-9211-520f8a0701d3"
-                    document.getElementById("banner_img_link").href="https://map.naver.com/p/entry/place/1042910752?c=15.00,0,0,0,dh"
-                }
-                function hello3()  {
-                    document.getElementById("banner_img").src="https://firebasestorage.googleapis.com/v0/b/softoasis-c684c.appspot.com/o/cafe3.jpg?alt=media&token=f6a59706-05a3-4e73-a6ce-4e3d1ff0f7a2"
-                    document.getElementById("banner_img_link").href="https://map.naver.com/p/entry/place/1965997995?c=15.00,0,0,0,dh"
-                }
-                function hello4()  {
-                    document.getElementById("banner_img").src = "https://firebasestorage.googleapis.com/v0/b/softoasis-c684c.appspot.com/o/cafe4.jpg?alt=media&token=921bf699-d736-4281-8279-cd4f7713c26f"
-                    document.getElementById("banner_img_link").href="https://map.naver.com/p/entry/place/1695760291?c=15.00,0,0,0,dh"
-                }
-            </script>
-            <div id="banner_page_img">
-                <style>
-                    #banner_img{
-                        width: 100%;
-                        height: max-content;
-                        text-align: center;
-                    }
-                </style>
-                <a id="banner_img_link" style="width: max-content; height: max-content;" onclick="hello1()" >
-                    <img id="banner_img" style="width: 100%; height: 100%;" src="https://firebasestorage.googleapis.com/v0/b/softoasis-c684c.appspot.com/o/cafe1.jpg?alt=media&token=15ab46cf-3099-457c-b4b4-ba89fa459e7b" href="https://map.naver.com/p/entry/place/1923188087?c=15.00,0,0,0,dh">
-                </a>
-            </div>
-
-            <div style="width: 100%; height: 20px;">
-                <style>
-                    #banner_page_move{
-                        width: 100%;
-                        height: 60px;
-                        text-align: center;
-                        display: flex;
-                    }
-                    #btn_banner_page_move{
-                        background-color: white;
-                        width: 40px;
-                        height: 40px;
-                        margin: auto;
-                        float: left;
-                        border-radius: 10px 10px 10px 10px;
-                        border: 1px solid black;
-                        margin: 10px;
-                    }
-                </style>
-                <div id="banner_page_move">
-                    <div style="width: 300px; height: 60px; margin: auto;">
-                        <a style="margin: auto; padding : 10px 0;" onclick="hello1()">
-                            <div id="btn_banner_page_move" style="width: 40px; height: 40px; " >
-                                <p style=" width: 30px; height: 30px; margin-top: 7px; margin-left: 5px;">
-                                    1
-                                </p>
-                            </div>
-                        </a>
-                        <a style="margin: auto; padding : 10px 0;" onclick="hello2()">
-                            <div id="btn_banner_page_move" style="width: 40px; height: 40px; " >
-                                <p style=" width: 30px; height: 30px; margin-top: 7px; margin-left: 5px;">
-                                    2
-                                </p>
-                            </div>
-                        </a>
-                        <a style="margin: auto; padding : 10px 0;" onclick="hello3()">
-                            <div id="btn_banner_page_move" style="width: 40px; height: 40px; " >
-                                <p style=" width: 30px; height: 30px; margin-top: 7px; margin-left: 5px;">
-                                    3
-                                </p>
-                            </div>
-                        </a>
-                        <a style="margin: auto; padding : 10px 0;" onclick="hello4()">
-                            <div id="btn_banner_page_move" style="width: 40px; height: 40px; " >
-                                <p style=" width: 30px; height: 30px; margin-top: 7px; margin-left: 5px;">
-                                    4
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+        <div id="mainspace_center_item_li">
+            <div id="mainspace_center_item_li_main" style="margin-top: +310px;">
+                <img src="https://firebasestorage.googleapis.com/v0/b/softoasis-763c2.appspot.com/o/image%2F3d_porter_filter.jpg?alt=media&token=7d237c6e-ab71-4bf6-8aef-211d5d09cb38" style="width: 100%; height: 100%;">
             </div>
         </div>
-        <div id="mainspace">
-            <style>
-                #mainspace_left{
-                    width: 200px;
-                    height: fit-content;
-                    display: flex;
-                    justify-content: center;
-                }
-                #mainspace_center{
-                    width: 100%;
-                    height: fit-content;
-                    display: flex;
-                }
-                #mainspace_right{
-                    width: 200px;
-                    height: fit-content;
-                    display: flex;
-                    justify-content: center;
-                }
-            </style>
-            <div id="mainspace_center">
-                <style>
-                    #mainspace_center_item_li{
-                        width: 25%;
-                        height: 700px;
-                        padding: 20px;
-                        margin-left: 30px;
-                    }
-                    #mainspace_center_item_li_main{
-                        width: 180px;
-                        height: 350px;
-                        padding: 20px;
-                        margin: auto;
-                        justify-content: center;
-                        border-radius: 30px;
-                    }
-                </style>
-                <div id="mainspace_center_item_li">
-                    <div id="mainspace_center_item_li_main" style="margin-top: +150px;">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/softoasis-763c2.appspot.com/o/image%2F3d_porter_filter.jpg?alt=media&token=7d237c6e-ab71-4bf6-8aef-211d5d09cb38" style="width: 100%; height: 100%;">
-                    </div>
-                </div>
-                <div id="mainspace_center_item_li">
-                    <div id="mainspace_center_item_li_main" style="margin-top: +310px;">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/softoasis-763c2.appspot.com/o/image%2F3d_porter_filter.jpg?alt=media&token=7d237c6e-ab71-4bf6-8aef-211d5d09cb38" style="width: 100%; height: 100%;">
-                    </div>
-                </div>
-                <div id="mainspace_center_item_li">
-                    <div id="mainspace_center_item_li_main">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/softoasis-763c2.appspot.com/o/image%2F3d_porter_filter.jpg?alt=media&token=7d237c6e-ab71-4bf6-8aef-211d5d09cb38" style="width: 100%; height: 100%;">
-                    </div>
-                </div>
-                <div id="mainspace_center_item_li">
-                    <div id="mainspace_center_item_li_main" style="margin-top: +200px;">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/softoasis-763c2.appspot.com/o/image%2F3d_porter_filter.jpg?alt=media&token=7d237c6e-ab71-4bf6-8aef-211d5d09cb38" style="width: 100%; height: 100%;">
-                    </div>
-                </div>
-                <script>
-                    
-                </script>
+        <div id="mainspace_center_item_li">
+            <div id="mainspace_center_item_li_main">
+                <img src="https://firebasestorage.googleapis.com/v0/b/softoasis-763c2.appspot.com/o/image%2F3d_porter_filter.jpg?alt=media&token=7d237c6e-ab71-4bf6-8aef-211d5d09cb38" style="width: 100%; height: 100%;">
             </div>
         </div>
-        <div id="bestseller">
-            <style>
-                #warp{
-                    width: 300px;
-                    height: fit-content;
-                    
-                }
-            </style>
-            <div id="warp">
-                <style>
-                    #bestseller_li{
-                        width: 100%;
-                        height: 50px;
-                        display: flex;
-                        border-radius: 30px;
-                        border: 1px solid black;
-                        padding: 10px;
-                        margin: 10px;
-                    }
-                    #bestseller_li_keyword_txt{
-                        width: 100%;
-                        height: fit-content;
-                        text-align: center;
-                    }
-                    #bestseller_name{
-                        width: 350px;
-                        height: fit-content
-                    }
-                </style>
-                <div id="bestseller_name">
-                    인기 상품 카테 고리 네임 (전체 그림자 적용)
-                </div>
-                <ul>
-                    <div id="bestseller_li">
-                        <div>
-                            <p id="bestseller_li_number">
-                                1
-                            </p>
-                        </div>
-                        <div id="bestseller_li_keyword">
-                            <p id="bestseller_li_keyword_txt">
-                                인기상품 이름
-                            </p>
-                        </div>
-                    </div>
-                    <div id="bestseller_li">
-                        <div>
-                            <p id="bestseller_li_number">
-                                1
-                            </p>
-                        </div>
-                        <div id="bestseller_li_keyword">
-                            <p id="bestseller_li_keyword_txt">
-                                인기상품 이름
-                            </p>
-                        </div>
-                    </div>
-                    <div id="bestseller_li">
-                        <div>
-                            <p id="bestseller_li_number">
-                                1
-                            </p>
-                        </div>
-                        <div id="bestseller_li_keyword">
-                            <p id="bestseller_li_keyword_txt">
-                                인기상품 이름
-                            </p>
-                        </div>
-                    </div>
-                    <div id="bestseller_li">
-                        <div>
-                            <p id="bestseller_li_number">
-                                1
-                            </p>
-                        </div>
-                        <div id="bestseller_li_keyword">
-                            <p id="bestseller_li_keyword_txt">
-                                인기상품 이름
-                            </p>
-                        </div>
-                    </div>
-                    <div id="bestseller_li">
-                        <div id="bestseller_li_keyword">
-                            <p id="bestseller_li_number">
-                                1
-                            </p>
-                        </div>
-                        <div id="bestseller_li_keyword">
-                            <p id="bestseller_li_keyword_txt">
-                                인기상품 이름
-                            </p>
-                        </div>
-                    </div>
-                    <div id="bestseller_li">
-                        <div>
-                            <p id="bestseller_li_number">
-                                1
-                            </p>
-                        </div>
-                        <div id="bestseller_li_keyword">
-                            <p id="bestseller_li_keyword_txt">
-                                인기상품 이름
-                            </p>
-                        </div>
-                    </div>
-                    <div id="bestseller_li">
-                        <div>
-                            <p id="bestseller_li_number">
-                                1
-                            </p>
-                        </div>
-                        <div id="bestseller_li_keyword">
-                            <p id="bestseller_li_keyword_txt">
-                                인기상품 이름
-                            </p>
-                        </div>
-                    </div>
-                    <div id="bestseller_li">
-                        <div>
-                            <p id="bestseller_li_number">
-                                1
-                            </p>
-                        </div>
-                        <div id="bestseller_li_keyword">
-                            <p id="bestseller_li_keyword_txt">
-                                인기상품 이름
-                            </p>
-                        </div>
-                    </div>
-                    <div id="bestseller_li">
-                        <div>
-                            <p id="bestseller_li_number">
-                                1
-                            </p>
-                        </div>
-                        <div id="bestseller_li_keyword">
-                            <p id="bestseller_li_keyword_txt">
-                                인기상품 이름
-                            </p>
-                        </div>
-                    </div>
-                    <div id="bestseller_li">
-                        <div>
-                            <p id="bestseller_li_number">
-                                1
-                            </p>
-                        </div>
-                        <div id="bestseller_li_keyword">
-                            <p id="bestseller_li_keyword_txt">
-                                인기상품 이름
-                            </p>
-                        </div>
-                    </div>
-
-                </ul>
+        <div id="mainspace_center_item_li">
+            <div id="mainspace_center_item_li_main" style="margin-top: +200px;">
+                <img src="https://firebasestorage.googleapis.com/v0/b/softoasis-763c2.appspot.com/o/image%2F3d_porter_filter.jpg?alt=media&token=7d237c6e-ab71-4bf6-8aef-211d5d09cb38" style="width: 100%; height: 100%;">
             </div>
         </div>
-        <div id="naver_view">
-            <style>
-                #view_left{
-                    width: 500px;
-                    height: fit-content;
-                }
-                #view_center{
-                    width: 500px;
-                    height: fit-content;
-                }
-                #view_right{
-                    width: 500px;
-                    height: fit-content;
-                }
-            </style>
-            <div id="view_left">
-                <style>
-                    #view_left_ul{
-                        border: 0px;
-                    }
-                    #view_left_li{
-                        list-style: none;
-                    }
-                    #naver_blog_img{
-                        width: 100%;
-                        height: 500px;
-                    }
-                </style>
-                <ul id="view_left_ul">
-                    <style>
-                        #view_left_li{
-                            border-radius: 30px
-                        }
-                    </style>
-                    <li id="view_left_li">
-                        <div>
-                            <p>
-                                네이버 블로그 제목
-                            </p>
-                        </div>
-                        <div>
-                            <p>
-                                본문 미리 보기
-                            </p>
-                        </div>
-                        <div>
-                            <img id="naver_blog_img">
-                        </div>
-                    </li>
-                </ul>
-            </div>
+        <script>
+            
+        </script>
+    </div>
+</div>
+<div id="bestseller">
+    <style>
+        #warp{
+            width: 300px;
+            height: fit-content;
+            
+        }
+    </style>
+    <div id="warp">
+        <style>
+            #bestseller_li{
+                width: 100%;
+                height: 50px;
+                display: flex;
+                border-radius: 30px;
+                border: 1px solid black;
+                padding: 10px;
+                margin: 10px;
+            }
+            #bestseller_li_keyword_txt{
+                width: 100%;
+                height: fit-content;
+                text-align: center;
+            }
+            #bestseller_name{
+                width: 350px;
+                height: fit-content
+            }
+        </style>
+        <div id="bestseller_name">
+            인기 상품 카테 고리 네임 (전체 그림자 적용)
         </div>
-        <div id="category_view">
-            <div id="category_name">
+        <ul>
+            <div id="bestseller_li">
                 <div>
-                    
+                    <p id="bestseller_li_number">
+                        1
+                    </p>
+                </div>
+                <div id="bestseller_li_keyword">
+                    <p id="bestseller_li_keyword_txt">
+                        인기상품 이름
+                    </p>
                 </div>
             </div>
-        </div>
-        <div id="company_info">
+            <div id="bestseller_li">
+                <div>
+                    <p id="bestseller_li_number">
+                        1
+                    </p>
+                </div>
+                <div id="bestseller_li_keyword">
+                    <p id="bestseller_li_keyword_txt">
+                        인기상품 이름
+                    </p>
+                </div>
+            </div>
+            <div id="bestseller_li">
+                <div>
+                    <p id="bestseller_li_number">
+                        1
+                    </p>
+                </div>
+                <div id="bestseller_li_keyword">
+                    <p id="bestseller_li_keyword_txt">
+                        인기상품 이름
+                    </p>
+                </div>
+            </div>
+            <div id="bestseller_li">
+                <div>
+                    <p id="bestseller_li_number">
+                        1
+                    </p>
+                </div>
+                <div id="bestseller_li_keyword">
+                    <p id="bestseller_li_keyword_txt">
+                        인기상품 이름
+                    </p>
+                </div>
+            </div>
+            <div id="bestseller_li">
+                <div id="bestseller_li_keyword">
+                    <p id="bestseller_li_number">
+                        1
+                    </p>
+                </div>
+                <div id="bestseller_li_keyword">
+                    <p id="bestseller_li_keyword_txt">
+                        인기상품 이름
+                    </p>
+                </div>
+            </div>
+            <div id="bestseller_li">
+                <div>
+                    <p id="bestseller_li_number">
+                        1
+                    </p>
+                </div>
+                <div id="bestseller_li_keyword">
+                    <p id="bestseller_li_keyword_txt">
+                        인기상품 이름
+                    </p>
+                </div>
+            </div>
+            <div id="bestseller_li">
+                <div>
+                    <p id="bestseller_li_number">
+                        1
+                    </p>
+                </div>
+                <div id="bestseller_li_keyword">
+                    <p id="bestseller_li_keyword_txt">
+                        인기상품 이름
+                    </p>
+                </div>
+            </div>
+            <div id="bestseller_li">
+                <div>
+                    <p id="bestseller_li_number">
+                        1
+                    </p>
+                </div>
+                <div id="bestseller_li_keyword">
+                    <p id="bestseller_li_keyword_txt">
+                        인기상품 이름
+                    </p>
+                </div>
+            </div>
+            <div id="bestseller_li">
+                <div>
+                    <p id="bestseller_li_number">
+                        1
+                    </p>
+                </div>
+                <div id="bestseller_li_keyword">
+                    <p id="bestseller_li_keyword_txt">
+                        인기상품 이름
+                    </p>
+                </div>
+            </div>
+            <div id="bestseller_li">
+                <div>
+                    <p id="bestseller_li_number">
+                        1
+                    </p>
+                </div>
+                <div id="bestseller_li_keyword">
+                    <p id="bestseller_li_keyword_txt">
+                        인기상품 이름
+                    </p>
+                </div>
+            </div>
+
+        </ul>
+    </div>
+</div>
+<div id="naver_view">
+    <style>
+        #view_left{
+            width: 500px;
+            height: fit-content;
+        }
+        #view_center{
+            width: 500px;
+            height: fit-content;
+        }
+        #view_right{
+            width: 500px;
+            height: fit-content;
+        }
+    </style>
+    <div id="view_left">
+        <style>
+            #view_left_ul{
+                border: 0px;
+            }
+            #view_left_li{
+                list-style: none;
+            }
+            #naver_blog_img{
+                width: 100%;
+                height: 500px;
+            }
+        </style>
+        <ul id="view_left_ul">
             <style>
-                #company_info_sub{
-                    width: 30%;
-                    height: 100%;
-                    float: left;
-                    background-color: pink;
+                #view_left_li{
+                    border-radius: 30px
                 }
             </style>
-            <div id="company_info_sub">
-                <div id="ADDRESS">
-                    <p style="font-size: x-large; margin: 0;">
-                        ADDRESS
-                    </p>
-                    <p style="font-size:small; margin: 0">
-                        대전광역시 대덕대로 223 대우토피아 1415호
-                    </p>
-                </div>
-                <div>
-                    <p style="font-size: x-large;">
-                        고객센터
-                    </p>
-                    <p style="font-size:medium;">
-                        010-4517-1684
-                    </p>
-                    <p style="font-size:medium;">
-                        상담 운영 시간 : 월 ~ 금    AM 09 : 00 ~ PM 18 : 00 
-                    </p>
-                </div>
-                <div>
-                    <p style="font-size: x-large;">
-                        SNS
-                    </p>
-                    <a href="https://www.instagram.com/life_para3/">
-                        <img src="website/insta.jpg" style="width: 40px; height: 40px; margin: 6px;">
-                    </a>
-                    <a href="https://www.facebook.com/profile.php?id=61552411303231">
-                        <img src="website/facebook.jpg" style="width: 40px; height: 40px; margin: 6px;">
-                    </a>
-                    <a href="https://open.kakao.com/o/sxTCML7f">
-                        <img src="website/kakao.jpg" style="width: 40px; height: 40px; margin: 6px;">
-                    </a>
-                    <p>
-                        네이버 블로그
-                    </p>
-                </div>
-            </div>
-            <div id="company_info_sub">
-                <style>
-                    #notice{
-                        width: 100%;
-                        height: 200px;
-                    }
-                </style>
-                <div id="notice">
-                    <div style="width: 100%; height: 60px;">
-                        <div style="width: 75%; height: 100%; float: left;" >
-                            <p style="font-size: large;">
-                                공지사항
-                            </p>
-                        </div>
-                        <div style="width: 25%; height: 100%; float: left;">
-                            <p style="font-size: small;"> 
-                                더보기 +
-                            </p>
-                        </div>
-                    </div>
-                    <div style="padding: 0; margin: 0 ;">
-                        <style>
-                            #notice_info_ul{
-                                list-style: none;
-                                margin: 0;
-                                margin-block-end: 0px;
-                                margin-block-start: 0px;
-                                padding-inline-start: 0px
-                            }
-                        </style>
-                        <ul id="notice_info_ul">
-                            <style>
-                                #notice_info_li{
-                                    margin-left: 0;
-                                    font-size: small;
-                                    margin: 6px;
-                                }
-
-                            </style>
-                            <li id="notice_info_li" >
-                                1. 
-                                <a id="notice_info_link">
-                                    공지1
-                                </a>
-                            </li>
-                            <li id="notice_info_li">
-                                2. 
-                                <a id="notice_info_link">
-                                    공지2
-                                </a>
-                            </li>
-                            <li id="notice_info_li">
-                                3. 
-                                <a id="notice_info_link">
-                                    공지3
-                                </a>
-                            </li>
-                            <li id="notice_info_li">
-                                4. 
-                                <a id="notice_info_link">
-                                    공지4
-                                </a>
-                            </li>
-                            <li id="notice_info_li">
-                                5. 
-                                <a id="notice_info_link">
-                                    공지5
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div id="company_info_sub">
+            <li id="view_left_li">
                 <div>
                     <p>
-                        buisness 문의
+                        네이버 블로그 제목
                     </p>
-                    <a href="https://open.kakao.com/o/grwHIL7f">
-                        <img src="kakao.jpg" style="width: 40px; height: 40px;">
-                    </a>
                 </div>
                 <div>
                     <p>
-                        테스트 스페이스
+                        본문 미리 보기
                     </p>
-                    <div style="width: 100px; height: 100px; background-color: black;" onclick="location.href='/tamplelate'">
-                        
-                    </div>
                 </div>
-            </div>
+                <div>
+                    <img id="naver_blog_img">
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="category_view">
+    <div id="category_name">
+        <div>
+            
         </div>
-    </body>
-</html>
+    </div>
+</div>
