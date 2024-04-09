@@ -17,167 +17,65 @@ main.listen(serverstart_port,function(){
 });
 main.set("views", "./mainpage");
 
+const templatePath = path.join(__dirname, "/../mainpage/mainpagetamplete/coffeemainpagetample.html");
+const userdata = "F:user/"
 
+main.get("/", (req, res) => {
+    // 탬플릿 안에 넣을 페이지 html파일 경로
+    const pagePath = path.join(__dirname, "/../mainpage/coffeemania.html");
 
+    // 페이지 내용을 템플릿에 적용하여 렌더링
+    let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
 
-const database_root = 'F:';
-
-
-main.get("/login", (req, res) => {  // 로그인 으로 인입이 되면 러 
-    //기능 또는 동작
-    fs.readFile(__dirname + "/../mainpage/coffeemania_login.html", 'utf8', (err, data) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('Server Error');
-            return;
-        }
-
-        // 클라이언트에게 수정된 HTML 전송
-        res.send(data);
-    });
-    
-    // 뒤에 로그인 시도 정보가 없다면 로그인 기본 페이지 로그인 시도 정보가 있으면 로그인 기능 실행
-    console.log("로그인페이지확인")
+    // 렌더링된 템플릿을 클라이언트에게 응답
+    res.send(renderedTemplate);
 });
-main.get("/", (req, res) => {  // 로그인 으로 인입이 되면 러 
-    //기능 또는 동작
-    //console.log(req.url)
-    
-    
-    fs.readFile(__dirname + "/../mainpage/coffeemania.html", 'utf8', (err, data) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('Server Error');
-            return;
-        }
-        
-        // HTML 파일을 cheerio로 로드
-        const $ = cheerio.load(data);
+main.get("/login", (req, res) => {
+    // 탬플릿 안에 넣을 페이지 html파일 경로
+    const pagePath = path.join(__dirname, "/../mainpage/coffeemania_login.html");
 
-        // id가 'mainitem'인 div 태그 내부에 id가 'text'인 p 태그 추가
+    // 페이지 내용을 템플릿에 적용하여 렌더링
+    let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
 
-        // 수정된 HTML을 문자열로 변환
-        const modifiedHtml = $.html();
-
-        // 클라이언트에게 수정된 HTML 전송
-        res.send(modifiedHtml);
-
-        console.log("방문자확인")
-    });
+    // 렌더링된 템플릿을 클라이언트에게 응답
+    res.send(renderedTemplate);
 });
 main.get("/join", (req, res) => {  // 로그인 으로 인입이 되면 러 
     //기능 또는 동작
-    fs.readFile(__dirname + "/../mainpage/coffeemania_register.html", 'utf8', (err, data) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('Server Error');
-            return;
-        }
+    const pagePath = path.join(__dirname, "/../mainpage/coffeemania_register.html");
 
-        // 클라이언트에게 수정된 HTML 전송
-        res.send(data);
-    });
-    
-    // 뒤에 로그인 시도 정보가 없다면 로그인 기본 페이지 로그인 시도 정보가 있으면 로그인 기능 실행
-    console.log("로그인페이지확인")
-});
-main.get("/main_event", (req, res) => {  // 로그인 으로 인입이 되면 러 
-    //기능 또는 동작
-    fs.readFile(__dirname + "/../mainpage/mainpagespase_1.html", 'utf8', (err, data) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('Server Error');
-            return;
-        }
-        // 클라이언트에게 수정된 HTML 전송
-        const $ = cheerio.load(data);
-    
-            // id가 'mainitem'인 div 태그 내부에 id가 'text'인 p 태그 추가
-        $('#mainspace_center').append('<iframe src="main_event" width="100%" height="max-content"></iframe>');
+    // 페이지 내용을 템플릿에 적용하여 렌더링
+    let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
 
-        // 수정된 HTML을 문자열로 변환
-        const modifiedHtml = $.html();
-
-        // 클라이언트에게 수정된 HTML 전송
-        res.send(modifiedHtml);
-        
-    });
+    // 렌더링된 템플릿을 클라이언트에게 응답
+    res.send(renderedTemplate);
 });
 main.get("/buisness", (req, res) => {  // 로그인 으로 인입이 되면 러 
-    //기능 또는 동작
-    console.log(req.url)
-    fs.readFile(__dirname + "/../mainpage/coffeemania_buisness.html", 'utf8', (err, data) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('Server Error');
-            return;
-        }
+    const pagePath = path.join(__dirname, "/../mainpage/coffeemania_buisness.html");
 
-        // 클라이언트에게 수정된 HTML 전송
-        res.send(data);
+    // 페이지 내용을 템플릿에 적용하여 렌더링
+    let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
 
-        console.log("비즈니스 요청 페이지 확인")
-    });
-    
-    // 뒤에 로그인 시도 정보가 없다면 로그인 기본 페이지 로그인 시도 정보가 있으면 로그인 기능 실행
-
+    // 렌더링된 템플릿을 클라이언트에게 응답
+    res.send(renderedTemplate);
 });
 main.get("/eventpage", (req, res) => {
-    fs.readFile(__dirname + "/../mainpage/coffeemania_event.html", 'utf8', (err, data) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('Server Error');
-            return;
-        }
+    const pagePath = path.join(__dirname, "/../mainpage/coffeemania_event.html");
 
-        // 클라이언트에게 수정된 HTML 전송
-        res.send(data);
+    // 페이지 내용을 템플릿에 적용하여 렌더링
+    let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
 
-        console.log("프로젝트지원자 페이지 확인")
-    });
+    // 렌더링된 템플릿을 클라이언트에게 응답
+    res.send(renderedTemplate);
 });
 main.get("/operation", (req, res) => {  // 로그인 으로 인입이 되면 러 
-    //기능 또는 동작
-    console.log(req.url)
-    fs.readFile(__dirname + "/../mainpage/coffeemania_operation.html", 'utf8', (err, data) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('Server Error');
-            return;
-        }
+    const pagePath = path.join(__dirname, "/../mainpage/coffeemania_operation.html");
 
-        // 클라이언트에게 수정된 HTML 전송
-        res.send(data);
+    // 페이지 내용을 템플릿에 적용하여 렌더링
+    let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
 
-        console.log("프로젝트지원자 페이지 확인")
-    });
-
-});
-main.get("/tamplelate", (req, res) => {  // 로그인 으로 인입이 되면 러 
-    //기능 또는 동작
-    //console.log(req.url)
-    
-    
-    fs.readFile(__dirname + "/../mainpage/mainpagetamplete/coffeemainpagetample.html", 'utf8', (err, data) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('Server Error');
-            return;
-        }
-        
-        // HTML 파일을 cheerio로 로드
-        const $ = cheerio.load(data);
-
-        // id가 'mainitem'인 div 태그 내부에 id가 'text'인 p 태그 추가
-
-        // 수정된 HTML을 문자열로 변환
-        const modifiedHtml = $.html();
-
-        // 클라이언트에게 수정된 HTML 전송
-        res.send(modifiedHtml);
-
-        console.log("방문자확인")
-    });
+    // 렌더링된 템플릿을 클라이언트에게 응답
+    res.send(renderedTemplate);
 });
 
 
@@ -195,8 +93,6 @@ main.post('/login_pass', (req, res) => {
             res.status(200).json({ "token" : token });
         }
     });
-
-    
 });
 main.post('/join_pass', (req, res) => {
     // 클라이언트로부터 전송받은 이메일과 비밀번호를 추출
@@ -306,147 +202,22 @@ main.post('/operation', (req, res) => {
 });
 
 
-
-function server_open_to_close() {
-    const port = 3002;
-    const server = http.createServer((req, res) => {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'text/plain');
-        res.end('Server is running!');
-    });
-
-    const currentTime = new Date().getHours();
-    const isWorkingHours = currentTime >= 9 && currentTime <= 18;
-
-    if (isWorkingHours) {
-        server.listen(port, () => {
-            console.log(`Server is running at http://localhost:${port}`);
-        });
-    } else {
-        console.log('It is outside of working hours. Server will not be started.');
-    }
+function loadTemplate(templatePath) {
+    return fs.readFileSync(templatePath, 'utf-8');
 }
-function buisness(businessInfo, res) {
-    const filePath = '드라이브/비즈니스/문의/business_info.txt';
+function loadPage(pagePath) {
+    return fs.readFileSync(pagePath, 'utf-8');
+}
+// 함수: 탬플릿 안에 넣을 페이지 html 적용
+function applyPageToTemplate(templatePath, pagePath) {
+    let template = loadTemplate(templatePath);
+    let pageContent = loadPage(pagePath);
 
-    fs.writeFile(filePath, businessInfo, (err) => {
-        if (err) {
-            console.error('Error writing file:', err);
-            res.status(500).send('Error writing file');
-        } else {
-            console.log('Business info saved successfully');
-            res.status(200).send('저장완료');
-        }
-    });
+    const mainPageRegex = /<div id="mainpage"><\/div>/;
+    return template.replace(mainPageRegex, `<div id="mainpage">${pageContent}</div>`);
 }
 function sellerinput(sellerInfo, res) {
     console.log(sellerInfo);
-}
-function login2(email,pw){
-    //user,id,pw 값을 localhost:5000/loginpass 로 전송
-    // 같은 폴더 안에 userinfo/user/userdata.json을 찾아 pw이 일치하는지 확인후 콘솔에 출력
-    
-    
-    //console.log(`email: ${email} , pw : ${pw} `)
-
-    // 보낼 데이터
-    const data = JSON.stringify({
-        email: email,
-        pw : pw
-    });
-    
-    // 요청 옵션 설정
-    const options = {
-        hostname: '192.168.0.2',
-        port: 200,
-        path: '/login_pass', // 요청을 보낼 경로
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': data.length
-        }
-    };
-    
-    // 요청 생성
-    const req = http.request(options, (res) => {
-        //console.log(`Status Code: ${res.statusCode}`);
-    
-        res.on('data', (d) => {
-            //process.stdout.write(d);
-            const dd = JSON.parse(d);
-            //console.log({'message' : dd.message,'email': email,'pw': pw});
-            return data
-        });
-    });
-    
-    // 요청 에러 핸들링
-    req.on('error', (error) => {
-        console.error(`Error: ${error.message}`);
-    });
-    
-    // 데이터 전송
-    req.write(data);
-    req.end();
-}
-function checkFileExists(filePath) {
-    try {
-        fs.accessSync(filePath, fs.constants.F_OK);
-        return true; // 파일이 존재하는 경우 true 반환
-    } catch (err) {
-        return false; // 파일이 존재하지 않는 경우 false 반환
-    }
-}
-function login_api(email,pw){
-    //user,id,pw 값을 localhost:5000/loginpass 로 전송
-    // 같은 폴더 안에 userinfo/user/userdata.json을 찾아 pw이 일치하는지 확인후 콘솔에 출력
-    
-    
-    //console.log(`email: ${email} , pw : ${pw} `)
-
-    // 보낼 데이터
-    const data = JSON.stringify({
-        email: email,
-        pw : pw
-    });
-    
-    // 요청 옵션 설정
-    const options = {
-        hostname: '192.168.0.2',
-        port: 3001,
-        path: '/login_pass', // 요청을 보낼 경로
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': data.length
-        }
-    };
-    
-    // 요청 생성
-    const req = http.request(options, (res) => {
-        //console.log(`Status Code: ${res.statusCode}`);
-    
-        res.on('data', (d) => {
-            //process.stdout.write(d);
-            const dd = JSON.parse(d);
-            //console.log({'message' : dd.message,'email': email,'pw': pw});
-            if(data > ''){
-                return data
-            }
-            else {
-                return "계정 정보 없음"
-            }
-            
-        });
-    });
-    
-    // 요청 에러 핸들링
-    req.on('error', (error) => {
-        console.error(`Error: ${error.message}`);
-    });
-    
-    // 데이터 전송
-    req.write(data);
-    req.end();
 }
 function login_file(email,pw){
     console.log(`email: ${email}, pw: ${pw}`);
@@ -614,12 +385,6 @@ function userfind(){
         }
     });
 }
-function joinemail_waitsave(){
-    // 파일이 존재하는지 확인
-    const filePath = 'F:/user/'+ +'.json';
-    
-}
-
 //메인 서버에 이메일 전송
 //메인 서버에서 대기 중인 이메일인지 확인
 //서브서버 또는 메인 서버에서 가입된 이메일이 있는지 확인 (함수 사용 : userfind)
