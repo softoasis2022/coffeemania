@@ -38,7 +38,7 @@
                         사업자 상호
                     </div>
                     <div id="buisness_info_li_sub2">
-                        <input id="market_name" value="사업자 등록증에 있는 상호명을 입력해 주세요" onclick="this.value = ''">
+                        <input id="market_industryname" value="사업자 등록증에 있는 상호명을 입력해 주세요" onclick="this.value = ''">
                     </div>
                 </li>
                 <li id="buisness_info_li">
@@ -46,7 +46,7 @@
                         업종
                     </div>
                     <div id="buisness_info_li_sub2">
-                        <input id="market_name">
+                        <input id="market_industrycategory1">
                     </div>
                 </li>
                 <li id="buisness_info_li">
@@ -54,7 +54,7 @@
                         업태
                     </div>
                     <div id="buisness_info_li_sub2">
-                        <input id="market_name">
+                        <input id="market_industrycategory2">
                     </div>
                 </li>
                 <li id="buisness_info_li">
@@ -62,10 +62,10 @@
                         담당자
                     </div>
                     <div id="buisness_info_li_sub2">
-                        <input id="market_name" value="담당자 또는 대표님 이름을 입력해 주세요" onclick="this.value = ''">
+                        <input id="market_directoryname" value="담당자 또는 대표님 이름을 입력해 주세요" onclick="this.value = ''">
                     </div>
                     <div id="buisness_info_li_sub2" style="width: 150px;">
-                        <input id="market_name" style="margin-left: 0px;" value="직책" onclick="this.value = ''">
+                        <input id="market_directoryproduce" style="margin-left: 0px;" value="직책" onclick="this.value = ''">
                     </div>
                 </li>
                 <li id="buisness_info_li">
@@ -124,8 +124,8 @@
                                 }
                             </script>
                         </div>
-                        <input id="market_number2" style="margin-left: 10px; height: 100%;" value="시 , 군 , 구" onclick="this.value = ''">
-                        <input id="market_number3" style="margin-left: 10px; height: 100%;" value="상세 주소 " onclick="this.value = ''">
+                        <input id="buisness_info_address_seconds" style="margin-left: 10px; height: 100%;" value="시 , 군 , 구" onclick="this.value = ''">
+                        <input id="buisness_info_address_info" style="margin-left: 10px; height: 100%;" value="상세 주소 " onclick="this.value = ''">
                     </div>
                 </li>
                 <li id="buisness_info_li">
@@ -133,7 +133,7 @@
                         문의 내용
                     </div>
                     <div id="buisness_info_li_sub2" style="display: flex; width: 1000px; height: 500px">
-                        <textarea style="width: 100%; height: 100%;"></textarea>
+                        <textarea id="buisness_txt" style="width: 100%; height: 100%;"></textarea>
                     </div>
                 </li>
                 <li id="buisness_info_li">
@@ -146,11 +146,11 @@
                                 <p>오전</p>
                             </div>
                             <div style="width: fit-content; height: fit-content; display: flex; margin-left: 5px;">
-                                <input id="market_name" style="width: fit-content; height: fit-content; margin-top: 15px;" type="number" max="24" min="0">
+                                <input id="buisness_sales_hour_first" style="width: fit-content; height: fit-content; margin-top: 15px;" type="number" max="24" min="0">
                                 <p style="width: fit-content;">시</p>
                             </div>
                             <div style="width: fit-content; height: fit-content; display: flex; margin-left: 5px;">
-                                <input id="market_name" style="width: fit-content; height: fit-content; margin-top: 15px;" type="number" max="59" min="0">
+                                <input id="buisness_sales_min_first" style="width: fit-content; height: fit-content; margin-top: 15px;" type="number" max="59" min="0">
                                 <p style="width: fit-content;">분</p>
                             </div>
                         </div>
@@ -159,11 +159,11 @@
                                 <p>오후</p>
                             </div>
                             <div style="width: fit-content; height: fit-content; display: flex; margin-left: 5px;">
-                                <input id="market_name" style="width: fit-content; height: fit-content; margin-top: 15px;" type="number" max="24" min="0">
+                                <input id="buisness_sales_hour_seconds" style="width: fit-content; height: fit-content; margin-top: 15px;" type="number" max="24" min="0">
                                 <p style="width: fit-content;">시</p>
                             </div>
                             <div style="width: fit-content; height: fit-content; display: flex; margin-left: 5px;">
-                                <input id="market_name" style="width: fit-content; height: fit-content; margin-top: 15px;" type="number" max="59" min="0">
+                                <input id="buisness_sales_min_seconds" style="width: fit-content; height: fit-content; margin-top: 15px;" type="number" max="59" min="0">
                                 <p style="width: fit-content;">분</p>
                             </div>
                         </div>
@@ -181,11 +181,70 @@
         </div>
         <script>
             function buisness_input(){
-                //각 영역 id설정
-                //각 데이터 변수 설정
+                //각 영역 id설정 (완료)
+                //각 데이터 변수 설정 (완료)
                 //변수에 데이터 저장
+                const marketname = document.getElementById("market_name").value; //매장이름
+                const marketindustryname = document.getElementById("market_industryname").value; //사업자 등록증 기준 매장이름
+                const marketindustrycategory1 = document.getElementById("market_industrycategory1").value; //업종
+                const marketindustrycategory2 = document.getElementById("market_industrycategory2").value; //업태
+                const marketdirectoryname = document.getElementById("market_directoryname").value; //MD이름
+                const marketdirectoryproduce = document.getElementById("market_directoryproduce").value; //직책
+                const marketnumber1 = document.getElementById("market_number1").value; //첫번쨰 연락처
+                const marketnumber2 = document.getElementById("market_number2").value; //두번쨰 연락처
+                const marketnumber3 = document.getElementById("market_number3").value; //세번쨰 연락처
+                const marketaddress1 = document.getElementById("buisness_info_address_first").value; //첫번쨰 주소
+                const marketaddress2 = document.getElementById("buisness_info_address_seconds").value; //두번쨰 주소
+                const marketaddress3 = document.getElementById("buisness_info_address_info").value; //세번째 주소
+                const market_buisnesstxt = document.getElementById("buisness_txt").value; //비즈니스문의 내용
+                const buisnesssaleshourfirst = document.getElementById("buisness_sales_hour_first").value; //연락 시작 가능 시간 시
+                const buisnesssalesminfirst = document.getElementById("buisness_sales_hour_first").value; //연락 시작 가능 시간 분
+                const buisnesssaleshourseconds = document.getElementById("buisness_sales_hour_first").value; //연락 최대 가능 시간 시
+                const buisnesssalesminseconds = document.getElementById("buisness_sales_hour_first").value; //연락 최대 가능 시간 분
+
+                const data = {
+                    marketname: marketname,
+                    marketindustryname: marketindustryname,
+                    marketindustrycategory1: marketindustrycategory1,
+                    marketindustrycategory2: marketindustrycategory2,
+                    marketdirectoryname: marketdirectoryname,
+                    marketdirectoryproduce: marketdirectoryproduce,
+                    marketnumber1: marketnumber1,
+                    marketnumber2: marketnumber2,
+                    marketnumber3: marketnumber3,
+                    marketaddress1: marketaddress1,
+                    marketaddress2: marketaddress2,
+                    marketaddress3: marketaddress3,
+                    market_buisnesstxt: market_buisnesstxt,
+                    buisnesssaleshourfirst: buisnesssaleshourfirst,
+                    buisnesssalesminfirst: buisnesssalesminfirst,
+                    buisnesssaleshourseconds: buisnesssaleshourseconds,
+                    buisnesssalesminseconds: buisnesssalesminseconds
+                };
                 //저장된 데이터 서버로 전송
-            }
+
+                fetch('http://localhost:3001/buisness', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                            })
+                            .then(data => {
+                                console.log('Data sent successfully:', data);
+                                // 성공적으로 전송되었을 때 수행할 작업 추가
+                            })
+                            .catch(error => {
+                                console.error('There was a problem with your fetch operation:', error);
+                                // 전송 중 오류가 발생했을 때 수행할 작업 추가
+                            });
+                        }
         </script>
     </div>
 </div>
