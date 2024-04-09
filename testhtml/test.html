@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display JSON Data</title>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // 페이지 로드가 완료되면 실행됩니다.
+
+            // 서버로부터 받은 JSON 데이터 (예시 데이터)
+            const jsonData = [
+                {
+                    "name": "John",
+                    "age": 30,
+                    "email": "john@example.com"
+                },
+                {
+                    "name": "Jane",
+                    "age": 25,
+                    "email": "jane@example.com"
+                }
+            ];
+
+            // JSON 데이터를 리스트로 출력
+            const userList = document.getElementById("users-list");
+            jsonData.forEach(function(user) {
+                const listItem = document.createElement("li");
+                listItem.innerHTML = `
+                    <strong>Name:</strong> ${user.name}<br>
+                    <strong>Age:</strong> ${user.age}<br>
+                    <strong>Email:</strong> ${user.email}
+                `;
+                userList.appendChild(listItem);
+            });
+        });
+    </script>
+</head>
+<body>
+    <ul id="users-list"></ul>
+</body>
+</html>
