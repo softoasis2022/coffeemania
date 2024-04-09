@@ -181,70 +181,70 @@
         </div>
         <script>
             function buisness_input(){
-                //각 영역 id설정 (완료)
-                //각 데이터 변수 설정 (완료)
-                //변수에 데이터 저장
-                const marketname = document.getElementById("market_name").value; //매장이름
-                const marketindustryname = document.getElementById("market_industryname").value; //사업자 등록증 기준 매장이름
-                const marketindustrycategory1 = document.getElementById("market_industrycategory1").value; //업종
-                const marketindustrycategory2 = document.getElementById("market_industrycategory2").value; //업태
-                const marketdirectoryname = document.getElementById("market_directoryname").value; //MD이름
-                const marketdirectoryproduce = document.getElementById("market_directoryproduce").value; //직책
-                const marketnumber1 = document.getElementById("market_number1").value; //첫번쨰 연락처
-                const marketnumber2 = document.getElementById("market_number2").value; //두번쨰 연락처
-                const marketnumber3 = document.getElementById("market_number3").value; //세번쨰 연락처
-                const marketaddress1 = document.getElementById("buisness_info_address_first").value; //첫번쨰 주소
-                const marketaddress2 = document.getElementById("buisness_info_address_seconds").value; //두번쨰 주소
-                const marketaddress3 = document.getElementById("buisness_info_address_info").value; //세번째 주소
-                const market_buisnesstxt = document.getElementById("buisness_txt").value; //비즈니스문의 내용
-                const buisnesssaleshourfirst = document.getElementById("buisness_sales_hour_first").value; //연락 시작 가능 시간 시
-                const buisnesssalesminfirst = document.getElementById("buisness_sales_hour_first").value; //연락 시작 가능 시간 분
-                const buisnesssaleshourseconds = document.getElementById("buisness_sales_hour_first").value; //연락 최대 가능 시간 시
-                const buisnesssalesminseconds = document.getElementById("buisness_sales_hour_first").value; //연락 최대 가능 시간 분
+                // 데이터 수집
+            const marketname = document.getElementById("market_name").value;
+            const marketindustryname = document.getElementById("market_industryname").value;
+            const marketindustrycategory1 = document.getElementById("market_industrycategory1").value;
+            const marketindustrycategory2 = document.getElementById("market_industrycategory2").value;
+            const marketdirectoryname = document.getElementById("market_directoryname").value;
+            const marketdirectoryproduce = document.getElementById("market_directoryproduce").value;
+            const marketnumber1 = document.getElementById("market_number1").value;
+            const marketnumber2 = document.getElementById("market_number2").value;
+            const marketnumber3 = document.getElementById("market_number3").value;
+            const marketaddress1 = document.getElementById("buisness_info_address_first").value;
+            const marketaddress2 = document.getElementById("buisness_info_address_seconds").value;
+            const marketaddress3 = document.getElementById("buisness_info_address_info").value;
+            const market_buisnesstxt = document.getElementById("buisness_txt").value;
+            const buisnesssaleshourfirst = document.getElementById("buisness_sales_hour_first").value;
+            const buisnesssalesminfirst = document.getElementById("buisness_sales_min_first").value;
+            const buisnesssaleshourseconds = document.getElementById("buisness_sales_hour_seconds").value;
+            const buisnesssalesminseconds = document.getElementById("buisness_sales_min_seconds").value;
 
-                const data = {
-                    marketname: marketname,
-                    marketindustryname: marketindustryname,
-                    marketindustrycategory1: marketindustrycategory1,
-                    marketindustrycategory2: marketindustrycategory2,
-                    marketdirectoryname: marketdirectoryname,
-                    marketdirectoryproduce: marketdirectoryproduce,
-                    marketnumber1: marketnumber1,
-                    marketnumber2: marketnumber2,
-                    marketnumber3: marketnumber3,
-                    marketaddress1: marketaddress1,
-                    marketaddress2: marketaddress2,
-                    marketaddress3: marketaddress3,
-                    market_buisnesstxt: market_buisnesstxt,
-                    buisnesssaleshourfirst: buisnesssaleshourfirst,
-                    buisnesssalesminfirst: buisnesssalesminfirst,
-                    buisnesssaleshourseconds: buisnesssaleshourseconds,
-                    buisnesssalesminseconds: buisnesssalesminseconds
-                };
-                //저장된 데이터 서버로 전송
+            // 데이터 객체 생성
+            const data = {
+                marketname: marketname,
+                marketindustryname: marketindustryname,
+                marketindustrycategory1: marketindustrycategory1,
+                marketindustrycategory2: marketindustrycategory2,
+                marketdirectoryname: marketdirectoryname,
+                marketdirectoryproduce: marketdirectoryproduce,
+                marketnumber1: marketnumber1,
+                marketnumber2: marketnumber2,
+                marketnumber3: marketnumber3,
+                marketaddress1: marketaddress1,
+                marketaddress2: marketaddress2,
+                marketaddress3: marketaddress3,
+                market_buisnesstxt: market_buisnesstxt,
+                buisnesssaleshourfirst: buisnesssaleshourfirst,
+                buisnesssalesminfirst: buisnesssalesminfirst,
+                buisnesssaleshourseconds: buisnesssaleshourseconds,
+                buisnesssalesminseconds: buisnesssalesminseconds
+            };
 
-                fetch('http://localhost:3001/buisness', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                })
-                .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                            })
-                            .then(data => {
-                                console.log('Data sent successfully:', data);
-                                // 성공적으로 전송되었을 때 수행할 작업 추가
-                            })
-                            .catch(error => {
-                                console.error('There was a problem with your fetch operation:', error);
-                                // 전송 중 오류가 발생했을 때 수행할 작업 추가
-                            });
-                        }
+            // POST 요청 설정
+            fetch('http://localhost:3001/buinessinfo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if(data.message === "buisness_successfully") { // 서버로부터 받은 응답을 확인
+                    window.location.href = "/"; // 홈 페이지로 이동
+                }
+            })
+            .catch(error => {
+                console.error('There was a problem with your fetch operation:', error);
+                // 전송 중 오류가 발생했을 때 수행할 작업 추가
+            });
+            }
         </script>
     </div>
 </div>
