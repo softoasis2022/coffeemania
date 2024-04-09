@@ -3,58 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>커피매니아 로그인</title>
-
+    <title>커피메니아</title>
     <style>
-       #company_info{
+        #mian_logo_page{
+            width: 100%;
+            height: 80px;
+            background-color: pink;
+        }
+        #main_first_top{
+            width: 100%;
+            height: auto;
+            display: flex;
+        }
+        #main{
+             width: 100%;
+             height: 1000px;
+             display: flex;
+             justify-content: center;
+         }
+        #company_info{
             width: 100%;
             height: 500px;
             background-color: pink;
         }
-        
-        #main{
-            width: 100%;
-            height: 1000px;
-            display: flex;
-            justify-content: center;
-        }
     </style>
 </head>
 <body>
+    <style>
+        #main_logo_page{
+            width: 100%;
+            height: fit-content;
+            display: flex;
+        }
+        #main_first_top{
+            width: 100%;
+            height: auto;
+            display:flex;
+        }
+        #company_info{
+            width: 100%;
+            height: 500px;
+            background-color: pink;
+        }
+        #main{
+            width: 100%;
+            height: fit-content;
+        }
+    </style>
+    <div id="main_logo_page">
+        <style>
+            #mian_logo_page_left{
+                width: 85%;
+                display: flex;
+                text-align: center;
+                justify-content : center;
+                margin: 10px;
+            }
+            #mian_logo_page_right{
+                width: 25%;
+                display: flex;
+                text-align: center;
+                justify-content : center;
+            }
+            #btn_login_page_move{
+                margin: 2px;
+                width: 50%;
+                height: fit-content;
+            }
+        </style>
+        <div id="mian_logo_page_left">
+            <a id="btn_login_page_move" onclick="location.href='/'">
+                커피매니아
+            </a>
+        </div>
+        <div id="mian_logo_page_right">
+            <a id="btn_login_page_move" style="padding: 5px;" onclick="location.href='/login'">
+                <div id="stl_btn" style="width: 100%; height: fit-content; border: 1px solid black;">
+                    로그인
+                </div>
+            </a>
+            <a id="btn_login_page_move" style="padding: 5px;" onclick="location.href='/join'">
+                <div id="stl_btn" style="width: 100%; height: fit-content; border: 1px solid black;">
+                    회원가입
+                </div>
+            </a>
+        </div>
+        <script>
+
+        </script>
+    </div>
+    <div id="main_first_top">
+        <style>
+            #main_first_top_ul{
+                display: flex;
+                list-style: none;
+                text-align: center;
+                width: fit-content;
+                height: fit-content;
+                padding-left: 0px;
+            }
+            #main_first_top_li{
+                width: fit-content;
+                height: max-content;
+                border: 1px solid black;
+                border-radius: 30px;
+                margin: 5px;
+                padding: 10px;
+            }
+            #main_first_top_sub_ul{
+                list-style: none;
+                text-align: center;
+                width: fit-content;
+                height: fit-content;
+                display: none;
+                padding-left: 0px;
+            }
+            #main_first_top_sub_li{
+                width: 150px;
+                height: fit-content;
+                border: 0px solid red;
+                border-radius: 30px;
+                box-shadow : 5px 5px 5px 5px gray;
+                padding: 10px;
+                margin: 10px;
+                justify-content : center;
+            }
+            /* li에 마우스를 올렸을 때만 하위 ul을 표시합니다 */
+            ul#main_first_top_ul li:hover > ul {
+                display: block;
+            }
+        </style>
+        <ul id="main_first_top_ul">
+            <li id="main_first_top_li">
+                커핑 이야기
+                <ul id="main_first_top_sub_ul">
+                    <li id="main_first_top_sub_li">
+                        <div>
+                            <a>브랜드 스토리</a>
+                        </div>
+                    </li>
+                    <li id="main_first_top_sub_li">
+                        <a>위치</a>
+                    </li>
+                    <li id="main_first_top_sub_li">
+                        <a>바리스타</a>
+                    </li>
+                </ul>
+            <li id="main_first_top_li">
+                커피
+                <ul id="main_first_top_sub_ul">
+                    <li id="main_first_top_sub_li">
+                        생두
+                    </li>
+                    <li id="main_first_top_sub_li">
+                        원두
+                    </li>
+                    <li id="main_first_top_sub_li">
+                        시럽
+                    </li>
+                    <li id="main_first_top_sub_li">
+                        티
+                    </li>
+                </ul>
+            </li>
+            <li id="main_first_top_li">
+                악세서리
+            </li>
+            <li id="main_first_top_li" >
+                <a onclick="location.href='/buisness'">
+                    비즈니스 문의
+                </a>
+            </li>
+            <li id="main_first_top_li">
+                <a onclick="location.href='/eventpage'">
+                    EVENT
+                </a>
+            </li>
+            <li id="main_first_top_li">
+                <div onclick="location.href='/operation'">
+                    프로젝트 참여
+                </div>
+            </li>
+        </ul>
+        <script>
+            
+        </script>
+    </div>
     <div id="main">
         <style>
             #main_left{
-                background-color: pink;
-                width: 200px;
-                height: max-content;
-            }
-            #main_center{
-                width: 1200px;
-                height: max-content;
-                height: 100%;
+                width: 10%;
+                height: fit-content;
                 
             }
+            #main_center{
+                width: 80%;
+                height: 500px;
+                justify-content: center;
+                padding-top: 200px;
+                border-right: 1px solid black;
+                border-left: 1px solid black;
+            }
             #main_right{
-                background-color: pink;
-                width: 200px; 
-                height: max-content;
+                width: 10%; 
+                height: fit-content;
+
             }
         </style>
         <div id="main_left">
-            왼쪽
         </div>
         <div id="main_center">
             <style>
                 #login_space{
                     width: 100%;
-                    height: max-content;
-                    margin-top: 200px;
+                    height: fit-content;
+                    display: flex;
+                    justify-content: center;
                 }
                 #api_login_grp{
                     width: 100%;
                     height: 80px;
                     display: flex;
                     justify-content: center;
+                    margin-top: 20px;
                 }
             </style>
             <div id="login_space">
@@ -66,7 +237,7 @@
                     </div>
                     <div>
                         <input id="pw_input" style="width: 100px; height: 30px;" title="페스워드" placeholder="페스워드">
-
+    
                         </input>
                     </div>
                 </div>
@@ -115,10 +286,13 @@
             <div id="api_login_grp">
                 <style>
                     #api_login{
-                    width: 100px;
-                    height: 50px;
-                    float: left;
-                }
+                        width: 100px;
+                        height: 50px;
+                        margin: 10px;
+                        text-align: center;
+                        border: 1px solid black;
+                        border-radius: 30px;
+                    }
                 </style>
                 <div id="api_login">
                     <a id="naver_login">
@@ -151,7 +325,7 @@
                     <a id="insta_login">
                         <div>
                             <p>
-                                페이스북
+                                인스타
                             </p>
                         </div>
                     </a>
@@ -159,10 +333,8 @@
             </div>
         </div>
         <div id="main_right">
-            오른쪽
         </div>
     </div>
-    
     <div id="company_info">
         <style>
             #company_info_sub{
@@ -190,6 +362,7 @@
                 </p>
                 <p style="font-size:medium;">
                     상담 운영 시간 : 월 ~ 금    AM 09 : 00 ~ PM 18 : 00 
+                    급하신 경우 전화 번호로 문의 바랍니다
                 </p>
             </div>
             <div>
@@ -205,9 +378,9 @@
                 <a href="https://open.kakao.com/o/sxTCML7f">
                     <img src="kakao.jpg" style="width: 40px; height: 40px; margin: 6px;">
                 </a>
-                <p>
-                    네이버 블로그
-                </p>
+                <a>
+                    네이버블로그
+                </a>
             </div>
         </div>
         <div id="company_info_sub">
@@ -296,7 +469,7 @@
                 <p>
                     테스트 스페이스
                 </p>
-                <div style="width: 100px; height: 100px; background-color: black;" onclick="location.href='coffeemania_pay.html'">
+                <div style="width: 100px; height: 100px; background-color: black;" onclick="location.href='/tamplelate'">
                     
                 </div>
             </div>
@@ -304,3 +477,6 @@
     </div>
 </body>
 </html>
+
+
+

@@ -15,17 +15,22 @@
                 width: 100%;
                 height: fit-content;
                 display: flex;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+            #main_first_top{
+                width: 100%;
+                height: auto;
+                display:flex;
+                border-bottom: 1px solid black;
+                border-top: 1px solid black;
             }
             #baanner_page{
                 width: 100%;
                 height: 560px;
                 padding: auto;
-                margin: 0;
-                }
-            #main_first_top{
-                width: 100%;
-                height: auto;
-                display:flex;
+                margin-top: 10px;
+
             }
             #mainspace{
                 width: 100%;
@@ -34,11 +39,6 @@
                 justify-content : left;
                 margin-top: 30px;
                 margin-bottom: 30px;
-            }
-            #company_info{
-                width: 100%;
-                height: 500px;
-                background-color: pink;
             }
             #item_category{
                 width: 100%;
@@ -52,6 +52,11 @@
             #naver_view{
                 justify-content : center;
                 display: flex;
+            }
+            #company_info{
+                width: 100%;
+                height: 500px;
+                background-color: pink;
             }
         </style>
         <div id="main_logo_page">
@@ -81,20 +86,19 @@
                 </a>
             </div>
             <div id="mian_logo_page_right">
-                <a id="btn_login_page_move" style="padding: 5px;" onclick="location.href='/login'">
-                    <div id="stl_btn" style="width: 100%; height: fit-content; border: 1px solid black;">
-                        로그인
-                    </div>
-                </a>
-                <a id="btn_login_page_move" style="padding: 5px;" onclick="location.href='/join'">
-                    <div id="stl_btn" style="width: 100%; height: fit-content; border: 1px solid black;">
-                        회원가입
-                    </div>
-                </a>
-            </div>
-            <script>
 
-            </script>
+
+                <div id="btn_login_page_move" style="padding: 10px;border: 1px solid black; border-radius: 20px;" onclick="location.href='/login'">
+                    <a id="stl_btn" style="width: 100%; height: 100%;">
+                        로그인
+                    </a>
+                </div>
+                <div id="btn_login_page_move" style="padding: 10px; border: 1px solid black; border-radius: 20px;" onclick="location.href='/join'">
+                    <a id="stl_btn" style="width: 100%; height: 100%;">
+                        회원 가입
+                    </a>
+                </div>
+            </div>
         </div>
         <div id="main_first_top">
             <style>
