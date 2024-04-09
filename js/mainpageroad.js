@@ -131,12 +131,9 @@ main.post('/check', (req, res) => {
 });
 main.post('/buinessinfo', (req, res) => {
     const data = req.body; // 클라이언트에서 보낸 데이터
-
-    // 받은 데이터를 콘솔에 출력
-    console.log("Received data:", data);
-
     // 클라이언트에 응답을 보내줌 (예: 성공 메시지)
     res.json({ message: "buisness_successfully" });
+    saveDataToFile(data);
 });
 main.post('/sellerinrut', (req, res) => {
     const { sellername, storename, sellerphonenumer, sellerindustinfo1, sellerindustinfo2, storeaddresss } = req.body;
@@ -375,6 +372,28 @@ function userfind(){
         } else {
             console.log('파일이 존재합니다.');
         }
+    });
+}
+function saveDataToFile(data) {
+    // 파일 디렉토리 생성 (예: 드라이브/비즈니스/)
+    const directoryPath = path.join('D:/', '비즈니스');
+    if (!fs.existsSync(directoryPath)) {
+        fs.mkdirSync(directoryPath, { recursive: true });
+    }
+
+    // 파일 경로 설정 (예: 드라이브/비즈니스/마켓이름.json)
+    const filePath = path.join(directoryPath, `${data.marketname}.json`);
+
+    // 데이터를 JSON 문자열로 변환
+    const jsonData = JSON.stringify(data);
+
+    // 파일에 데이터 쓰기
+    fs.writeFile(filePath, jsonData, 'utf8', (err) => {
+        if (err) {
+            console.error('Error writing file:', err);
+            return;
+        }
+        console.log('Data saved to file successfully.');
     });
 }
 //메인 서버에 이메일 전송
