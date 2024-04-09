@@ -5,110 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>커피메니아</title>
     <style>
-        #mian_logo_page{
+        #main_logo_page{
             width: 100%;
-            height: 80px;
-            background-color: pink;
+            height: fit-content;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid black;
+            display: flex;
         }
         #main_first_top{
             width: 100%;
-            height: auto;
-            display:flex;
+            height: fit-content;
+            display: flex;
+            border-bottom: 2px solid black;
+        }
+        #mainpage{
+            width: 100%;
+            height: 500px;
         }
         #company_info{
             width: 100%;
             height: 500px;
-            background-color: pink;
         }
     </style>
 </head>
 <body>
-    <style>
-        #main_logo_page{
-            width: 100%;
-            height: fit-content;
-            display: flex;
-        }
-        #baanner_page{
-            width: 100%;
-            height: 560px;
-            padding: auto;
-            margin: 0;
+    <div id="main_logo_page">
+        <style>
+            #mian_logo_page_left{
+                width: 85%;
+                display: flex;
+                text-align: center;
+                justify-content : center;
+                margin: 10px;
             }
-        #main_first_top{
-            width: 100%;
-            height: auto;
-            display:flex;
-        }
-        #mainspace{
-            width: 100%;
-            height: fit-content;
-            display: flex;
-            justify-content : left;
-            margin-top: 30px;
-            margin-bottom: 30px;
-        }
-        #company_info{
-            width: 100%;
-            height: 500px;
-            background-color: pink;
-        }
-        #item_category{
-            width: 100%;
-            height: fit-content;
-            border-top: 1px solid black;
-        }
-        #bestseller{
-            justify-content : center;
-            display: flex;
-        }
-        #naver_view{
-            justify-content : center;
-            display: flex;
-        }
-    </style>
-        <div id="main_logo_page">
-            <style>
-                #mian_logo_page_left{
-                    width: 85%;
-                    display: flex;
-                    text-align: center;
-                    justify-content : center;
-                    margin: 10px;
-                }
-                #mian_logo_page_right{
-                    width: 25%;
-                    display: flex;
-                    text-align: center;
-                    justify-content : center;
-                }
-                #btn_login_page_move{
-                    margin: 2px;
-                    width: 50%;
-                    height: fit-content;
-                }
-            </style>
-            <div id="mian_logo_page_left">
-                <a id="btn_login_page_move" onclick="location.href='/'">
-                    커피매니아
-                </a>
-            </div>
-            <div id="mian_logo_page_right">
-                <a id="btn_login_page_move" style="padding: 5px;" onclick="location.href='/login'">
-                    <div id="stl_btn" style="width: 100%; height: fit-content; border: 1px solid black;">
-                        로그인
-                    </div>
-                </a>
-                <a id="btn_login_page_move" style="padding: 5px;" onclick="location.href='/join'">
-                    <div id="stl_btn" style="width: 100%; height: fit-content; border: 1px solid black;">
-                        회원가입
-                    </div>
-                </a>
-            </div>
-            <script>
-
-            </script>
+            #mian_logo_page_right{
+                width: 25%;
+                display: flex;
+                text-align: center;
+                justify-content : center;
+            }
+            #btn_login_page_move{
+                margin: 2px;
+                width: 50%;
+                height: fit-content;
+            }
+        </style>
+        <div id="mian_logo_page_left">
+            <a id="btn_login_page_move" onclick="location.href='/'">
+                커피매니아
+            </a>
         </div>
+        <div id="mian_logo_page_right">
+            <div id="btn_login_page_move" style="padding: 10px;border: 1px solid black; border-radius: 20px;" onclick="location.href='/login'">
+                <a id="stl_btn" style="width: 100%; height: 100%;">
+                    로그인
+                </a>
+            </div>
+            <div id="btn_login_page_move" style="padding: 10px; border: 1px solid black; border-radius: 20px;" onclick="location.href='/join'">
+                <a id="stl_btn" style="width: 100%; height: 100%;">
+                    회원 가입
+                </a>
+            </div>
+        </div>
+    </div>
     <div id="main_first_top">
         <style>
             #main_first_top_ul{
@@ -121,7 +81,7 @@
             }
             #main_first_top_li{
                 width: fit-content;
-                height: max-content;
+                height: fit-content;
                 border: 1px solid black;
                 border-radius: 30px;
                 margin: 5px;
@@ -206,99 +166,7 @@
             
         </script>
     </div>
-    <div id="baanner_page">
-        <style>
-            #banner_page_img{
-                width: 100%;
-                height: 500px;
-            }
-        </style>
-        <script>
-            function hello1()  {
-                document.getElementById("banner_img").src = "https://firebasestorage.googleapis.com/v0/b/softoasis-c684c.appspot.com/o/cafe1.jpg?alt=media&token=15ab46cf-3099-457c-b4b4-ba89fa459e7b"
-                document.getElementById("banner_img_link").href="https://map.naver.com/p/entry/place/1923188087?c=15.00,0,0,0,dh"
-            }
-            function hello2()  {
-                document.getElementById("banner_img").src = "https://firebasestorage.googleapis.com/v0/b/softoasis-c684c.appspot.com/o/cafe2.jpg?alt=media&token=8809e2b8-3a05-4272-9211-520f8a0701d3"
-                document.getElementById("banner_img_link").href="https://map.naver.com/p/entry/place/1042910752?c=15.00,0,0,0,dh"
-            }
-            function hello3()  {
-                document.getElementById("banner_img").src="https://firebasestorage.googleapis.com/v0/b/softoasis-c684c.appspot.com/o/cafe3.jpg?alt=media&token=f6a59706-05a3-4e73-a6ce-4e3d1ff0f7a2"
-                document.getElementById("banner_img_link").href="https://map.naver.com/p/entry/place/1965997995?c=15.00,0,0,0,dh"
-            }
-            function hello4()  {
-                document.getElementById("banner_img").src = "https://firebasestorage.googleapis.com/v0/b/softoasis-c684c.appspot.com/o/cafe4.jpg?alt=media&token=921bf699-d736-4281-8279-cd4f7713c26f"
-                document.getElementById("banner_img_link").href="https://map.naver.com/p/entry/place/1695760291?c=15.00,0,0,0,dh"
-            }
-        </script>
-        <div id="banner_page_img">
-            <style>
-                #banner_img{
-                    width: 100%;
-                    height: max-content;
-                    text-align: center;
-                }
-            </style>
-            <a id="banner_img_link" style="width: max-content; height: max-content;" onclick="hello1()" >
-                <img id="banner_img" style="width: 100%; height: 100%;" src="https://firebasestorage.googleapis.com/v0/b/softoasis-c684c.appspot.com/o/cafe1.jpg?alt=media&token=15ab46cf-3099-457c-b4b4-ba89fa459e7b" href="https://map.naver.com/p/entry/place/1923188087?c=15.00,0,0,0,dh">
-            </a>
-        </div>
-
-        <div style="width: 100%; height: 20px;">
-            <style>
-                #banner_page_move{
-                    width: 100%;
-                    height: 60px;
-                    text-align: center;
-                    display: flex;
-                }
-                #btn_banner_page_move{
-                    background-color: white;
-                    width: 40px;
-                    height: 40px;
-                    margin: auto;
-                    float: left;
-                    border-radius: 10px 10px 10px 10px;
-                    border: 1px solid black;
-                    margin: 10px;
-                }
-            </style>
-            <div id="banner_page_move">
-                <div style="width: 300px; height: 60px; margin: auto;">
-                    <a style="margin: auto; padding : 10px 0;" onclick="hello1()">
-                        <div id="btn_banner_page_move" style="width: 40px; height: 40px; " >
-                            <p style=" width: 30px; height: 30px; margin-top: 7px; margin-left: 5px;">
-                                1
-                            </p>
-                        </div>
-                    </a>
-                    <a style="margin: auto; padding : 10px 0;" onclick="hello2()">
-                        <div id="btn_banner_page_move" style="width: 40px; height: 40px; " >
-                            <p style=" width: 30px; height: 30px; margin-top: 7px; margin-left: 5px;">
-                                2
-                            </p>
-                        </div>
-                    </a>
-                    <a style="margin: auto; padding : 10px 0;" onclick="hello3()">
-                        <div id="btn_banner_page_move" style="width: 40px; height: 40px; " >
-                            <p style=" width: 30px; height: 30px; margin-top: 7px; margin-left: 5px;">
-                                3
-                            </p>
-                        </div>
-                    </a>
-                    <a style="margin: auto; padding : 10px 0;" onclick="hello4()">
-                        <div id="btn_banner_page_move" style="width: 40px; height: 40px; " >
-                            <p style=" width: 30px; height: 30px; margin-top: 7px; margin-left: 5px;">
-                                4
-                            </p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
     <div id="mainpage">
-        
     </div>
     <div id="company_info">
         <style>
@@ -306,7 +174,6 @@
                 width: 30%;
                 height: 100%;
                 float: left;
-                background-color: pink;
             }
         </style>
         <div id="company_info_sub">
