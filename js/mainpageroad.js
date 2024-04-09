@@ -130,21 +130,13 @@ main.post('/check', (req, res) => {
     // 클라이언트에 응답 전송
 });
 main.post('/buinessinfo', (req, res) => {
-    const { buisnessname, buisnesscategory, produnctername, address, info, phonenumber, industnumber, industinfo1, industinfo2 } = req.body;
+    const data = req.body; // 클라이언트에서 보낸 데이터
 
-    const businessInfo = `
-        Business Name: ${buisnessname}
-        Business Category: ${buisnesscategory}
-        Producer Name: ${produnctername}
-        Address: ${address}
-        Info: ${info}
-        Phone Number: ${phonenumber}
-        Industry Number: ${industnumber}
-        Industry Info 1: ${industinfo1}
-        Industry Info 2: ${industinfo2}
-    `;
-    res.send("문의 내용이 전송 되었습니다")
-    //buisness(businessInfo, res);
+    // 받은 데이터를 콘솔에 출력
+    console.log("Received data:", data);
+
+    // 클라이언트에 응답을 보내줌 (예: 성공 메시지)
+    res.json({ message: "buisness_successfully" });
 });
 main.post('/sellerinrut', (req, res) => {
     const { sellername, storename, sellerphonenumer, sellerindustinfo1, sellerindustinfo2, storeaddresss } = req.body;
