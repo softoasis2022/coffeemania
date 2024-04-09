@@ -376,7 +376,7 @@ function userfind(){
 }
 function saveDataToFile(data) {
     // 파일 디렉토리 생성 (예: 드라이브/비즈니스/)
-    const directoryPath = path.join('D:/', '비즈니스');
+    const directoryPath = path.join('D:/민섭', '비즈니스');
     if (!fs.existsSync(directoryPath)) {
         fs.mkdirSync(directoryPath, { recursive: true });
     }
