@@ -1,225 +1,150 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>커피메니아 데이터 관리</title>
-</head>
-<body>
+<div id="admin_info">
     <style>
-        #admin_category{
-            display: flex;
-            background-color: gray;
-        }
-        #admin_category_ul{
-            color: white;
-            list-style: none;
-            display: flex;
-        }
-        #admin_category_li{
-            margin: 10px;
-        }
-        #admin_info{
+        #admin_info_top{
             width: 100%;
-            height: 100%;
+            height: fit-content;
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+        }
+        #admin_info_bottom{
+            width: 100%;
+            height: fit-content;
+            display: flex;
+            justify-content: center;
+        }
+        #admin_info_top_left{
+            width: 50%;
+            height: 540px;
+            border: 1px solid black;
+        }
+        #admin_info_top_right{
+            width: 50%;
+            height: 540px;
+            border: 1px solid black;
+        }
+        #admin_info_top_left{
+            width: 50%;
+            height: 540px;
+            border: 1px solid black;
+        }
+        #admin_info_top_right{
+            width: 50%;
+            height: 540px;
+            border: 1px solid black;
         }
     </style>
-    <div id="admin_category">
-        <ul id="admin_category_ul">
-            <li id="admin_category_li" onclick="admin_category_li_cl(this.textContent)">메인</li>
-            <li id="admin_category_li" onclick="admin_category_li_cl(this.textContent)">판매관리</li>
-            <li id="admin_category_li" onclick="admin_category_li_cl(this.textContent)">비즈니스 관리</li>
-            <li id="admin_category_li" onclick="admin_category_li_cl(this.textContent)">지원자</li>
-            <li id="admin_category_li" onclick="admin_category_li_cl(this.textContent)">판매자관리</li>
-            <li id="admin_category_li" onclick="admin_category_li_cl(this.textContent)">통계</li>
-        </ul>
-        <script>
-            function admin_category_li_cl(admin_category_li_cl_txt){
-                //console.log(admin_category_li_cl_txt);
-                if(admin_category_li_cl_txt == "메인"){
-                    pageAPI(admin_category_li_cl_txt);
+    <div id="admin_info_top">
+        <div id="admin_info_top_left">
+            <style>
+                #admin_info_top_left_bar{
+                    background-color: beige;
+                    height: 30px;
+                    margin-bottom: 20px;
+                    margin-right: 10px;
+                    margin-left: 10px;
+                    margin-top: 10px;
                 }
-                if(admin_category_li_cl_txt == "판매관리"){
-                    pageAPI(admin_category_li_cl_txt);
+                #admin_info_top_left_bar_main{
+                    width: 70%;
+                    height: 100%;
+                    background-color: blue;
                 }
-                if(admin_category_li_cl_txt == "비즈니스 관리"){
-                    pageAPI(admin_category_li_cl_txt);
-                }
-                if(admin_category_li_cl_txt == "지원자"){
-                    pageAPI(admin_category_li_cl_txt);
-                }
-                if(admin_category_li_cl_txt == "판매자관리"){
-                    pageAPI(admin_category_li_cl_txt);
-                }
-                if(admin_category_li_cl_txt == "통계"){
-                    pageAPI(admin_category_li_cl_txt);
-                }
-            };
-            function pageAPI(){
-                //const email_wrap = document.getElementById('email_input'); // ID가 'email_input'인 요소를 찾음
-                //const pw_wrap = document.getElementById('pw_input'); // ID가 'pw_input'인 요소를 찾음
-                //const input_email = email_wrap.value; // email 입력 필드의 값을 가져옴
-                //const input_pw = pw_wrap.value; // password 입력 필드의 값을 가져옴
-                fetch('http://www.coffeemanias.com:200/admin', {
-                                    method: 'POST', // POST 요청을 사용
-                                    headers: {'Content-Type': 'application/json' // 요청의 본문이 JSON 형태임을 명시
-                                    },
-                                    body: JSON.stringify({
-                                        email: input_email, // 이메일 데이터
-                                        password: input_pw // 비밀번호 데이터
-                                    })
-                                    })
-                                    .then(response => response.json()) // 서버로부터의 응답을 JSON 형태로 파싱
-                                    .then(data => {
-                                        console.log(data); // 응답 결과를 콘솔에 출력
-                                        if (data.message === '로그인성공') {
-                                            // 메시지가 '로그인 정보를 성공적으로 받았습니다.' 일 때, 페이지를 이동
-                                            window.location.href = 'https://www.softoasis.org:3000/';
-                                        }
-                                        if(data.message === '로그인실패'){
-                                            console.log('로그인실패');
-                                        }
-                                    })
-                                    .catch(error => console.error('Error:', error)); // 에러가 발생한 경우 콘솔에 에러를 출력
-            }
-        </script>
+            </style>
+            <div style="border-bottom: 1px solid black">
+                <p>통계</p>
+            </div>
+            <div id="admin_info_top_left_bar">
+                <div id="admin_info_top_left_bar_main">
+                    
+                </div>
+            </div>
+            <div style="display: flex;">
+                <p style="margin-left: 10px;">
+                    전일 대비
+                </p>
+                <p style="margin-left: 10px;">
+                    20% 증가
+                </p>
+            </div>
+            <div id="admin_info_top_left_bar">
+                <div id="admin_info_top_left_bar_main">
+                    
+                </div>
+            </div>
+            <div style="display: flex;">
+                <p style="margin-left: 10px;">
+                    전월 대비
+                </p>
+                <p style="margin-left: 10px;">
+                    11% 증가
+                </p>
+            </div>
+        </div>
+        <div id="admin_info_top_right">
+            공지
+        </div>
     </div>
-    <div id="admin_info">
-        <style>
-            #admin_info_top{
-                width: 2000px;
-                height: 1080px;
-                margin-top: 10px;
-                display: flex;
-                justify-content: center;
-            }
-            #admin_info_bottom{
-                width: 2000px;
-                height: 1080px;
-                display: flex;
-                justify-content: center;
-            }
-            #admin_info_top_left{
-                width: 1000px;
-                height: 540px;
-                border: 1px solid black;
-            }
-            #admin_info_top_right{
-                width: 1000px;
-                height: 540px;
-                border: 1px solid black;
-            }
-            #admin_info_top_left{
-                width: 1000px;
-                height: 540px;
-                border: 1px solid black;
-            }
-            #admin_info_top_right{
-                width: 1000px;
-                height: 540px;
-                border: 1px solid black;
-            }
-        </style>
-        <div id="admin_info_top">
-            <div id="admin_info_top_left">
+    <div id="admin_info_bottom">
+        <div id="admin_info_top_left">
+            <div style="border-bottom: 1px solid black">
+                <p>
+                    비즈니스
+                </p>
+            </div>
+            <div>
                 <style>
-                    #admin_info_top_left_bar{
-                        background-color: beige;
-                        height: 30px;
-                        margin-bottom: 20px;
-                        margin-right: 10px;
-                        margin-left: 10px;
-                        margin-top: 10px;
-                    }
-                    #admin_info_top_left_bar_main{
-                        width: 70%;
-                        height: 100%;
-                        background-color: blue;
+                    #admin_buisness_ul{
+                        list-style: none;
                     }
                 </style>
-                <div style="border-bottom: 1px solid black">
-                    <p>통계</p>
-                </div>
-                <div id="admin_info_top_left_bar">
-                    <div id="admin_info_top_left_bar_main">
-                        
-                    </div>
-                </div>
-                <div style="display: flex;">
-                    <p style="margin-left: 10px;">
-                        전일 대비
-                    </p>
-                    <p style="margin-left: 10px;">
-                        20% 증가
-                    </p>
-                </div>
-                <div id="admin_info_top_left_bar">
-                    <div id="admin_info_top_left_bar_main">
-                        
-                    </div>
-                </div>
-                <div style="display: flex;">
-                    <p style="margin-left: 10px;">
-                        전월 대비
-                    </p>
-                    <p style="margin-left: 10px;">
-                        11% 증가
-                    </p>
-                </div>
-            </div>
-            <div id="admin_info_top_right">
-                공지
+                <ul id="admin_buisness_ul">
+                    <li id="admin_buisness_li">
+                        <div>
+                            1. 
+                        </div>
+                    </li>
+                    <li id="admin_buisness_li">
+                        <div>
+                            1. 
+                        </div>
+                    </li>
+                    <li id="admin_buisness_li">
+                        <div>
+                            1. 
+                        </div>
+                    </li>
+                    <li id="admin_buisness_li">
+                        <div>
+                            1. 
+                        </div>
+                    </li>
+                    <li id="admin_buisness_li">
+                        <div>
+                            1. 
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div id="admin_info_bottom">
-            <div id="admin_info_top_left">
-                <div style="border-bottom: 1px solid black">
-                    <p>
-                        비즈니스
-                    </p>
-                </div>
-                <div>
-                    <style>
-                        #admin_buisness_ul{
-                            list-style: none;
-                        }
-                    </style>
-                    <ul id="admin_buisness_ul">
-                        <li id="admin_buisness_li">
-                            <div>
-                                1. 
-                            </div>
-                        </li>
-                        <li id="admin_buisness_li">
-                            <div>
-                                1. 
-                            </div>
-                        </li>
-                        <li id="admin_buisness_li">
-                            <div>
-                                1. 
-                            </div>
-                        </li>
-                        <li id="admin_buisness_li">
-                            <div>
-                                1. 
-                            </div>
-                        </li>
-                        <li id="admin_buisness_li">
-                            <div>
-                                1. 
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div id="admin_info_top_right">
-                개발
-            </div>
+        <div id="admin_info_top_right">
+            개발
         </div>
     </div>
-    <div>
-        영역별 그래프 
-    </div>
-</body>
-</html>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            // 페이지 로드 시 서버에 요청 보내기
+            fetch('/mainadmin')
+                .then(response => response.json())
+                .then(data => {
+                    // 받은 데이터를 해당 위치에 출력
+                    const adminInfoTopLeftBarMain = document.getElementById('admin_info_top_left_bar_main');
+                    adminInfoTopLeftBarMain.innerHTML = `
+                        <p>이름: ${data.name}</p>
+                        <p>나이: ${data.age}</p>
+                    `;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+</div>
