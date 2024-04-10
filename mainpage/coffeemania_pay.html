@@ -1,14 +1,32 @@
-<div id='pay_info'>
-    <div>
-        <div id="info_img_space" style="width: 50%; height: 100%; float: left;">
-            <div style="width: 500px; height: 500px; background-color: aquamarine; margin: 30px;">
-                <a>
-                    <img id="info_img_view" src="softoasis_logo.jpg">
-                </a>
+<div id='mainpage'>
+    <style>
+        #product_info{
+            width: 100%;
+            height: fit-content;
+            display: flex;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+    <div id="product_info">
+        <style>
+            #product_img{
+                width: 100%; 
+                height: fit-content;
+                justify-content: center;
+                text-align: center;
+            }
+            #info_img_space{
+                border-right: 1px solid black;
+            }
+        </style>
+        <div id="info_img_space" style="width: 50%; height: 100%; padding: 20px;">
+            <div id="product_img">
+                <img id="info_img_view" style="width: 400px; height: 400px;" src="https://images.ctfassets.net/a97lsixqgsyg/aKUkICoYzuaVB5tqmB3JX/bd8f6cae3894bd0484325136b68d148f/20220218_142512.png?w=944&q=100">
             </div>
-            <div>
+            <div id="product_img_sub">
                 <div style="width: 100%; height: 140px;">
-                    <ul style="width: 100%; height: 140px; list-style: none; padding-inline-start: 0px">
+                    <ul style="width: 100%; height: 140px; list-style: none; padding-left: 0px;">
                         <style>
                             #img_info_li{
                                 width: 100px; 
@@ -17,28 +35,32 @@
                                 background-color: pink;
                                 margin: 20px;
                             }
+                            #product_img_sub_li_img{
+                                width: 100px;
+                                height: 100px;
+                            }
                         </style>
                         <script>
                             //사진에 마우스를 가져가 대면  info_img_view 에 사진이 해당 사진으로 변경이 된다
                         </script>
                         <li id="img_info_li">
-                            
+                            <img id="product_img_sub_li_img" src="https://images.ctfassets.net/a97lsixqgsyg/aKUkICoYzuaVB5tqmB3JX/bd8f6cae3894bd0484325136b68d148f/20220218_142512.png?w=944&q=100">
                         </li>
                         <li id="img_info_li">
-                            
+                            <img id="product_img_sub_li_img" src="https://images.ctfassets.net/a97lsixqgsyg/aKUkICoYzuaVB5tqmB3JX/bd8f6cae3894bd0484325136b68d148f/20220218_142512.png?w=944&q=100">
                         </li>
                         <li id="img_info_li">
-                            
+                            <img id="product_img_sub_li_img" src="https://images.ctfassets.net/a97lsixqgsyg/aKUkICoYzuaVB5tqmB3JX/bd8f6cae3894bd0484325136b68d148f/20220218_142512.png?w=944&q=100">
                         </li>
                         <li id="img_info_li">
-                            
+                            <img id="product_img_sub_li_img" src="https://images.ctfassets.net/a97lsixqgsyg/aKUkICoYzuaVB5tqmB3JX/bd8f6cae3894bd0484325136b68d148f/20220218_142512.png?w=944&q=100">
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div id="info_pay" style="width: 50%; height: 100%; float: left; ">
-            <div style="margin: 30px;">
+        <div id="info_pay" style="width: 50%; height: 100%;">
+            <div style="padding: 20px;">
                 <div>
                     <p>
                         상품 이름
@@ -54,41 +76,48 @@
                 </div>
                 <div>
                     <div >
-
+    
                     </div>
                     <div>
-
+    
                     </div>
                 </div>
-                <div style="width: 100%; height: 50px;">
+                <div style="width: 100%; height: 50px;display: flex;">
                     <style>
                         #btn_updawn{
                             width: 50px;
                             height: 50px;
                             float: left;
-                            background-color: black;
                         }
                         #pay_number{
                             cursor: text; 
                             width: 100%; height: 100%; 
                             margin: 0px; 
-                            color: black; 
                             padding: 0px; 
                             border: 0px solid white; 
                             text-align: center;
                         }
                     </style>
+                    <button id="btn_updawn" onclick="paynumber('dawn')"></button>
+                    <div style="width: 50px; height: 50px;">
+                        <input id="pay_number" type="number" value="1" min="0">
+                    </div>
+                    <button id="btn_updawn" onclick="paynumber('up')"></button>
                     <script>
+                        function paynumber(paynumber_action){
+                            const pnumber = document.getElementById("pay_number");
+                            pnumber_input = parseInt(pnumber.value);
+                            if(paynumber_action == 'dawn'){
+                                pnumber_input = pnumber_input-1;
+                            }
+                            if(paynumber_action == 'up'){
+                                pnumber_input = pnumber_input+1;
+                            }
+                            pnumber.value = pnumber_input;
+                        }
                         //수량 버튼 이미지로 추가
                         //수량 버튼 클릭시 수량 변경 스크립트 적용
                     </script>
-                    <button id="btn_updawn" onclick="number_dawn()">
-                        
-                    </button>
-                    <div style="width: 50px; height: 50px; float: left;">
-                        <input id="pay_number" type="number" value="1">
-                    </div>
-                    <button id="btn_updawn" onclick="number_up()"></button>
                 </div>
             </div>
         </div>
