@@ -19,7 +19,6 @@ main.set("views", "./mainpage");
 
 const admintemplatePath = path.join(__dirname, "/../mainpage/adminpagetamplate/adminpagetamplate.html");
 
-
 main.get("/", (req, res) => {
     // 탬플릿 안에 넣을 페이지 html파일 경로
     const pagePath = path.join(__dirname, "/../mainpage/admin/adminmain.html");
@@ -38,7 +37,6 @@ main.get("/mainadmin", (req, res) => {
     // 렌더링된 템플릿을 클라이언트에게 응답
     res.send(renderedTemplate);
 });
-
 main.get("/marketadmin", (req, res) => {
     // 탬플릿 안에 넣을 페이지 html파일 경로
     const pagePath = path.join(__dirname, "/../mainpage/admin/adminmarket.html");
