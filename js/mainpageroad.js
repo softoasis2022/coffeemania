@@ -2,411 +2,284 @@
 
 const express = require('express');
 const main = express();
-
-
-const cheerio = require('cheerio');
-const http = require('http');
-const fs = require('fs');  // 파일 시스템 모듈 불러오기
 const path = require('path');
+const fs = require('fs');
 
 const serverstart_port = 3001;
 
 main.use(express.json());
-main.listen(serverstart_port,function(){
-    console.log(serverstart_port + "번에서 서버가동") //터미널에 출력
+main.listen(serverstart_port, () => {
+    console.log(serverstart_port + "번에서 서버가동"); //터미널에 출력
 });
+
 main.set("views", "./mainpage");
 
-const templatePath = path.join(__dirname, "/../mainpage/mainpagetamplete/coffeemainpagetample.html");
-const userdata = "F:user/"
+const templatePath = path.join(__dirname, "/../page/mainpage/tamplate/coffeemainpagetample.html");
+const ref_database = "D:";
 
 main.get("/", (req, res) => {
-    // 탬플릿 안에 넣을 페이지 html파일 경로
-    const pagePath = path.join(__dirname, "/../mainpage/coffeemania.html");
-
-    // 페이지 내용을 템플릿에 적용하여 렌더링
+    const pagePath = path.join(__dirname, "/../page/mainpage/main/coffeemania.html");
     let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
-
-    // 렌더링된 템플릿을 클라이언트에게 응답
     res.send(renderedTemplate);
 });
+
 main.get("/login", (req, res) => {
-    // 탬플릿 안에 넣을 페이지 html파일 경로
-    const pagePath = path.join(__dirname, "/../mainpage/coffeemania_login.html");
-
-    // 페이지 내용을 템플릿에 적용하여 렌더링
+    const pagePath = path.join(__dirname, "/../page/mainpage/main/coffeemania_login.html");
     let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
-
-    // 렌더링된 템플릿을 클라이언트에게 응답
     res.send(renderedTemplate);
 });
-main.get("/join", (req, res) => {  // 로그인 으로 인입이 되면 러 
-    //기능 또는 동작
-    const pagePath = path.join(__dirname, "/../mainpage/coffeemania_register.html");
 
-    // 페이지 내용을 템플릿에 적용하여 렌더링
+main.get("/join", (req, res) => {
+    const pagePath = path.join(__dirname, "/../page/mainpage/main/coffeemania_register.html");
     let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
-
-    // 렌더링된 템플릿을 클라이언트에게 응답
     res.send(renderedTemplate);
 });
-main.get("/buisness", (req, res) => {  // 로그인 으로 인입이 되면 러 
-    const pagePath = path.join(__dirname, "/../mainpage/coffeemania_buisness.html");
 
-    // 페이지 내용을 템플릿에 적용하여 렌더링
+main.get("/buisness", (req, res) => {
+    const pagePath = path.join(__dirname, "/../page/mainpage/main/coffeemania_buisness.html");
     let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
-
-    // 렌더링된 템플릿을 클라이언트에게 응답
     res.send(renderedTemplate);
 });
+
 main.get("/eventpage", (req, res) => {
-    const pagePath = path.join(__dirname, "/../mainpage/coffeemania_event.html");
-
-    // 페이지 내용을 템플릿에 적용하여 렌더링
+    const pagePath = path.join(__dirname, "/../page/mainpage/main/coffeemania_event.html");
     let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
-
-    // 렌더링된 템플릿을 클라이언트에게 응답
-    res.send(renderedTemplate);
-});
-main.get("/operation", (req, res) => {  // 로그인 으로 인입이 되면 러 
-    const pagePath = path.join(__dirname, "/../mainpage/coffeemania_operation.html");
-
-    // 페이지 내용을 템플릿에 적용하여 렌더링
-    let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
-
-    // 렌더링된 템플릿을 클라이언트에게 응답
     res.send(renderedTemplate);
 });
 
+main.get("/operation", (req, res) => {
+    const pagePath = path.join(__dirname, "/../page/mainpage/main/coffeemania_operation.html");
+    let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
+    res.send(renderedTemplate);
+});
+
+main.get("/pay", (req, res) => {
+    const pagePath = path.join(__dirname, "/../page/mainpage/main/coffeemania_pay.html");
+    let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
+    res.send(renderedTemplate);
+});
+main.get("/operationinfo", (req, res) => {
+    const pagePath = path.join(__dirname, "/../page/mainpage/main/coffeemania_operationinfo.html");
+    let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
+    res.send(renderedTemplate);
+});
 
 main.post('/login_pass', (req, res) => {
     const { email, password } = req.body;
-    //console.log('이메일:', email);
-    //console.log('비밀번호:', password);
-    login_file(email,password);
-
-    getTokenFromUserFile(email, (err, token) => {
+    login_file(email, password, (err, token) => {
         if (err) {
-            res.status(200).json({ "token" : 'no_user'});
+            res.status(200).json({ "token": err });
         } else {
-            console.log('토큰:', token);
-            res.status(200).json({ "token" : token });
+            res.status(200).json({ "token": token });
         }
     });
 });
-main.post('/join_pass', (req, res) => {
-    // 클라이언트로부터 전송받은 이메일과 비밀번호를 추출
-    const { email} = req.body;
 
-    // 서버 콘솔에 이메일과 비밀번호 출력
-    //console.log('이메일:', email);
-    //console.log('비밀번호:', password);
-
-    // 추가기능 리스트
-    // 1.이메일과 테스워드를 확인하고 로그인  
-    //console.log(`email: ${email} , pw : ${password} `)
-
-    join(email)
-
-    res.status(200).json({ message: '' }); //이메일 가입 가능 여부 확인 후 가능 여부 전송 
-    // 클라이언트에 응답 전송
-});
-main.post('/check', (req, res) => {
-    // 클라이언트로부터 전송받은 이메일과 비밀번호를 추출
-    const { email} = req.body;
-    console.log(req.params)
-
-    // 서버 콘솔에 이메일과 비밀번호 출력
-    console.log('이메일:', email);
-    //console.log('비밀번호:', password);
-
-    // 추가기능 리스트
-    // 1.이메일과 테스워드를 확인하고 로그인  
-    //console.log(`email: ${email} , pw : ${password} `)
-
-    
-
-    res.status(200).json({ message: '로그인 정보를 성공적으로 받았습니다.' });
-    // 클라이언트에 응답 전송
-});
 main.post('/buinessinfo', (req, res) => {
-    const data = req.body; // 클라이언트에서 보낸 데이터
-    // 클라이언트에 응답을 보내줌 (예: 성공 메시지)
+    const data = req.body;
     res.json({ message: "buisness_successfully" });
-    saveDataToFile(data);
-});
-main.post('/sellerinrut', (req, res) => {
-    const { sellername, storename, sellerphonenumer, sellerindustinfo1, sellerindustinfo2, storeaddresss } = req.body;
-
-    const sellerInfo = `
-        Business Name: ${sellername}
-        Store Name: ${storename}
-        Seller Phone Number: ${sellerphonenumer}
-        Seller Industry Info 1: ${sellerindustinfo1}
-        Seller Industry Info 2: ${sellerindustinfo2}
-        Store Address: ${storeaddresss}
-    `;
-
-    sellerinput(sellerInfo, res);
-});
-main.post('/operation', (req, res) => {
-    const { name, nickname, operation, phonenumber1, phonenumber2, phonenumber3, portfolio, skill } = req.body;
-
-    const operation_input_data = `
-        name: ${name}
-        nickname: ${nickname}
-        operation: ${operation}
-        phonenumber1: ${phonenumber1}
-        phonenumber2: ${phonenumber2}
-        phonenumber3: ${phonenumber3}
-        portpolio: ${portfolio}
-        skill: ${skill}
-    `;
-
-    // 현재 시간을 이용하여 파일 이름 생성 (예: 2022-01-01T12:00:00_operation.json)
-    const timestamp = new Date().toISOString().replace(/:/g, '-');
-    const fileName = `${name}.json`;
-
-    // 파일 저장 경로 설정 (예: d드라이브 안에 있는 파일 루트 지원자/opration)
-    const directory = path.join('F:', '지원자', operation);
-
-    // 파일 경로 설정
-    const filePath = path.join(directory, fileName);
-
-    // 폴더가 없으면 생성
-    if (!fs.existsSync(directory)) {
-        fs.mkdirSync(directory, { recursive: true });
-    }
-
-    // 데이터를 JSON 형식으로 파일에 쓰기
-    fs.writeFile(filePath, JSON.stringify(operation_input_data, null, 4), (err) => {
+    saveDataToFile(data, "비즈니스", (err) => {
         if (err) {
-            console.error('파일 저장 중 오류 발생:', err);
-            res.status(500).send('파일 저장 중 오류 발생');
-        } else {
-            console.log('데이터가 파일에 성공적으로 저장되었습니다.');
-            res.status(200).json({ message: '지원완료' });
+            console.error('Error saving data to file:', err);
         }
     });
 });
 
 
+main.post('/operation', (req, res) => {
+    const data = req.body;
+    res.status(200).json({ message: '지원완료' });
+    saveDataToFile(data, data.action , (err) => {
+        if (err) {
+            console.error('Error saving data to file:', err);
+        }
+    });
+});
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
+function applyPageToTemplate(templatePath, pagePath) {
+    let template = loadTemplate(templatePath);
+    let pageContent = loadPage(pagePath);
+    const mainPageRegex = /<div id="mainpage"><\/div>/;
+    return template.replace(mainPageRegex, `<div id="mainpage">${pageContent}</div>`);
+}
 function loadTemplate(templatePath) {
     return fs.readFileSync(templatePath, 'utf-8');
 }
 function loadPage(pagePath) {
     return fs.readFileSync(pagePath, 'utf-8');
 }
-// 함수: 탬플릿 안에 넣을 페이지 html 적용
-function applyPageToTemplate(templatePath, pagePath) {
-    let template = loadTemplate(templatePath);
-    let pageContent = loadPage(pagePath);
-
-    const mainPageRegex = /<div id="mainpage"><\/div>/;
-    return template.replace(mainPageRegex, `<div id="mainpage">${pageContent}</div>`);
-}
-function sellerinput(sellerInfo, res) {
-    console.log(sellerInfo);
-}
-function login_file(email,pw){
-    console.log(`email: ${email}, pw: ${pw}`);
-
-    const loginemail = email;
-    const loginpassword = pw;
-
-    const loginfilePath = 'F:' + '/user/' + loginemail + '.json'; // 경로 설정
-
-
-    // 유저 파일이 존재하는지 확인
-    fs.access(loginfilePath, fs.constants.F_OK, (err) => {  //유저가 존재 하는지 확인
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
+function login_file(email, pw, callback) {
+    const loginfilePath = `D:/user/${email}.json`;
+    fs.access(loginfilePath, fs.constants.F_OK, (err) => {
         if (err) {
-            //console.error(`no_user`);
-            // 파일이 존재하지 않을 때의 처리를 여기에 추가합니다.
-            return "no_user"
-            
+            callback('no_user');
+            return;
         } else {
-            console.log(`on_user`);
-            // 파일이 존재할 때의 처리를 여기에 추가합니다.
-            
             fs.readFile(loginfilePath, 'utf8', (readErr, data) => {
                 if (readErr) {
-                    console.error('파일 읽기 오류:', readErr);
-                    return "error_reading_file";
+                    callback('error_reading_file');
+                    return;
                 }
-
                 let userData = {};
                 try {
                     userData = JSON.parse(data);
                 } catch (parseError) {
-                    console.error('JSON 파싱 오류:', parseError);
-                    return "error_parsing_json";
+                    callback('error_parsing_json');
+                    return;
                 }
-
-                if (userData.pw === loginpassword) {
-                    console.log('패스워드가 일치합니다');
-                    // 일치할 때의 처리를 여기에 추가
+                if (userData.pw === pw) {
                     let randomString = generateRandomString(30);
-                    console.log(randomString); // 생성된 랜덤 문자열 출력
-                    saveTokenToFile(loginemail, randomString); // 생성된 토큰을 파일에 저장
-                    return randomString;
+                    saveTokenToFile(email, randomString, (err) => {
+                        if (err) {
+                            callback('error_saving_token');
+                        } else {
+                            callback(null, randomString);
+                        }
+                    });
                 } else {
-                    console.log('패스워드가 일치하지 않습니다');
-                    return "password_mismatch";
+                    callback('password_mismatch');
                 }
             });
-
-            
         }
     });
 }
-function join(email) {
-    console.log(`email: ${email}`);
-
-    //대기 목록에 있는지 확인
-    joinemail_waitcheck(email);
-    userfind(email);
-    
-}
-
-
-
-function generateRandomString(length) {//계정 토큰 생성
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'; // 사용할 문자들
+function generateRandomString(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let randomString = '';
-    
     for (let i = 0; i < length; i++) {
-        const randomIndex = Math.floor(Math.random() * characters.length); // 랜덤 인덱스 생성
-        randomString += characters.charAt(randomIndex); // 랜덤 문자열에 추가
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        randomString += characters.charAt(randomIndex);
     }
-    toString(randomString);
     return randomString;
 }
-function saveTokenToFile(email, token) {//계정 토큰을 저장
-    const loginfilePath = path.join('F:', '/user/', `${email}.json`);
-
-    // 이전 파일 데이터를 읽어옴
+function saveTokenToFile(email, token, callback) {
+    const loginfilePath = `D:/user/${email}.json`;
     fs.readFile(loginfilePath, 'utf8', (err, data) => {
         if (err) {
-            console.error('파일 읽기 오류:', err);
+            callback('error_reading_file');
             return;
         }
-
         let userData = {};
         try {
-            // 파일 데이터를 JSON으로 파싱
             userData = JSON.parse(data);
         } catch (parseError) {
-            console.error('JSON 파싱 오류:', parseError);
+            callback('error_parsing_json');
             return;
         }
-
-        // "tocken" 키를 추가하고 값 설정
         userData.token = token;
-
-        // JSON 형식으로 변환하여 파일에 쓰기
         fs.writeFile(loginfilePath, JSON.stringify(userData), 'utf8', (writeErr) => {
             if (writeErr) {
-                console.error('파일 쓰기 오류:', writeErr);
+                callback('error_writing_file');
                 return;
             }
-            console.log('토큰 저장 완료');
+            callback(null);
         });
     });
 }
-function getTokenFromUserFile(loginemail, callback) {
-    const loginfilePath = path.join('F:', '/user/', loginemail + '.json');
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
+function saveDataToFile(data, action, callback) {
+    const directoryPath = getDirectoryPath(action, data); // 저장 경로 설정
+    let fileName = '';
 
-    fs.readFile(loginfilePath, 'utf8', (err, data) => {
-        if (err) {
-            console.error('파일 읽기 오류:', err);
-            callback(err, null);
-            return;
-        }
-
-        let userData = {};
-        try {
-            userData = JSON.parse(data);
-        } catch (parseError) {
-            console.error('JSON 파싱 오류:', parseError);
-            callback(parseError, null);
-            return;
-        }
-
-        const token = userData.token;
-        if (token) {
-            callback(null, token);
-        } else {
-            console.error('토큰이 유저 파일에 존재하지 않습니다.');
-            callback('토큰이 존재하지 않습니다.', null);
-        }
-    });
-}
-function joinemail_waitcheck(email){
-    // 파일에서 정보 읽어오기
-    fs.readFile('F:/waituser/joinwait.json', 'utf8', (err, data) => {
-        if (err) {
-            console.error(`Error reading file: ${err}`);
-            return;
-        }
-
-        const jsonData = JSON.parse(data); // JSON 데이터 파싱
-        const userInfo = jsonData[email]; // 이메일을 키로 사용하여 해당 이메일의 정보 가져오기
-        
-        if (userInfo) {
-            console.log(`User Info: ${JSON.stringify(userInfo)}`);
-            // 이제 userInfo 객체를 사용하여 추가적인 작업을 수행할 수 있습니다.
-            return "대기 목록에 있음"
-        } else {
-            console.log('User not found');
-            // 이메일에 해당하는 정보가 없는 경우에 대한 처리를 여기에 추가할 수 있습니다.
-            return "대기 목록에 있음"
-        }
-    });
-}
-function userfind(){
-    // 파일이 존재하는지 확인
-    const filePath = 'F:/user/'+ +'.json';
-    fs.access(filePath, fs.constants.F_OK, (err) => {
-        if (err) {
-            console.error('파일이 존재하지 않습니다.');
-        } else {
-            console.log('파일이 존재합니다.');
-        }
-    });
-}
-function saveDataToFile(data) {
-    // 파일 디렉토리 생성 (예: 드라이브/비즈니스/)
-    const directoryPath = path.join('D:/민섭', '비즈니스');
-    if (!fs.existsSync(directoryPath)) {
+    if (!directoryPath) { // 관련 없는 action이 유입 : 다른 action이 유입이 되없다면 파일 경로가 정해 지지 않는다.
+        callback('invalid_action');
+        return;
+    }
+    if (!fs.existsSync(directoryPath)) { // 파일경로가 있는지 확인
         fs.mkdirSync(directoryPath, { recursive: true });
     }
-
-    // 파일 경로 설정 (예: 드라이브/비즈니스/마켓이름.json)
-    const filePath = path.join(directoryPath, `${data.marketname}.json`);
-
-    // 데이터를 JSON 문자열로 변환
-    const jsonData = JSON.stringify(data);
-
-    // 파일에 데이터 쓰기
-    fs.writeFile(filePath, jsonData, 'utf8', (err) => {
-        if (err) {
-            console.error('Error writing file:', err);
-            return;
-        }
-        console.log('Data saved to file successfully.');
-    });
-}
-//메인 서버에 이메일 전송
-//메인 서버에서 대기 중인 이메일인지 확인
-//서브서버 또는 메인 서버에서 가입된 이메일이 있는지 확인 (함수 사용 : userfind)
-//없다면 "가입 가능한 아이디 입니다" 전송
-//있다면 "이미 존재하는 아이디 입니다" 전송
-
-function filesave(action,filepath,data){
-    if(action == "비즈니스"){
-
+    if (action == "프로젝트 참가") {
+        fileName = `${data.operation}.json`;
+        const filePath = path.join(directoryPath, fileName);
+        operation_input(filePath, [data], (error) => {
+            if (error) {
+                console.error('Error saving data to file:', error);
+            } else {
+                console.log('Data saved to file successfully.');
+            }
+        });
     }
-    if(action == "프로젝트 참가"){
-
+    if (action == "비즈니스") {
+        fileName = `${data.marketname}.json`;
+        buisness_input(directoryPath, fileName, data, (error) => {
+            if (error) {
+                console.error('Error saving data to file:', error);
+            } else {
+                console.log('Data saved to file successfully.');
+            }
+        });
+    }
+}
+function fileExists(filePath) {  //파일이 존재 하는지 알아 보는 함수
+    try {
+        fs.accessSync(filePath, fs.constants.F_OK);
+        return true;
+    } catch (err) {
+        return false;
+    }
+}
+function getDirectoryPath(action,data) { //action 유입에 따라 파일경로를 전달
+    const ref_database_root = 'company';
+    switch (action) {
+        case "비즈니스":
+            return path.join(ref_database, ref_database_root,'비즈니스');
+        case "프로젝트 참가":
+            return path.join(ref_database,ref_database_root,"지원자");
+        default:
+            console.error("Invalid action:", action);
+            return null;
+    }
+}
+function buisness_input(directoryPath, fileName, data, callback) {
+    const filePath = path.join(directoryPath, fileName); // 파일경로와 파일이름이 합쳐진다
+    if (!fileExists(filePath)) { // 파일이 존재 하지 않늕다면
+        fs.writeFile(filePath, JSON.stringify(data), 'utf8', (err) => { // 파일 출력
+            if (err) {
+                callback('error_writing_file');
+            } else {
+                callback(null);
+            }
+        });
+    } else {
+        console.log('File already exists. Skipping saving data.');
+        callback(null);
+    }
+}
+function operation_input(filePath, newData, callback) {
+    // 파일이 존재하는지 확인
+    if (!fileExists(filePath)) {
+        // 파일이 존재하지 않을 경우 새로운 배열에 데이터를 추가하고 파일에 쓴다
+        fs.writeFile(filePath, JSON.stringify(newData), 'utf8', (err) => { // 파일 출력
+            if (err) {
+                callback('error_writing_file');
+            } else {
+                callback(null);
+            }
+        });
+    } else {
+        // 파일이 이미 존재할 경우 기존 데이터를 읽어와서 배열에 추가하고 다시 파일에 쓴다
+        fs.readFile(filePath, 'utf8', (err, fileData) => { // 파일 읽기
+            if (err) {
+                callback('error_reading_file');
+                return;
+            }
+            try {
+                const existingData = JSON.parse(fileData); // 기존 데이터 파싱
+                existingData.push(...newData); // 기존 데이터에 새로운 데이터 추가
+                fs.writeFile(filePath, JSON.stringify(existingData), 'utf8', (err) => { // 파일 출력
+                    if (err) {
+                        callback('error_writing_file');
+                    } else {
+                        callback(null);
+                    }
+                });
+            } catch (parseError) {
+                console.error('Error parsing existing data:', parseError);
+                callback('error_parsing_existing_data');
+            }
+        });
     }
 }
