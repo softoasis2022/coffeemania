@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>커피메니아 어드민</title>
+</head>
+<body>
+    <style>
+        #admin_category{
+            width: 100%;
+            height: fit-content;
+            display: flex;
+            border-bottom: 2px solid black;
+            padding-bottom: 10px;
+        }
+        #admin_category_ul{
+            list-style: none;
+            display: flex;
+            padding-left: 0px;
+        }
+        #admin_category_li{
+            padding: 20px;
+            margin: 5px;
+            border: 1px solid black;
+            border-radius: 15px;
+        }
+        #admin_info{
+            width: 100%;
+            height: fit-content;
+        }
+    </style>
+    <div id="admin_category">
+        <ul id="admin_category_ul">
+            <li id="admin_category_li" onclick="admin_category_li_cl(this.textContent)">메인</li>
+            <li id="admin_category_li" onclick="admin_category_li_cl(this.textContent)">판매관리</li>
+            <li id="admin_category_li" onclick="admin_category_li_cl(this.textContent)">비즈니스 관리</li>
+            <li id="admin_category_li" onclick="admin_category_li_cl(this.textContent)">구성원</li>
+            <li id="admin_category_li" onclick="admin_category_li_cl(this.textContent)">판매자관리</li>
+            <li id="admin_category_li" onclick="admin_category_li_cl(this.textContent)">통계</li>
+        </ul>
+        <script>
+            function admin_category_li_cl(admin_category_li_cl_txt){
+                //console.log(admin_category_li_cl_txt);
+                if(admin_category_li_cl_txt == "메인"){
+                    location.href='/mainadmin';
+                }
+                if(admin_category_li_cl_txt == "판매관리"){
+                    location.href='/marketadmin';
+                }
+                if(admin_category_li_cl_txt == "비즈니스 관리"){
+                    location.href='/buisnessadmin';
+                }
+                if(admin_category_li_cl_txt == "구성원"){
+                    location.href='/operationadmin';
+                }
+                if(admin_category_li_cl_txt == "판매자관리"){
+                    location.href='/selleradmin';
+                }
+                if(admin_category_li_cl_txt == "통계"){
+                    location.href='/statisticsadmin';
+                }
+            };
+        </script>
+    </div>
+    <div id="admin_info"></div>
+</body>
+</html>
