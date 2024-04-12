@@ -1,0 +1,144 @@
+<style>
+    #main_center{
+        width: 100%;
+        height: 500px;
+        justify-content: center;
+        padding-top: 200px;
+        border-right: 1px solid black;
+        border-left: 1px solid black;
+    }
+</style>
+<div id="main_center">
+    <style>
+        #login_space{
+            width: 100%;
+            height: fit-content;
+            display: flex;
+            justify-content: center;
+        }
+        #api_login_grp{
+            width: 100%;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+    </style>
+    <div id="login_space">
+        <div id-="input">
+            <div>
+                <input id="email_input" style="width: 100px; height: 30px;" title="이메일" placeholder="이메일">
+                    
+                </input>
+            </div>
+            <div>
+                <input id="pw_input" style="width: 100px; height: 30px;" title="페스워드" placeholder="페스워드">
+
+                </input>
+            </div>
+        </div>
+        <div id="btn_login" style="float: left; width: 80px; height:60px; margin-left: 20px; border: 2px solid black;">
+            <a>
+                <div style="height: 100%; height:60px; text-align: center;" onclick="login_pass()">
+                    <p>
+                        로그인
+                    </p>
+                </div>
+                <script>
+                    function login_pass(){
+                        console.log('로그인버튼클릭 이벤트');
+                        const email_wrap = document.getElementById('email_input'); // ID가 'email_input'인 요소를 찾음
+                        const pw_wrap = document.getElementById('pw_input'); // ID가 'pw_input'인 요소를 찾음
+                        const input_email = email_wrap.value; // email 입력 필드의 값을 가져옴
+                        const input_pw = pw_wrap.value; // password 입력 필드의 값을 가져옴
+                        //console.log(input_email, input_pw); // 콘솔에 이메일과 비밀번호를 출력
+                        
+                        fetch('http://www.coffeemanias.com:3001/login_pass', {
+                            method: 'POST', // POST 요청을 사용
+                            headers: {'Content-Type': 'application/json' // 요청의 본문이 JSON 형태임을 명시
+                            },
+                            body: JSON.stringify({
+                                email: input_email, // 이메일 데이터
+                                password: input_pw // 비밀번호 데이터
+                            })
+                            })
+                            .then(response => response.json()) // 서버로부터의 응답을 JSON 형태로 파싱
+                            .then(data => {
+                                if (data.token == 'no_user') {
+                                    alert("아이디 또는 비밀번호를 확인해 주세요");
+                                    console.log(data.token);
+                                }
+                                else{
+                                    window.location.href = '/';
+                                    console.log(data.token);
+                                }
+                            })
+                            .catch(error => console.error('Error:', error)); // 에러가 발생한 경우 콘솔에 에러를 출력
+                        }
+                </script>
+            </a>
+        </div>
+    </div>
+    <div id="api_login_grp">
+        <style>
+            #api_login{
+                width: 100px;
+                height: 50px;
+                margin: 10px;
+                text-align: center;
+                border: 1px solid black;
+                border-radius: 30px;
+            }
+        </style>
+        <div id="api_login">
+            <a id="naver_login" onclick="naverlogin()">
+                <div>
+                    <p>
+                        네이버
+                    </p>
+                </div>
+            </a>
+        </div>
+        <div id="api_login">
+            <a id="google_login" onclick="googlelogin()">
+                <div>
+                    <p>
+                        구글
+                    </p>
+                </div>
+            </a>
+        </div>
+        <div id="api_login">
+            <a id="facebook_login" onclick="facebooklogin()">
+                <div>
+                    <p>
+                        페이스북
+                    </p>
+                </div>
+            </a>
+        </div>
+        <div id="api_login">
+            <a id="insta_login" onclick="instalogin()">
+                <div>
+                    <p>
+                        인스타
+                    </p>
+                </div>
+            </a>
+        </div>
+        <script>
+            function naverlogin(){
+                alert("네이버 로그인 클릭");
+            }
+            function googlelogin(){
+                alert("구글 로그인 클릭");
+            }
+            function facebooklogin(){
+                alert("페이스북 로그인 클릭");
+            }
+            function instalogin(){
+                alert("인스타 로그인 클릭");
+            }
+        </script>
+    </div>
+</div>

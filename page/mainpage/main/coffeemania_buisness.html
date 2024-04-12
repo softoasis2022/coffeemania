@@ -1,0 +1,251 @@
+<div id="mainpage">
+    <div style="width: 100%; height: fit-content;">
+        <div>
+            <style>
+                #buisness_info{
+                    list-style: none;
+                    width: fit-content;
+                    height: fit-content;
+                }
+                #buisness_info_li{
+                    display: flex;
+                    width: fit-content;
+                    height: fit-content;
+                    margin: 20px;
+                }
+                #buisness_info_li_sub1{
+                    width: 150px;
+                    height: fit-content;
+                    margin-left: 10px;
+                }
+                #buisness_info_li_sub2{
+                    width: 200px;
+                    height: fit-content;
+                    
+                }
+            </style>
+            <ul id="buisness_info" class="buisness_info">
+                <li id="buisness_info_li">
+                    <div id="buisness_info_li_sub1">
+                        매장이름
+                    </div>
+                    <div id="buisness_info_li_sub2">
+                        <input id="market_name" value="간판이름을 입력해 주세요" onclick="this.value = ''">
+                    </div>
+                </li>
+                <li id="buisness_info_li">
+                    <div id="buisness_info_li_sub1">
+                        사업자 상호
+                    </div>
+                    <div id="buisness_info_li_sub2">
+                        <input id="market_industryname" value="사업자 등록증에 있는 상호명을 입력해 주세요" onclick="this.value = ''">
+                    </div>
+                </li>
+                <li id="buisness_info_li">
+                    <div id="buisness_info_li_sub1">
+                        업종
+                    </div>
+                    <div id="buisness_info_li_sub2">
+                        <input id="market_industrycategory1">
+                    </div>
+                </li>
+                <li id="buisness_info_li">
+                    <div id="buisness_info_li_sub1">
+                        업태
+                    </div>
+                    <div id="buisness_info_li_sub2">
+                        <input id="market_industrycategory2">
+                    </div>
+                </li>
+                <li id="buisness_info_li">
+                    <div id="buisness_info_li_sub1">
+                        담당자
+                    </div>
+                    <div id="buisness_info_li_sub2">
+                        <input id="market_directoryname" value="담당자 또는 대표님 이름을 입력해 주세요" onclick="this.value = ''">
+                    </div>
+                    <div id="buisness_info_li_sub2" style="width: 150px;">
+                        <input id="market_directoryproduce" style="margin-left: 0px;" value="직책" onclick="this.value = ''">
+                    </div>
+                </li>
+                <li id="buisness_info_li">
+                    <div id="buisness_info_li_sub1">
+                        연락처
+                    </div>
+                    <div id="buisness_info_li_sub2" style="display: flex;">
+                        <input id="market_number1" value="010" onclick="this.value = ''">
+                        <input id="market_number2" style="margin-left: 10px;" value="0000" onclick="this.value = ''">
+                        <input id="market_number3" style="margin-left: 10px;" value="0000" onclick="this.value = ''">
+                    </div>
+                </li>
+                <li id="buisness_info_li">
+                    <div id="buisness_info_li_sub1">
+                        주소
+                    </div>
+                    <div id="buisness_info_li_sub2" style="display: flex;">
+                        <div>
+                            <input id="buisness_info_address_first" value="도 지역" onclick="address_sellect_in(document.getElementById('address_sellect_ul').style.display)">
+                            <ul id="address_sellect_ul" style="list-style: none; display: none;">
+                                <style>
+                                    #address_sellect_li{
+                                        width: fit-content;
+                                        height: fit-content;
+                                        padding: 3px;
+                                        margin: 5px;
+                                        border: 1px solid black;
+                                        border-radius: 5px;
+                                    }
+                                </style>
+                                <li id="address_sellect_li" onclick="address_sellect(this.textContent)">서울특별시</li>
+                                <li id="address_sellect_li" onclick="address_sellect(this.textContent)">경기도</li>
+                                <li id="address_sellect_li" onclick="address_sellect(this.textContent)">강원도</li>
+                                <li id="address_sellect_li" onclick="address_sellect(this.textContent)">충청북도</li>
+                                <li id="address_sellect_li" onclick="address_sellect(this.textContent)">충청남도</li>
+                                <li id="address_sellect_li" onclick="address_sellect(this.textContent)">대전광역시</li>
+                                <li id="address_sellect_li" onclick="address_sellect(this.textContent)">광주광역시</li>
+                                <li id="address_sellect_li" onclick="address_sellect(this.textContent)">경상북도</li>
+                                <li id="address_sellect_li" onclick="address_sellect(this.textContent)">경상남도</li>
+                                <li id="address_sellect_li" onclick="address_sellect(this.textContent)">대구광역시</li>
+                                <li id="address_sellect_li" onclick="address_sellect(this.textContent)">전라북도</li>
+                                <li id="address_sellect_li" onclick="address_sellect(this.textContent)">전라북도</li>
+                            </ul>
+                            <script>
+                                function address_sellect_in(sellect_onoff){
+                                    if (sellect_onoff == "none") {
+                                        document.getElementById("address_sellect_ul").style.display = "block";
+                                    } else {
+                                        document.getElementById("address_sellect_ul").style.display = "none";
+                                    }
+                                    document.getElementById("buisness_info_address_first").value = '';
+                                }
+                                function address_sellect(address){
+                                    document.getElementById("buisness_info_address_first").value = address;
+                                    document.getElementById("address_sellect_ul").style.display = "none";
+                                }
+                            </script>
+                        </div>
+                        <input id="buisness_info_address_seconds" style="margin-left: 10px; height: 100%;" value="시 , 군 , 구" onclick="this.value = ''">
+                        <input id="buisness_info_address_info" style="margin-left: 10px; height: 100%;" value="상세 주소 " onclick="this.value = ''">
+                    </div>
+                </li>
+                <li id="buisness_info_li">
+                    <div id="buisness_info_li_sub1">
+                        문의 내용
+                    </div>
+                    <div id="buisness_info_li_sub2" style="display: flex; width: 1000px; height: 500px">
+                        <textarea id="buisness_txt" style="width: 100%; height: 100%;"></textarea>
+                    </div>
+                </li>
+                <li id="buisness_info_li">
+                    <div id="buisness_info_li_sub1">
+                        연락가능한 시간
+                    </div>
+                    <div id="buisness_info_li_sub2" style="display: flex;">
+                        <div style="display: flex; width: fit-content; height: fit-content; border: 1px solid black;">
+                            <div style="width: 40px;">
+                                <p>오전</p>
+                            </div>
+                            <div style="width: fit-content; height: fit-content; display: flex; margin-left: 5px;">
+                                <input id="buisness_sales_hour_first" style="width: fit-content; height: fit-content; margin-top: 15px;" type="number" max="24" min="0">
+                                <p style="width: fit-content;">시</p>
+                            </div>
+                            <div style="width: fit-content; height: fit-content; display: flex; margin-left: 5px;">
+                                <input id="buisness_sales_min_first" style="width: fit-content; height: fit-content; margin-top: 15px;" type="number" max="59" min="0">
+                                <p style="width: fit-content;">분</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; width: fit-content; height: fit-content; border: 1px solid black; margin-left: 20px;">
+                            <div style="width: 40px;">
+                                <p>오후</p>
+                            </div>
+                            <div style="width: fit-content; height: fit-content; display: flex; margin-left: 5px;">
+                                <input id="buisness_sales_hour_seconds" style="width: fit-content; height: fit-content; margin-top: 15px;" type="number" max="24" min="0">
+                                <p style="width: fit-content;">시</p>
+                            </div>
+                            <div style="width: fit-content; height: fit-content; display: flex; margin-left: 5px;">
+                                <input id="buisness_sales_min_seconds" style="width: fit-content; height: fit-content; margin-top: 15px;" type="number" max="59" min="0">
+                                <p style="width: fit-content;">분</p>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>제품 카테고리 또는 문의 카테 고리</li>
+                <li>음료, 디저트</li>
+            </ul>
+            
+        </div>
+    </div>
+    <div style="width: 100%; height: fit-content;">
+        <div onclick="buisness_input()">
+            문의 내용 입력 완료
+        </div>
+        <script>
+            function buisness_input(){
+                // 데이터 수집
+                const marketname = document.getElementById("market_name").value;
+                const marketindustryname = document.getElementById("market_industryname").value;
+                const marketindustrycategory1 = document.getElementById("market_industrycategory1").value;
+                const marketindustrycategory2 = document.getElementById("market_industrycategory2").value;
+                const marketdirectoryname = document.getElementById("market_directoryname").value;
+                const marketdirectoryproduce = document.getElementById("market_directoryproduce").value;
+                const marketnumber1 = document.getElementById("market_number1").value;
+                const marketnumber2 = document.getElementById("market_number2").value;
+                const marketnumber3 = document.getElementById("market_number3").value;
+                const marketaddress1 = document.getElementById("buisness_info_address_first").value;
+                const marketaddress2 = document.getElementById("buisness_info_address_seconds").value;
+                const marketaddress3 = document.getElementById("buisness_info_address_info").value;
+                const market_buisnesstxt = document.getElementById("buisness_txt").value;
+                const buisnesssaleshourfirst = document.getElementById("buisness_sales_hour_first").value;
+                const buisnesssalesminfirst = document.getElementById("buisness_sales_min_first").value;
+                const buisnesssaleshourseconds = document.getElementById("buisness_sales_hour_seconds").value;
+                const buisnesssalesminseconds = document.getElementById("buisness_sales_min_seconds").value;
+        
+                // 데이터 객체 생성
+                const data = {
+                    action : "비즈니스",
+                    marketname: marketname,
+                    marketindustryname: marketindustryname,
+                    marketindustrycategory1: marketindustrycategory1,
+                    marketindustrycategory2: marketindustrycategory2,
+                    marketdirectoryname: marketdirectoryname,
+                    marketdirectoryproduce: marketdirectoryproduce,
+                    marketnumber1: marketnumber1,
+                    marketnumber2: marketnumber2,
+                    marketnumber3: marketnumber3,
+                    marketaddress1: marketaddress1,
+                    marketaddress2: marketaddress2,
+                    marketaddress3: marketaddress3,
+                    market_buisnesstxt: market_buisnesstxt,
+                    buisnesssaleshourfirst: buisnesssaleshourfirst,
+                    buisnesssalesminfirst: buisnesssalesminfirst,
+                    buisnesssaleshourseconds: buisnesssaleshourseconds,
+                    buisnesssalesminseconds: buisnesssalesminseconds
+                };
+        
+                // POST 요청 설정
+                fetch('http://www.coffeemanias.com:3001/buinessinfo', { // 변경된 주소로 수정
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if(data.message === "buisness_successfully") { // 서버로부터 받은 응답을 확인
+                        window.location.href = "/"; // 홈 페이지로 이동
+                    }
+                })
+                .catch(error => {
+                    console.error('There was a problem with your fetch operation:', error);
+                    // 전송 중 오류가 발생했을 때 수행할 작업 추가
+                });
+            }
+        </script>
+    </div>
+</div>
