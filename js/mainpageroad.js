@@ -75,7 +75,7 @@ main.post('/login_pass', (req, res) => {
     });
 });
 
-main.post('/buinessinfo', (req, res) => {
+main.post('/buisness', (req, res) => {
     const data = req.body;
     res.json({ message: "buisness_successfully" });
     saveDataToFile(data, "비즈니스", (err) => {
@@ -84,8 +84,6 @@ main.post('/buinessinfo', (req, res) => {
         }
     });
 });
-
-
 main.post('/operation', (req, res) => {
     const data = req.body;
     res.status(200).json({ message: '지원완료' });
