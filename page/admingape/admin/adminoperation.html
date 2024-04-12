@@ -1,0 +1,246 @@
+<div id="admin_info">
+    <style>
+        #operation_top{
+            width: 100%;
+            height: fit-content;
+        }
+        #operation_top_menu{
+            width: 100%;
+            height: fit-content;
+            margin-top: 10px;
+            margin-bottom : 5px;
+            display: flex;
+            padding-bottom: 5px;
+            border-bottom: 3px solid black;
+        }
+        #operation_top_menu_li{
+            width: fit-content;
+            height: 30px;
+            display: flex;
+
+        }
+    </style>
+    <div id="operation_top">
+        <div id="operation_top_menu">
+            <div id="operation_top_menu_li" style="display: flex;">
+                <button id="staff" onclick="staff('직원')">직원</button>
+                <button id="staff_mini" onclick="staff('지원자')">지원자</button>
+                <script>
+                    function staff(content) {
+                        if (confirm(content+"로 보시겠습니까?") == true){    //확인
+                            if(content == "직원"){
+                                operationadmin();
+                            }
+                            else{
+                                operationadmin_mini();
+                            }
+                        }else{   //취소
+                            return false;
+                        }
+                    }
+                </script>
+            </div>
+            <div id="operation_top_menu_li">
+                <p>사번</p>
+                <input id="staff_number" type="text" style="margin-left: 5px; padding: 5px; width: 150px; height: 100%;">
+            </div>
+            <div id="operation_top_menu_li">
+                
+            </div>
+            <div id="operation_top_menu_li">
+                
+            </div>
+            <div id="operation_top_menu_li">
+                
+            </div>
+            <div>
+                <p>검색</p>
+            </div>
+        </div>
+        <div>
+            <style>
+                #staff_info_container_name{
+                    display: flex;
+                    border-bottom: 2px solid black;
+                }
+                #staff_info_warp{
+                    width: 150px;
+                    height: 20px;
+                    text-align: center;
+                    border-right: 1px solid black;
+                }
+                #staff_info{
+                    width: fit-content;
+                    height: fit-content;
+                }
+            </style>
+            <div id="staff_info_container_name">
+                <div id="staff_info_warp" >
+                    사번
+                </div>
+                <div id="staff_info_warp">
+                    부서
+                </div>
+                <div id="staff_info_warp">
+                    직급
+                </div>
+                <div id="staff_info_warp">
+                    이름
+                </div>
+                <div id="staff_info_warp">
+                    연락처
+                </div>
+                <div id="staff_info_warp" style="width: 200px; height: fit-content; border-right: 0px solid black;">
+                    주소
+                </div>
+            </div>
+            <div id="staff_info_container">
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        fetch('/operationadmin', { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                // 받은 데이터를 처리하고 페이지에 표시
+                displayStaffInfo(data);
+            })
+            .catch(error => console.error('Error fetching staff data:', error));
+    });
+    function operationadmin() {
+        fetch('/operationadmin', { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                // 받은 데이터를 처리하고 페이지에 표시
+                displayStaffInfo(data);
+            })
+            .catch(error => console.error('Error fetching staff data:', error));
+    }
+    function displayStaffInfo(staffData) {
+        const staffInfoContainer = document.getElementById('staff_info_container');
+        staffInfoContainer.innerHTML = ''; // 이전 데이터 지우기
+
+        //지원 부서  , 이름 , 활동이름 , 전화 번호
+        const staffinfo_containername= document.getElementById('staff_info_container_name');
+        staffinfo_containername.innerHTML = ''; // 이전 데이터 지우기
+        staffinfo_containername.innerHTML = `
+                <div id="staff_info_warp">
+                    사번
+                </div>
+                <div id="staff_info_warp">
+                    부서
+                </div>
+                <div id="staff_info_warp">
+                    직급
+                </div>
+                <div id="staff_info_warp">
+                    이름
+                </div>
+                <div id="staff_info_warp">
+                    연락처
+                </div>
+                <div id="staff_info_warp" style="width: 200px; height: fit-content; border-right: 0px solid black;">
+                    주소
+                </div>
+        `;
+
+        // staffData를 반복하여 각 직원 정보를 표시
+        staffData.forEach((staff, index) => {
+            const staffInfoElement = document.createElement('div');
+            staffInfoElement.classList.add('staff_info');
+            // id를 'staff_info_' + index 형태로 설정
+            staffInfoElement.setAttribute('id', 'staff_info');
+            staffInfoElement.style.display = "flex";
+            staffInfoElement.style.height = "fit_content";
+            
+
+            // 예시 데이터를 기반으로 각 직원의 정보를 구성
+            staffInfoElement.innerHTML = `
+                <div id="staff_info_warp">
+                    <div>${staff.id}</div>
+                </div>
+                <div id="staff_info_warp">
+                    <div>${staff.name}</div>
+                </div>
+                <div id="staff_info_warp">
+                    <div>${staff.operation}</div>
+                </div>
+                <div id="staff_info_warp">
+                    <div>${staff.position}</div>
+                </div>
+                <div id="staff_info_warp">
+                    <div>${staff.phonenumber.join('-')}</div>
+                </div>
+                <div id="staff_info_warp" style="width: 200px; height: fit-content; border-right: 0px solid black;">
+                    <div>${staff.address.join(' ')}</div>
+                </div>
+            `;
+
+            staffInfoContainer.appendChild(staffInfoElement);
+        });
+    }
+    function operationadmin_mini() {
+        fetch('/operationadmin_mini', { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                // 받은 데이터를 처리하고 페이지에 표시
+                displayStaffInfomini(data);
+            })
+            .catch(error => console.error('Error fetching staff data:', error));
+    }
+    function displayStaffInfomini(joinstaffData) {
+        const staffInfoContainer = document.getElementById('staff_info_container');
+        staffInfoContainer.innerHTML = ''; // 이전 데이터 지우기
+
+        //지원 부서  , 이름 , 활동이름 , 전화 번호
+        const staffinfo_containername= document.getElementById('staff_info_container_name');
+        staffinfo_containername.innerHTML = ''; // 이전 데이터 지우기
+        staffinfo_containername.innerHTML = `
+                <div id="staff_info_warp" >
+                    지원 부서
+                </div>
+                <div id="staff_info_warp">
+                    이름
+                </div>
+                <div id="staff_info_warp">
+                    활동이름
+                </div>
+                <div id="staff_info_warp" style="width: 200px; height: fit-content; border-right: 0px solid black;">
+                    연락처
+                </div>
+        `;
+
+        // staffData를 반복하여 각 직원 정보를 표시
+        joinstaffData.forEach((staffmini, index) => {
+            const staffInfoElement = document.createElement('div');
+            staffInfoElement.classList.add('staff_info');
+            // id를 'staff_info_' + index 형태로 설정
+            staffInfoElement.setAttribute('id', 'staff_info');
+            staffInfoElement.style.display = "flex";
+            staffInfoElement.style.height = "fit_content";
+
+            //지원 부서  , 이름 , 활동이름 , 전화 번호
+
+            // 예시 데이터를 기반으로 각 직원의 정보를 구성
+            staffInfoElement.innerHTML = `
+                <div id="staff_info_warp">
+                    <div>${staffmini.operation}</div>
+                </div>
+                <div id="staff_info_warp">
+                    <div>${staffmini.name}</div>
+                </div>
+                <div id="staff_info_warp">
+                    <div>${staffmini.라페}</div>
+                </div>
+                <div id="staff_info_warp" style="width: 200px; height: fit-content; border-right: 0px solid black;">
+                    <div>${staffmini.phonenumber1+staffmini.phonenumber2+staffmini.phonenumber3}</div>
+                </div>
+            `;
+
+            staffInfoContainer.appendChild(staffInfoElement);
+        });
+    }
+</script>
