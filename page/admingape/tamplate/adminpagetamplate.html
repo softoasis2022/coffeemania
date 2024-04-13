@@ -38,6 +38,7 @@
             <li id="admin_category_li" onclick="admin_category_li_cl(this.textContent)">구성원</li>
             <li id="admin_category_li" onclick="admin_category_li_cl(this.textContent)">판매자관리</li>
             <li id="admin_category_li" onclick="admin_category_li_cl(this.textContent)">통계</li>
+            <li id="admin_category_li" onclick="admin_category_li_cl(this.textContent)">메일</li>
         </ul>
         <script>
             function admin_category_li_cl(admin_category_li_cl_txt){
@@ -59,6 +60,9 @@
                 }
                 if(admin_category_li_cl_txt == "통계"){
                     location.href='/statisticsadmin';
+                }
+                if(admin_category_li_cl_txt == "메일"){
+                    location.href='/mail';
                 }
             };
         </script>
