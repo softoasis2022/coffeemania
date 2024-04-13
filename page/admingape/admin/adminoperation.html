@@ -22,6 +22,14 @@
     </style>
     <div id="operation_top">
         <div id="operation_top_menu">
+            <style>
+                #staff_search_name{
+                    width: fit-content;
+                    height: 20px;
+                    margin-top: 5px;
+                    margin-bottom: 5px;
+                }
+            </style>
             <div id="operation_top_menu_li" style="display: flex;">
                 <button id="staff" onclick="staff('직원')">직원</button>
                 <button id="staff_mini" onclick="staff('지원자')">지원자</button>
@@ -41,20 +49,31 @@
                 </script>
             </div>
             <div id="operation_top_menu_li">
-                <p>사번</p>
-                <input id="staff_number" type="text" style="margin-left: 5px; padding: 5px; width: 150px; height: 100%;">
+                <p id="staff_search_name">사번</p>
+                <input id="staff_number" type="text" style="margin-left: 5px; padding: 5px; width: 150px; height: 20px;">
             </div>
             <div id="operation_top_menu_li">
-                
+                <p id="staff_search_name">부서</p>
+                <input id="staff_oper" type="text" style="margin-left: 5px; padding: 5px; width: 150px; height: 20px;">
             </div>
             <div id="operation_top_menu_li">
-                
+                <p id="staff_search_name">직급</p>
+                <input id="staff_position" type="text" style="margin-left: 5px; padding: 5px; width: 150px; height: 20px;">
             </div>
             <div id="operation_top_menu_li">
-                
+                <p id="staff_search_name">이름</p>
+                <input id="staff_name" type="text" style="margin-left: 5px; padding: 5px; width: 150px; height: 20px;">
             </div>
-            <div>
-                <p>검색</p>
+            <div id="operation_top_menu_li">
+                <p id="staff_search_name">연락처</p>
+                <input id="staff_phonenumber" type="text" style="margin-left: 5px; padding: 5px; width: 150px; height: 20px;" placeholder = "010-0000-0000">
+            </div>
+            <div id="operation_top_menu_li">
+                <p id="staff_search_name">주소</p>
+                <input id="staff_address" type="text" style="margin-left: 5px; padding: 5px; width: 150px; height: 20px;">
+            </div>
+            <div id="operation_top_menu_li">
+                <button id="staff_mini" onclick="staffinput()">직원등록</button>
             </div>
         </div>
         <div>
@@ -101,6 +120,7 @@
     </div>
 </div>
 <script>
+    let data;
     document.addEventListener('DOMContentLoaded', function () {
         fetch('/operationadmin', { method: 'POST' })
             .then(response => response.json())
@@ -163,18 +183,18 @@
                     <div>${staff.id}</div>
                 </div>
                 <div id="staff_info_warp">
-                    <div>${staff.name}</div>
-                </div>
-                <div id="staff_info_warp">
                     <div>${staff.operation}</div>
                 </div>
                 <div id="staff_info_warp">
                     <div>${staff.position}</div>
                 </div>
                 <div id="staff_info_warp">
+                    <div>${staff.name}</div>
+                </div>
+                <div id="staff_info_warp">
                     <div>${staff.phonenumber.join('-')}</div>
                 </div>
-                <div id="staff_info_warp" style="width: 200px; height: fit-content; border-right: 0px solid black;">
+                <div id="staff_info_warp" style="width: fit-content; height: fit-content; border-right: 0px solid black;">
                     <div>${staff.address.join(' ')}</div>
                 </div>
             `;
@@ -236,11 +256,59 @@
                     <div>${staffmini.라페}</div>
                 </div>
                 <div id="staff_info_warp" style="width: 200px; height: fit-content; border-right: 0px solid black;">
-                    <div>${staffmini.phonenumber1+staffmini.phonenumber2+staffmini.phonenumber3}</div>
+                    <div>${staffmini.phonenumber1+'-'+staffmini.phonenumber2+'-'+staffmini.phonenumber3}</div>
                 </div>
             `;
 
             staffInfoContainer.appendChild(staffInfoElement);
         });
+    }
+    function staff_find(data, finddata){
+        return data.filter(item => item.name.includes(finddata));
+    }
+    function staffinput(){ //직원 등록
+        const staff_number = document.getElementById("staff_number");
+        const staff_oper = document.getElementById("staff_oper");
+        const staff_position = document.getElementById("staff_position");
+        const staff_name = document.getElementById("staff_name");
+        const staff_phonenumber = document.getElementById("staff_phonenumber");
+        const staff_address = document.getElementById("staff_address");
+
+        let staffinput_number = staff_number.value;
+        let staffinput_oper = staff_oper.value;
+        let staffinput_position = staff_position.value;
+        let staffinput_name = staff_name.value;
+        let staffinput_phonenumber = staff_phonenumber.value;
+        let staffinput_address = staff_address.value;
+        let phonenumber = staffinput_phonenumber.split('-');
+        let address = staffinput_address.split(' ');
+        console.log(staffinput_number);
+        if(staffinput_number > 0 ){
+            alert('사원 번호는 전송할 수 없습니다');
+            return;
+        }
+        fetch(window.location.href, {
+                    method: 'POST', // POST 요청을 사용
+                    headers: {'Content-Type': 'application/json' // 요청의 본문이 JSON 형태임을 명시
+                    },
+                    body: JSON.stringify({
+                        action : "직원등록",
+                        id : 0,
+                        operation : staffinput_oper,
+                        position :staffinput_position,
+                        name : staffinput_name,
+                        phonenumber : phonenumber,
+                        address : address
+                    })
+                    })
+                    .then(response => response.json()) // 서버로부터의 응답을 JSON 형태로 파싱
+                    .then(data => {
+                        console.log(data); // 응답 결과를 콘솔에 출력
+                        if(data.message == "전송완료"){
+                            location.href('/');
+                        }
+                    })
+                    .catch(error => console.error('Error:', error)); // 에러가 발생한 경우 콘솔에 에러를 출력
+                    operationadmin();
     }
 </script>
