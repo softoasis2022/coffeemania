@@ -505,6 +505,7 @@
         </a>
         <script>
             function operationdata_input(){
+                const url = window.location.href;
                 console.log('로그인버튼클릭 이벤트');
                 const operation_input_name = document.getElementById('name').value; // 아이디에 해장 하는 테그를 찾아 value값을 찾는다
                 const operation_input_nickname = document.getElementById('nickname').value;
@@ -513,6 +514,24 @@
                 const operation_input_phonenumber2 = document.getElementById('phonenumber2').value;
                 const operation_input_phonenumber3 = document.getElementById('phonenumber3').value;
                 // 추가 안된 항목 : 포트폴리오 항목
+
+                // 모든 "platform" input 요소 가져오기
+                var platformInputs = document.querySelectorAll("#portpolio_input input[id='platform']");
+                // 모든 "link" input 요소 가져오기
+                var linkInputs = document.querySelectorAll("#portpolio_input input[id='link']");
+
+                // 각 입력 필드의 값을 저장할 배열 초기화
+                var platformValues = [];
+                var linkValues = [];
+
+                platformInputs.forEach(function(input) {
+                    platformValues.push(input.value);
+                });
+
+                linkInputs.forEach(function(input) {
+                    linkValues.push(input.value);
+                });
+                
 
                 if(operation_input_name == '실명을 입력해주세요 최대 4글자'){
                     alert("이름을 입력해 주세요");
@@ -527,7 +546,7 @@
                     alert("전화 번호는 필수 입니다");
                 }
                 else {
-                    fetch('http://www.coffeemanias.com:3001/operation', {
+                    fetch(window.location.href, {
                     method: 'POST', // POST 요청을 사용
                     headers: {'Content-Type': 'application/json' // 요청의 본문이 JSON 형태임을 명시
                     },
@@ -539,6 +558,7 @@
                         phonenumber1 : operation_input_phonenumber1, // 지원자 이름 데이터
                         phonenumber2 : operation_input_phonenumber2, // 지원자 이름 데이터
                         phonenumber3 : operation_input_phonenumber3, // 지원자 이름 데이터
+                        
                     })
                     })
                     .then(response => response.json()) // 서버로부터의 응답을 JSON 형태로 파싱
@@ -547,7 +567,7 @@
                         if (data.message === '지원완료') {
                             alert(data.message);
                             // 메시지가 '로그인 정보를 성공적으로 받았습니다.' 일 때, 페이지를 이동
-                            window.location.href = 'http://www.coffeemanias.com:3001/';
+                            location.href = '/';
                         }
                         if(data.message === '지원 실패'){
                             console.log('지원 실패');

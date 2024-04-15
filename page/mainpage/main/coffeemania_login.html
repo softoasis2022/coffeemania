@@ -53,7 +53,7 @@
                         const input_pw = pw_wrap.value; // password 입력 필드의 값을 가져옴
                         //console.log(input_email, input_pw); // 콘솔에 이메일과 비밀번호를 출력
                         
-                        fetch('http://www.coffeemanias.com:3001/login_pass', {
+                        fetch('/login_pass', {
                             method: 'POST', // POST 요청을 사용
                             headers: {'Content-Type': 'application/json' // 요청의 본문이 JSON 형태임을 명시
                             },

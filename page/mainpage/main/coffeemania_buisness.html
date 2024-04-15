@@ -223,7 +223,7 @@
                 };
         
                 // POST 요청 설정
-                fetch('http://www.coffeemanias.com:3001/buinessinfo', { // 변경된 주소로 수정
+                fetch(window.location.href, { // 변경된 주소로 수정
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -238,7 +238,7 @@
                 })
                 .then(data => {
                     if(data.message === "buisness_successfully") { // 서버로부터 받은 응답을 확인
-                        window.location.href = "/"; // 홈 페이지로 이동
+                        location.href = "/"; // 홈 페이지로 이동
                     }
                 })
                 .catch(error => {
