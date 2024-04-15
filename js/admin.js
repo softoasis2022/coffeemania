@@ -109,6 +109,13 @@ main.post('/operationadmin_mini', (req, res) => {
     const allStaffData = all_staffmini_find(); //함수에서 전달 받은 데이터를 응답해준다
     res.json(allStaffData);
 });
+main.post('/operationadmin_mini_delete', (req, res) => {
+    const data = req.body;
+    console.log(data);
+    operationadmin_mini_delete(data);
+});
+
+
 function all_staff_find(){
     //직원 정보 파일 경로 : ref_database/staff/부서/부서이름.json
     //json데이터 예시 
@@ -120,7 +127,7 @@ function all_staff_find(){
     //1.모든 부서별 직원의 정보를 가져온다
     //2.모든 부서별 직원정보를 하나의 json형태로 모은다
     //3.모은 json을 리턴해준다
-    const departments = ["개발", "기획","마케팅", "디자인", "세무", "영업", "인사"];
+    const departments = ["대표","개발", "기획", "디자인", "세무", "영업", "인사","마케팅", "로스터", "바리스타"];
     let allStaffData = [];
 
     departments.forEach(department => {
@@ -130,7 +137,7 @@ function all_staff_find(){
             departmentData = JSON.parse(fs.readFileSync(departmentFilePath, 'utf8'));
             allStaffData = allStaffData.concat(departmentData);
         } catch (error) {
-            console.log(`${department}는 지원자가 없습니다`);
+            
         }
     });
 
@@ -147,7 +154,7 @@ function all_staffmini_find(){
     //1.모든 부서별 직원의 정보를 가져온다
     //2.모든 부서별 직원정보를 하나의 json형태로 모은다
     //3.모은 json을 리턴해준다
-    const departments = ["개발", "기획", "디자인", "세무", "영업", "인사","마케팅"];
+    const departments = ["대표","개발", "기획", "디자인", "세무", "영업", "인사","마케팅", "로스터", "바리스타"];
     let allStaffData = [];
 
     departments.forEach(department => {
@@ -156,7 +163,7 @@ function all_staffmini_find(){
             const departmentData = JSON.parse(fs.readFileSync(departmentFilePath, 'utf8'));
             allStaffData = allStaffData.concat(departmentData);
         } catch (error) {
-            console.error(`Error reading file for department ${department} 분야는 없습니다`);
+            
         }
     });
 
@@ -193,7 +200,7 @@ function staff_input(inputdata){
     let finddata = all_staff_find();
     let id = displayStaffInfo(finddata);
     if(id > 0){
-        inputdata.id = id; 
+        inputdata.id = id;
         console.log(inputdata);
     }
     operation_input_check(departmentFilePath,inputdata);
@@ -214,9 +221,7 @@ function findById(data, idToFind) {
     // 데이터 배열을 순회하면서 id 값이 일치하는 객체들을 찾음
     return data.filter(item => item.id === idToFind);
 }
-
 // fetch 후에 호출되는 함수 내에서 사용할 수 있음
-
 function operation_input_check(directoryPath, newData, callback) {
     let fileName = newData.operation + `.json`;
     let filePath = path.join(directoryPath, fileName);
@@ -270,4 +275,42 @@ function fileExists(filePath) {  //파일이 존재 하는지 알아 보는 함�
     } catch (err) {
         return false;
     }
+}
+function operationadmin_mini_delete(data){
+    const filePath = `D:/company/지원자/${data.operation}.json`;
+    
+    const p1 = data.phonenumber[0];
+    const p2 = data.phonenumber[1];
+    const p3 = data.phonenumber[2];
+    
+    // JSON 파일 읽기
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('파일을 읽는 도중 오류가 발생했습니다:', err);
+            return;
+        }
+
+        try {
+            // JSON 데이터 파싱
+            let jsonData = JSON.parse(data);
+
+            // 전화번호가 "010-7658-8855"인 사람을 필터링하여 제거
+            jsonData = jsonData.filter(item => item.phonenumber1 + item.phonenumber2 + item.phonenumber3 !== p1+p2+p3);
+
+            // 수정된 데이터를 JSON 형식으로 문자열로 변환
+            const updatedJsonData = JSON.stringify(jsonData, null, 2);
+
+            // 수정된 데이터를 파일에 쓰기
+            fs.writeFile(filePath, updatedJsonData, 'utf8', (err) => {
+                if (err) {
+                    console.error('파일에 쓰는 도중 오류가 발생했습니다:', err);
+                    return;
+                }
+                console.log('전화번호가 "010-7658-8855"인 데이터가 성공적으로 삭제되었습니다.');
+            });
+        } catch (parseError) {
+            console.error('JSON 데이터를 파싱하는 도중 오류가 발생했습니다:', parseError);
+        }
+    });
+
 }

@@ -93,6 +93,15 @@ main.post('/operation', (req, res) => {
         }
     });
 });
+main.post('/operationinput', (req, res) => {
+    const data = req.body;
+    res.status(200).json({ message: '지원완료' });
+    saveDataToFile(data, data.action , (err) => {
+        if (err) {
+            console.error('Error saving data to file:', err);
+        }
+    });
+});
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -110,7 +119,7 @@ function loadPage(pagePath) {
 }
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
 function login_file(email, pw, callback) {
-    const loginfilePath = `D:/user/${email}.json`;
+    const loginfilePath = `D:/database/user/${email}.json`;
     fs.access(loginfilePath, fs.constants.F_OK, (err) => {
         if (err) {
             callback('no_user');
