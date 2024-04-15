@@ -63,7 +63,16 @@ main.get("/operationinfo", (req, res) => {
     let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
     res.send(renderedTemplate);
 });
+main.post('/', (req, res) => {
+    const data = req.body;
+    if(data.action == "DOMContentLoaded"){
+        let pagedata = mainpageUI();
 
+        
+        
+        res.status(200).json(pagedata);
+    }
+});
 main.post('/login_pass', (req, res) => {
     const { email, password } = req.body;
     login_file(email, password, (err, token) => {
@@ -74,7 +83,6 @@ main.post('/login_pass', (req, res) => {
         }
     });
 });
-
 main.post('/buisness', (req, res) => {
     const data = req.body;
     res.json({ message: "buisness_successfully" });
@@ -102,6 +110,7 @@ main.post('/operationinput', (req, res) => {
         }
     });
 });
+
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -288,5 +297,17 @@ function operation_input(filePath, newData, callback) {
                 callback('error_parsing_existing_data');
             }
         });
+    }
+}
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
+function mainpageUI() {
+    const filePath = path.join(__dirname, '/../UIUX/mainpage.json'); // mainpage.json 파일의 경로
+    try {
+        const jsonData = fs.readFileSync(filePath, 'utf8'); // 파일 동기적으로 읽기
+        const data = JSON.parse(jsonData); // JSON 데이터 파싱
+        return data; // 파싱된 JSON 데이터 반환
+    } catch (error) {
+        console.error('Error reading mainpage.json file:', error);
+        return null; // 에러 발생 시 null 반환
     }
 }
