@@ -88,6 +88,12 @@
                     text-align: center;
                     border-right: 1px solid black;
                 }
+                #staff_info_warp_add{
+                    width: fit-content;
+                    height: 20px;
+                    text-align: center;
+                    border-right: 1px solid black;
+                }
                 #staff_info{
                     width: fit-content;
                     height: fit-content;
@@ -109,7 +115,7 @@
                 <div id="staff_info_warp">
                     연락처
                 </div>
-                <div id="staff_info_warp" style="width: 200px; height: fit-content; border-right: 0px solid black;">
+                <div id="staff_info_warp_add" style="width: 200px; height: fit-content; border-right: 0px solid black;">
                     주소
                 </div>
             </div>
@@ -129,6 +135,7 @@
                 displayStaffInfo(data);
             })
             .catch(error => console.error('Error fetching staff data:', error));
+            operationadmin();
     });
     function operationadmin() {
         fetch('/operationadmin', { method: 'POST' })
@@ -172,7 +179,7 @@
             const staffInfoElement = document.createElement('div');
             staffInfoElement.classList.add('staff_info');
             // id를 'staff_info_' + index 형태로 설정
-            staffInfoElement.setAttribute('id', 'staff_info');
+            staffInfoElement.setAttribute('id', `staff_info_${index}`);
             staffInfoElement.style.display = "flex";
             staffInfoElement.style.height = "fit_content";
             
@@ -219,16 +226,19 @@
         const staffinfo_containername= document.getElementById('staff_info_container_name');
         staffinfo_containername.innerHTML = ''; // 이전 데이터 지우기
         staffinfo_containername.innerHTML = `
-                <div id="staff_info_warp" >
-                    지원 부서
+                <div id="staff_info_warp" style="width: 20px; height: 20px;">
+                    N
                 </div>
                 <div id="staff_info_warp">
+                    지원 부서
+                </div>
+                <div id="staff_info_warp" >
                     이름
                 </div>
                 <div id="staff_info_warp">
                     활동이름
                 </div>
-                <div id="staff_info_warp" style="width: 200px; height: fit-content; border-right: 0px solid black;">
+                <div id="staff_info_warp" style="width: 200px; height: fit-content;">
                     연락처
                 </div>
         `;
@@ -236,9 +246,9 @@
         // staffData를 반복하여 각 직원 정보를 표시
         joinstaffData.forEach((staffmini, index) => {
             const staffInfoElement = document.createElement('div');
-            staffInfoElement.classList.add('staff_info');
+            staffInfoElement.classList.add(`staff_info`);
             // id를 'staff_info_' + index 형태로 설정
-            staffInfoElement.setAttribute('id', 'staff_info');
+            staffInfoElement.setAttribute('id', `staff_info`);
             staffInfoElement.style.display = "flex";
             staffInfoElement.style.height = "fit_content";
 
@@ -246,17 +256,25 @@
 
             // 예시 데이터를 기반으로 각 직원의 정보를 구성
             staffInfoElement.innerHTML = `
-                <div id="staff_info_warp">
+                <div id="warp_${index}" style="width: 20px; height: 20px; text-align: center; border-right: 1px solid black;">
+                    <div>${index}</div>
+                </div>
+                <div id="staff_info_warp_operation_${index}" style="width: 150px; height: 20px; text-align: center; border-right: 1px solid black;">
                     <div>${staffmini.operation}</div>
                 </div>
-                <div id="staff_info_warp">
+                <div id="staff_info_warp_name_${index}" style="width: 150px; height: 20px; text-align: center; border-right: 1px solid black;">
                     <div>${staffmini.name}</div>
                 </div>
-                <div id="staff_info_warp">
-                    <div>${staffmini.라페}</div>
+                <div id=staff_info_warp_nickname_${index}" style="width: 150px; height: 20px; text-align: center; border-right: 1px solid black;">
+                    <div>${staffmini.nickname}</div>
                 </div>
-                <div id="staff_info_warp" style="width: 200px; height: fit-content; border-right: 0px solid black;">
+                <div id="staff_info_warp_phonenumber_${index}" style="width: 200px; height: fit-content; text-align: center; border-right: 1px solid black;">
                     <div>${staffmini.phonenumber1+'-'+staffmini.phonenumber2+'-'+staffmini.phonenumber3}</div>
+                </div>
+                <div id="staff_info_warp" style="width: fit-content; height: fit-content; border-right: 0px solid black; text-align: center; border-right: 1px solid black;">
+                    <button  onclick="input(this.value)" value="${index}">
+                        입력
+                    </button>
                 </div>
             `;
 
@@ -287,7 +305,7 @@
             alert('사원 번호는 전송할 수 없습니다');
             return;
         }
-        fetch(window.location.href, {
+        fetch(location.href, {
                     method: 'POST', // POST 요청을 사용
                     headers: {'Content-Type': 'application/json' // 요청의 본문이 JSON 형태임을 명시
                     },
@@ -305,10 +323,40 @@
                     .then(data => {
                         console.log(data); // 응답 결과를 콘솔에 출력
                         if(data.message == "전송완료"){
-                            location.href('/');
+                            operationadmin_mini_delete(phonenumber);
+                            operationadmin_mini();
                         }
                     })
                     .catch(error => console.error('Error:', error)); // 에러가 발생한 경우 콘솔에 에러를 출력
-                    operationadmin();
+                    
     }
+    function input(index){
+        console.log(index);
+        const staff_oper = document.getElementById("staff_oper");
+        staff_oper.value = document.getElementById("staff_info_warp_operation_"+index).firstElementChild.textContent;
+        const staff_name = document.getElementById("staff_name");
+        staff_name.value = document.getElementById("staff_info_warp_name_"+index).firstElementChild.textContent;
+        const staff_phonenumber = document.getElementById("staff_phonenumber");
+        staff_phonenumber.value = document.getElementById("staff_info_warp_phonenumber_"+index).firstElementChild.textContent;
+        const staff_position = document.getElementById("staff_position");
+        staff_position.value = "사원";
+        
+    } 
+    function operationadmin_mini_delete(phonenumber){
+        console.log(phonenumber);
+        fetch("/operationadmin_mini_delete", {
+                    method: 'POST', // POST 요청을 사용
+                    headers: {'Content-Type': 'application/json' // 요청의 본문이 JSON 형태임을 명시
+                    },
+                    body: JSON.stringify({
+                        phonenumber : phonenumber,
+                        operation : staff_oper.value
+                    })
+                    })
+                    .then(response => response.json()) // 서버로부터의 응답을 JSON 형태로 파싱
+                    .then(data => {
+                        console.log(data); // 응답 결과를 콘솔에 출력
+                    })
+                    .catch(error => console.error('Error:', error)); // 에러가 발생한 경우 콘솔에 에러를 출력
+    } 
 </script>
