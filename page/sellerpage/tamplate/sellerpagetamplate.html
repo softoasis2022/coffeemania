@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="companyname">회사이름</title>
+    <style>
+        body{
+            display: flex;
+        }
+        #seller{
+            width: fit-content;
+            height: fit-content;
+            border-right: 2px solid black;
+        }
+        #mainpage{
+            width: 100%;
+            height: fit-content;
+        }
+    </style>
+</head>
+<body>
+    <style>
+        #sellermenu{
+            width: fit-content;
+            height: fit-content;
+        }
+        #sellermenu_li{
+            width: 130px;
+            height: fit-content;
+            padding: 10px;
+            border: 1px solid black;
+            border-radius: 10px;
+            text-align: center;
+            margin: 5px;
+        }
+    </style>
+    <div id="seller">
+        <div id="sellermenu">
+            <div id="sellermenu_li">
+                판매
+            </div>
+            <div id="sellermenu_li">
+                발주
+            </div>
+            <div id="sellermenu_li">
+                주문
+            </div>
+            <div id="sellermenu_li">
+                정산
+            </div>
+            <div id="sellermenu_li">
+                문의
+            </div>
+            <div id="sellermenu_li">
+                스토어관리
+            </div>
+        </div>
+    </div>
+    <div id="mainpage"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded',motion1()); //페이지가 로드 되면
+        function motion1(){
+            const sellername = document.getElementById("companyname").textContent;
+            console.log(sellername);
+            if(sellername == "회사이름"){
+                //셀러 로그인 화면으로 전환 (셀러로그인 화면 X)
+                location.href = '/sellerlogin';
+            }
+            else{
+                userinfo(sellername);
+            }
+        }
+        function userinfo(){
+            fetch('/seller_user_info', {
+            method: 'POST', // POST 요청을 사용
+            headers: {'Content-Type': 'application/json' // 요청의 본문이 JSON 형태임을 명시
+            },
+            body: JSON.stringify({
+                email: input_email, // 이메일 데이터
+                password: input_pw // 비밀번호 데이터
+            })
+            })
+            .then(response => response.json()) // 서버로부터의 응답을 JSON 형태로 파싱
+            .then(data => {
+                if (data.token == 'no_user') {
+                    
+                }
+                else{
+                    
+                }
+            })
+            .catch(error => console.error('Error:', error)); // 에러가 발생한 경우 콘솔에 에러를 출력
+        }
+        
+    </script>
+</body>
+</html>
