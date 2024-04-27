@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>커피메니아</title>
     <style>
+        body{
+            
+            margin: 0px;
+        }
         #main_logo_page{
             width: 100%;
             height: fit-content;
@@ -12,12 +16,14 @@
             padding-bottom: 20px;
             border-bottom: 2px solid black;
             display: flex;
+            background-color: #F4F5B5;
         }
         #main_first_top{
             width: 100%;
             height: fit-content;
             display: flex;
             border-bottom: 2px solid black;
+            background-color: #6FEA6C;
         }
         #mainpage{
             width: 100%;
@@ -88,84 +94,26 @@
                 margin: 5px;
                 padding: 10px;
             }
-            #main_first_top_sub_ul{
-                list-style: none;
-                text-align: center;
+            #menu{
                 width: fit-content;
                 height: fit-content;
-                display: none;
-                padding-left: 0px;
-            }
-            #main_first_top_sub_li{
-                width: 150px;
-                height: fit-content;
-                border: 0px solid red;
-                border-radius: 30px;
-                box-shadow : 5px 5px 5px 5px gray;
                 padding: 10px;
-                margin: 10px;
-                justify-content : center;
-            }
-            /* li에 마우스를 올렸을 때만 하위 ul을 표시합니다 */
-            ul#main_first_top_ul li:hover > ul {
-                display: block;
+                margin: 3px;
+                border: 1px solid black;
+                background-image: linear-gradient(to right, #DAD796, #32E1D6);
             }
         </style>
-        <ul id="main_first_top_ul">
-            <li id="main_first_top_li">
-                커핑 이야기
-                <ul id="main_first_top_sub_ul">
-                    <li id="main_first_top_sub_li">
-                        <div>
-                            <a>브랜드 스토리</a>
-                        </div>
-                    </li>
-                    <li id="main_first_top_sub_li">
-                        <a>위치</a>
-                    </li>
-                    <li id="main_first_top_sub_li">
-                        <a>바리스타</a>
-                    </li>
-                </ul>
-            <li id="main_first_top_li">
-                커피
-                <ul id="main_first_top_sub_ul">
-                    <li id="main_first_top_sub_li">
-                        생두
-                    </li>
-                    <li id="main_first_top_sub_li">
-                        원두
-                    </li>
-                    <li id="main_first_top_sub_li">
-                        시럽
-                    </li>
-                    <li id="main_first_top_sub_li">
-                        티
-                    </li>
-                </ul>
-            </li>
-            <li id="main_first_top_li">
-                악세서리
-            </li>
-            <li id="main_first_top_li" >
-                <a onclick="location.href='/buisness'">
-                    비즈니스 문의
-                </a>
-            </li>
-            <li id="main_first_top_li">
-                <a onclick="location.href='/eventpage'">
-                    EVENT
-                </a>
-            </li>
-            <li id="main_first_top_li">
-                <div onclick="location.href='/operation'">
-                    프로젝트 참여
-                </div>
-            </li>
-        </ul>
-        <script>
-            
-        </script>
+        <div id="menu">맛있는 커피</div>
+        <div id="menu" onclick="location.href='/brendstory'">브랜드 스토리</div>
+        <diV id="menu">스페셜티</diV>
+        <div id="menu">원두</div>
+        <diV id="menu">추출방식</diV>
+        <div id="menu">디저트</div>
+        <div id="menu">티</div>
+        <div id="menu">디핑</div>
+        <div id="menu" onclick="location.href='/buisness'">비즈니스 문의</div>
+        <div id="menu" onclick="location.href='/eventpage'">EVENT</div>
+        <div id="menu" onclick="location.href='/operation'">프로젝트 참여</div>
     </div>
     <div id="mainpage"></div>
     <div id="company_info">
