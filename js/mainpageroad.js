@@ -5,7 +5,12 @@ const main = express();
 const path = require('path');
 const fs = require('fs');
 
+const cheerio = require('cheerio');
+const http = require('http');
+
 const serverstart_port = 3001;
+
+const pageref = "/../page";
 
 main.use(express.json());
 main.listen(serverstart_port, () => {
@@ -14,11 +19,14 @@ main.listen(serverstart_port, () => {
 
 main.set("views", "./mainpage");
 
-const templatePath = path.join(__dirname, "/../page/mainpage/tamplate/coffeemainpagetample.html");
+const templatePath = path.join(__dirname,pageref+  "/mainpage/tamplate/coffeemainpagetample.html");
 const ref_database = "D:";
+const ref_searchmainkeyword = path.join("database", "search", "keyword", "mainkeyword");
+
+
 
 main.get("/", (req, res) => {
-    const pagePath = path.join(__dirname, "/../page/mainpage/main/coffeemania.html");
+    const pagePath = path.join(__dirname, "/../page/mainpage/main/coffeemania_mainhome.html");
     let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
     res.send(renderedTemplate);
 });
@@ -63,7 +71,19 @@ main.get("/operationinfo", (req, res) => {
     let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
     res.send(renderedTemplate);
 });
-
+main.get("/brendstory", (req, res) => {
+    const pagePath = path.join(__dirname, "/../page/mainpage/main/coffeemania_brendstory.html");
+    let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
+    res.send(renderedTemplate);
+});
+main.post('/search', (req, res) => {
+    const { search } = req.body;
+    let mainkeyword = mainkeyword();
+    let ex_search = "원두";
+    if(mainkeyword.includes(ex_search)){
+        
+    }
+});
 main.post('/login_pass', (req, res) => {
     const { email, password } = req.body;
     login_file(email, password, (err, token) => {
@@ -289,4 +309,10 @@ function operation_input(filePath, newData, callback) {
             }
         });
     }
+}
+//ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+function mainkeyword(keyword){
+    //d 드리이브에 검색메인 키워드파일에 작성된 키워드 정보를 받아옴
+    let searchmainkeyword = JSON.parse(fs.readFileSync(pagePath, 'utf-8'));
+    console.log(searchmainkeyword);
 }
