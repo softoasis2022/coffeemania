@@ -1,227 +1,392 @@
+
 <style>
-    #banner{
+    #baanner_page{
         width: 100%;
         height: fit-content;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        border-bottom: 1px solid black;
-}
+    }
+    #mainspace{
+        width: 100%;
+        height: fit-content;
+    }
+    #bestseller{
+        width: 100%;
+        height: fit-content;
+    }
+    #naver_view{
+        width: 100%;
+        height: fit-content;
+    }
+    #category_view{
+        width: 100%;
+        height: fit-content;
+    }
 </style>
-<div id="mainpage">
-    <div id="banner">
-        <div id="banner_0" style="padding: 20px; display: flex; justify-content: center;">
-            <div style="width: fit-content; height: fit-content; display: flex; margin-left: 50px; background-color: white; padding: 20px; border-radius: 40px; box-shadow: 5px 5px 5px 5px gray;" onclick="location.href = 'https://www.pesado.co.kr'">
-                <img style="width: 350px; height: 100px;" src="https://contents.sixshop.com/uploadedFiles/177722/default/image_1642493008354.png">
-            </div>
-            <div style="width: fit-content; height: fit-content; display: flex; margin-left: 50px; background-color: white; padding: 20px; border-radius: 40px; box-shadow: 5px 5px 5px 5px gray;" onclick="location.href = 'https://elrociokr.cafe24.com/'">
-                <img style="width: 450px; height: 100px;" src="https://elrociokr.cafe24.com/wp-content/uploads/2024/03/로고_가로형_300-1.png">
-            </div>
-            <div style="width: fit-content; height: fit-content; display: flex; margin-left: 50px; background-color: white; padding: 20px; border-radius: 40px; box-shadow: 5px 5px 5px 5px gray;" onclick="location.href = 'https://smartstore.naver.com/omelascoffee'">
-                <img style="width: 300px; height: 100px;" src="https://shop-phinf.pstatic.net/20221211_136/1670716430220Nk13o_PNG/%BF%C0%B8%E1%BC%EE%C7%CE%B7%CE%B0%ED_%282%29.png?type=w640">
-            </div>
-        </div>
-        <div id="banner_1" style="padding: 20px; display: flex; justify-content: center;">
-            <div style="width: fit-content; height: fit-content; display: flex; margin-left: 50px; background-color: white; padding: 20px; border-radius: 40px; box-shadow: 5px 5px 5px 5px gray;" onclick="location.href = 'https://smartstore.naver.com/omelascoffee'">
-                <img style="width: 300px; height: 100px;" src="https://shop-phinf.pstatic.net/20221211_136/1670716430220Nk13o_PNG/%BF%C0%B8%E1%BC%EE%C7%CE%B7%CE%B0%ED_%282%29.png?type=w640">
-            </div>
-            <div style="width: fit-content; height: fit-content; display: flex; margin-left: 50px; background-color: white; padding: 20px; border-radius: 40px; box-shadow: 5px 5px 5px 5px gray;" onclick="location.href = 'https://www.pesado.co.kr'">
-                <img style="width: 350px; height: 100px;" src="https://contents.sixshop.com/uploadedFiles/177722/default/image_1642493008354.png">
-            </div>
-            <div style="width: fit-content; height: fit-content; display: flex; margin-left: 50px; background-color: white; padding: 20px; border-radius: 40px; box-shadow: 5px 5px 5px 5px gray;" onclick="location.href = 'https://elrociokr.cafe24.com/'">
-                <img style="width: 450px; height: 100px;" src="https://elrociokr.cafe24.com/wp-content/uploads/2024/03/로고_가로형_300-1.png">
-            </div>
-        </div>
-        <div id="banner_2" style="padding: 20px; display: flex; justify-content: center;">
-            <div style="width: fit-content; height: fit-content; display: flex; margin-left: 50px; background-color: white; padding: 20px; border-radius: 40px; box-shadow: 5px 5px 5px 5px gray;" onclick="location.href = 'https://elrociokr.cafe24.com/'">
-                <img style="width: 450px; height: 100px;" src="https://elrociokr.cafe24.com/wp-content/uploads/2024/03/로고_가로형_300-1.png">
-            </div>
-            <div style="width: fit-content; height: fit-content; display: flex; margin-left: 50px; background-color: white; padding: 20px; border-radius: 40px; box-shadow: 5px 5px 5px 5px gray;" onclick="location.href = 'https://smartstore.naver.com/omelascoffee'">
-                <img style="width: 300px; height: 100px;" src="https://shop-phinf.pstatic.net/20221211_136/1670716430220Nk13o_PNG/%BF%C0%B8%E1%BC%EE%C7%CE%B7%CE%B0%ED_%282%29.png?type=w640">
-            </div>
-            <div style="width: fit-content; height: fit-content; display: flex; margin-left: 50px; background-color: white; padding: 20px; border-radius: 40px; box-shadow: 5px 5px 5px 5px gray;" onclick="location.href = 'https://www.pesado.co.kr'">
-                <img style="width: 350px; height: 100px;" src="https://contents.sixshop.com/uploadedFiles/177722/default/image_1642493008354.png">
-            </div>
-        </div>
+<div id="baanner_page">
+    <style>
+        #banner_page_img{
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+    <script>
+        function hello1()  {
+            document.getElementById("banner_img").src = "https://firebasestorage.googleapis.com/v0/b/softoasis-c684c.appspot.com/o/cafe1.jpg?alt=media&token=15ab46cf-3099-457c-b4b4-ba89fa459e7b"
+            document.getElementById("banner_img_link").href="https://map.naver.com/p/entry/place/1923188087?c=15.00,0,0,0,dh"
+        }
+        function hello2()  {
+            document.getElementById("banner_img").src = "https://firebasestorage.googleapis.com/v0/b/softoasis-c684c.appspot.com/o/cafe2.jpg?alt=media&token=8809e2b8-3a05-4272-9211-520f8a0701d3"
+            document.getElementById("banner_img_link").href="https://map.naver.com/p/entry/place/1042910752?c=15.00,0,0,0,dh"
+        }
+        function hello3()  {
+            document.getElementById("banner_img").src="https://firebasestorage.googleapis.com/v0/b/softoasis-c684c.appspot.com/o/cafe3.jpg?alt=media&token=f6a59706-05a3-4e73-a6ce-4e3d1ff0f7a2"
+            document.getElementById("banner_img_link").href="https://map.naver.com/p/entry/place/1965997995?c=15.00,0,0,0,dh"
+        }
+        function hello4()  {
+            document.getElementById("banner_img").src = "https://firebasestorage.googleapis.com/v0/b/softoasis-c684c.appspot.com/o/cafe4.jpg?alt=media&token=921bf699-d736-4281-8279-cd4f7713c26f"
+            document.getElementById("banner_img_link").href="https://map.naver.com/p/entry/place/1695760291?c=15.00,0,0,0,dh"
+        }
+    </script>
+    <div id="banner_page_img">
+        <style>
+            #banner_img{
+                width: 100%;
+                height: max-content;
+                text-align: center;
+            }
+        </style>
+        <a id="banner_img_link" style="width: max-content; height: max-content;" onclick="hello1()" >
+            <img id="banner_img" style="width: 100%; height: 100%;" src="https://firebasestorage.googleapis.com/v0/b/softoasis-c684c.appspot.com/o/cafe1.jpg?alt=media&token=15ab46cf-3099-457c-b4b4-ba89fa459e7b" href="https://map.naver.com/p/entry/place/1923188087?c=15.00,0,0,0,dh">
+        </a>
     </div>
-    <div id="maininfo">
-        <div id="maininfo_0" style="width: 100%; ">
-            <div style="width: 100%; height: fit-content; padding: 10px; margin-top: 10px; margin-bottom: 10px;  justify-content: center; display: flex;">
-                <p style="font-size: 50px; width: 500px; height: fit-content; text-align: center; border-radius: 20px; box-shadow: 5px 5px 5px 5px gray; padding-top: 30px; padding-bottom: 30px;">Specialty</p>
-            </div>
-            <div id="maininfo_0_" style="display: flex;">
-                <style>
-                    #specialtee_ul{
-                        list-style: none;
-                        padding-left: 0px;
-                    }
-                </style>
-                <div id="specialtee_0">
-                    <div style="width: 100%; height: fit-content; border: 1px solid black;">
-                        <p id="specialty_0" style="width: 100%; text-align: center; font-size: 20px; padding-top: 10px; padding-bottom: 10px; ">산미</p>
+
+    <div style="width: 100%; height: 20px;">
+        <style>
+            #banner_page_move{
+                width: 100%;
+                height: 60px;
+                text-align: center;
+                display: flex;
+            }
+            #btn_banner_page_move{
+                background-color: white;
+                width: 40px;
+                height: 40px;
+                margin: auto;
+                float: left;
+                border-radius: 10px 10px 10px 10px;
+                border: 1px solid black;
+                margin: 10px;
+            }
+        </style>
+        <div id="banner_page_move">
+            <div style="width: 300px; height: 60px; margin: auto;">
+                <a style="margin: auto; padding : 10px 0;" onclick="hello1()">
+                    <div id="btn_banner_page_move" style="width: 40px; height: 40px; " >
+                        <p style=" width: 30px; height: 30px; margin-top: 7px; margin-left: 5px;">
+                            1
+                        </p>
                     </div>
-                    <ul id="specialtee_ul">
-                        <li id="specialtee_0_li" style="width: 100%; box-shadow: 3px 3px 3px 3px gray; border-radius: 10px; padding: 5px;" >
-                            <div >
-                                산미제품1
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div id="specialtee_1">
-                    <div style="width: 100%; height: fit-content; border: 1px solid black;">
-                        <p id="specialty_1" style="width: 100%; text-align: center; font-size: 20px; padding-top: 10px; padding-bottom: 10px; ">단맛</p>
+                </a>
+                <a style="margin: auto; padding : 10px 0;" onclick="hello2()">
+                    <div id="btn_banner_page_move" style="width: 40px; height: 40px; " >
+                        <p style=" width: 30px; height: 30px; margin-top: 7px; margin-left: 5px;">
+                            2
+                        </p>
                     </div>
-                    <ul id="specialtee_ul">
-                        <li id="specialtee_0_li" style="width: 100%; box-shadow: 3px 3px 3px 3px gray; border-radius: 10px; padding: 5px;" >
-                            <div >
-                                산미제품1
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div id="specialtee_2">
-                    <div style="width: 100%; height: fit-content; border: 1px solid black;">
-                        <p style="width: 100%; text-align: center; font-size: 20px; padding-top: 10px; padding-bottom: 10px; ">밸런스</p>
+                </a>
+                <a style="margin: auto; padding : 10px 0;" onclick="hello3()">
+                    <div id="btn_banner_page_move" style="width: 40px; height: 40px; " >
+                        <p style=" width: 30px; height: 30px; margin-top: 7px; margin-left: 5px;">
+                            3
+                        </p>
                     </div>
-                    <ul id="specialtee_ul">
-                        <li id="specialtee_0_li" style="width: 100%; box-shadow: 3px 3px 3px 3px gray; border-radius: 10px; padding: 5px;">
-                            <div >
-                                산미제품1
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div id="specialtee_3">
-                    <div style="width: 100%; height: fit-content; border: 1px solid black;">
-                        <p style="width: 100%; text-align: center; font-size: 20px; padding-top: 10px; padding-bottom: 10px; ">바디감</p>
+                </a>
+                <a style="margin: auto; padding : 10px 0;" onclick="hello4()">
+                    <div id="btn_banner_page_move" style="width: 40px; height: 40px; " >
+                        <p style=" width: 30px; height: 30px; margin-top: 7px; margin-left: 5px;">
+                            4
+                        </p>
                     </div>
-                    <ul id="specialtee_ul">
-                        <li id="specialtee_0_li" style="width: 100%; box-shadow: 3px 3px 3px 3px gray; border-radius: 10px; padding: 5px;">
-                            <div >
-                                산미제품1
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div id="specialtee_4">
-                    <div style="width: 100%; height: fit-content; border: 1px solid black;">
-                        <p style="width: 100%; text-align: center; font-size: 20px; padding-top: 10px; padding-bottom: 10px; ">쓴맛</p>
-                    </div>
-                    <ul id="specialtee_ul">
-                        <li id="specialtee_0_li" style="width: 100%; box-shadow: 3px 3px 3px 3px gray; border-radius: 10px; padding: 5px;">
-                            <div >
-                                산미제품1
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                </a>
             </div>
         </div>
     </div>
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded',motion1()); //페이지가 로드 되면
-
-    function motion1(){
-        let resdata;
-        fetch(location.href, {
-            method: 'POST', // POST 요청을 사용
-            headers: {'Content-Type': 'application/json' // 요청의 본문이 JSON 형태임을 명시
-            },
-            body: JSON.stringify({
-                action : "DOMContentLoaded"
-            })
-            })
-            .then(response => response.json()) // 서버로부터의 응답을 JSON 형태로 파싱
-            .then(data => {
-                //console.log(data[0].Specialty["산미"]); // 응답 결과를 콘솔에 출력
-                //console.log(data[0].Specialty["산미"][1]); // 응답 결과의 두 번째 값을 콘솔에 출력
-                //console.log(Object.keys(data[0].Specialty)); // Specialty 객체의 키들을 콘솔에 출력
-                resdata = data
-                ch(resdata);
-                //displayStaffInfo(data);
-            })
-            .catch(error => console.error('Error:', error)); // 에러가 발생한 경우 콘솔에 에러를 출력
-    }
-    function ch(data){
-    const staffInfoContainer1 = document.getElementById('maininfo');
-    staffInfoContainer1.innerHTML = ''; // 이전 데이터 지우기
-
-    
-
-    data.forEach((displaydata1, index1) => {
-        const staffInfoElement1 = document.createElement('div');
-        staffInfoElement1.classList.add('maininfo');
-        staffInfoElement1.setAttribute('id', `maininfo_${index1}`);
-        staffInfoElement1.style.height = "fit-content";
-
-        
-        
-        // 해당 데이터의 첫 번째 키를 가져와서 직원 정보로 표시
-        const firstKey = Object.keys(displaydata1)[0];
-        staffInfoElement1.innerHTML = `
-            <div style="width: 100%; height: fit-content; padding: 10px; margin-top: 10px; margin-bottom: 10px; justify-content: center; display: flex;">
-                <p style="font-size: 50px; width: 500px; height: fit-content; text-align: center; border-radius: 20px; box-shadow: 5px 5px 5px 5px gray; padding-top: 30px; padding-bottom: 30px;">${firstKey}</p>
+<div id="mainspace">
+    <style>
+        #mainspace_left{
+            width: 200px;
+            height: fit-content;
+            display: flex;
+            justify-content: center;
+        }
+        #mainspace_center{
+            width: 100%;
+            height: fit-content;
+            display: flex;
+        }
+        #mainspace_right{
+            width: 200px;
+            height: fit-content;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+    <div id="mainspace_center">
+        <style>
+            #mainspace_center_item_li{
+                width: 25%;
+                height: 700px;
+                padding: 20px;
+                margin-left: 30px;
+            }
+            #mainspace_center_item_li_main{
+                width: 180px;
+                height: 350px;
+                padding: 20px;
+                margin: auto;
+                justify-content: center;
+                border-radius: 30px;
+            }
+        </style>
+        <div id="mainspace_center_item_li">
+            <div id="mainspace_center_item_li_main" style="margin-top: +150px;">
+                <img src="https://firebasestorage.googleapis.com/v0/b/softoasis-763c2.appspot.com/o/image%2F3d_porter_filter.jpg?alt=media&token=7d237c6e-ab71-4bf6-8aef-211d5d09cb38" style="width: 100%; height: 100%;">
             </div>
-            <div id="maininfo_li_${index1}" style="width: 100%; height: fit-content; display: flex;"></div>
-        `;
-        staffInfoContainer1.appendChild(staffInfoElement1);
-
-        const staffInfoContainer2 = document.getElementById(`maininfo_li_${index1}`);
-        staffInfoContainer2.innerHTML = ''; // 이전 데이터 지우기
-
-        const specialtyKeys = Object.keys(displaydata1[firstKey]);
-        specialtyKeys.forEach((key, index2) => {
-            const staffInfoElement2 = document.createElement('div');
-            staffInfoElement2.classList.add('maininfo_li');
-            staffInfoElement2.setAttribute('id', `specialty_${index1}_${index2}`);
-            staffInfoElement2.style.height = "fit-content";
-            staffInfoElement2.style.width = "20%";
-            staffInfoElement2.style.borderRadius = "10px";
+        </div>
+        <div id="mainspace_center_item_li">
+            <div id="mainspace_center_item_li_main" style="margin-top: +310px;">
+                <img src="https://firebasestorage.googleapis.com/v0/b/softoasis-763c2.appspot.com/o/image%2F3d_porter_filter.jpg?alt=media&token=7d237c6e-ab71-4bf6-8aef-211d5d09cb38" style="width: 100%; height: 100%;">
+            </div>
+        </div>
+        <div id="mainspace_center_item_li">
+            <div id="mainspace_center_item_li_main">
+                <img src="https://firebasestorage.googleapis.com/v0/b/softoasis-763c2.appspot.com/o/image%2F3d_porter_filter.jpg?alt=media&token=7d237c6e-ab71-4bf6-8aef-211d5d09cb38" style="width: 100%; height: 100%;">
+            </div>
+        </div>
+        <div id="mainspace_center_item_li">
+            <div id="mainspace_center_item_li_main" style="margin-top: +200px;">
+                <img src="https://firebasestorage.googleapis.com/v0/b/softoasis-763c2.appspot.com/o/image%2F3d_porter_filter.jpg?alt=media&token=7d237c6e-ab71-4bf6-8aef-211d5d09cb38" style="width: 100%; height: 100%;">
+            </div>
+        </div>
+        <script>
             
+        </script>
+    </div>
+</div>
+<div id="bestseller">
+    <style>
+        #warp{
+            width: 300px;
+            height: fit-content;
             
-            staffInfoElement2.innerHTML = `
-                <div style="width: 100%; height: fit-content; border: 1px solid black; ">
-                    <p style="width: 100%; text-align: center; font-size: 20px; padding-top: 10px; padding-bottom: 10px;">${key}</p>
+        }
+    </style>
+    <div id="warp">
+        <style>
+            #bestseller_li{
+                width: 100%;
+                height: 50px;
+                display: flex;
+                border-radius: 30px;
+                border: 1px solid black;
+                padding: 10px;
+                margin: 10px;
+            }
+            #bestseller_li_keyword_txt{
+                width: 100%;
+                height: fit-content;
+                text-align: center;
+            }
+            #bestseller_name{
+                width: 350px;
+                height: fit-content
+            }
+        </style>
+        <div id="bestseller_name">
+            인기 상품 카테 고리 네임 (전체 그림자 적용)
+        </div>
+        <ul>
+            <div id="bestseller_li">
+                <div>
+                    <p id="bestseller_li_number">
+                        1
+                    </p>
                 </div>
-                <ul id="specialtee_ul_${index1}_${index2}" style="list-style: none; padding-left: 0px;">
+                <div id="bestseller_li_keyword">
+                    <p id="bestseller_li_keyword_txt">
+                        인기상품 이름
+                    </p>
+                </div>
+            </div>
+            <div id="bestseller_li">
+                <div>
+                    <p id="bestseller_li_number">
+                        1
+                    </p>
+                </div>
+                <div id="bestseller_li_keyword">
+                    <p id="bestseller_li_keyword_txt">
+                        인기상품 이름
+                    </p>
+                </div>
+            </div>
+            <div id="bestseller_li">
+                <div>
+                    <p id="bestseller_li_number">
+                        1
+                    </p>
+                </div>
+                <div id="bestseller_li_keyword">
+                    <p id="bestseller_li_keyword_txt">
+                        인기상품 이름
+                    </p>
+                </div>
+            </div>
+            <div id="bestseller_li">
+                <div>
+                    <p id="bestseller_li_number">
+                        1
+                    </p>
+                </div>
+                <div id="bestseller_li_keyword">
+                    <p id="bestseller_li_keyword_txt">
+                        인기상품 이름
+                    </p>
+                </div>
+            </div>
+            <div id="bestseller_li">
+                <div id="bestseller_li_keyword">
+                    <p id="bestseller_li_number">
+                        1
+                    </p>
+                </div>
+                <div id="bestseller_li_keyword">
+                    <p id="bestseller_li_keyword_txt">
+                        인기상품 이름
+                    </p>
+                </div>
+            </div>
+            <div id="bestseller_li">
+                <div>
+                    <p id="bestseller_li_number">
+                        1
+                    </p>
+                </div>
+                <div id="bestseller_li_keyword">
+                    <p id="bestseller_li_keyword_txt">
+                        인기상품 이름
+                    </p>
+                </div>
+            </div>
+            <div id="bestseller_li">
+                <div>
+                    <p id="bestseller_li_number">
+                        1
+                    </p>
+                </div>
+                <div id="bestseller_li_keyword">
+                    <p id="bestseller_li_keyword_txt">
+                        인기상품 이름
+                    </p>
+                </div>
+            </div>
+            <div id="bestseller_li">
+                <div>
+                    <p id="bestseller_li_number">
+                        1
+                    </p>
+                </div>
+                <div id="bestseller_li_keyword">
+                    <p id="bestseller_li_keyword_txt">
+                        인기상품 이름
+                    </p>
+                </div>
+            </div>
+            <div id="bestseller_li">
+                <div>
+                    <p id="bestseller_li_number">
+                        1
+                    </p>
+                </div>
+                <div id="bestseller_li_keyword">
+                    <p id="bestseller_li_keyword_txt">
+                        인기상품 이름
+                    </p>
+                </div>
+            </div>
+            <div id="bestseller_li">
+                <div>
+                    <p id="bestseller_li_number">
+                        1
+                    </p>
+                </div>
+                <div id="bestseller_li_keyword">
+                    <p id="bestseller_li_keyword_txt">
+                        인기상품 이름
+                    </p>
+                </div>
+            </div>
 
-                </ul>
-            `;
-            staffInfoContainer2.appendChild(staffInfoElement2);
-
-            const staffInfoContainer3 = document.getElementById(`specialtee_ul_${index1}_${index2}`);
-            staffInfoContainer3.innerHTML = ''; // 이전 데이터 지우기
-
-            const specialtyKeys = data[0].Specialty["산미"];
+        </ul>
+    </div>
+</div>
+<div id="naver_view">
+    <style>
+        #view_left{
+            width: 500px;
+            height: fit-content;
+        }
+        #view_center{
+            width: 500px;
+            height: fit-content;
+        }
+        #view_right{
+            width: 500px;
+            height: fit-content;
+        }
+    </style>
+    <div id="view_left">
+        <style>
+            #view_left_ul{
+                border: 0px;
+            }
+            #view_left_li{
+                list-style: none;
+            }
+            #naver_blog_img{
+                width: 100%;
+                height: 500px;
+            }
+        </style>
+        <ul id="view_left_ul">
+            <style>
+                #view_left_li{
+                    border-radius: 30px
+                }
+            </style>
+            <li id="view_left_li">
+                <div>
+                    <p>
+                        네이버 블로그 제목
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        본문 미리 보기
+                    </p>
+                </div>
+                <div>
+                    <img id="naver_blog_img">
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="category_view">
+    <div id="category_name">
+        <div>
             
-            specialtyKeys.forEach((key, index3) => {
-                const staffInfoElement3 = document.createElement('li');
-                staffInfoElement3.classList.add('maininfo_li');
-                staffInfoElement3.setAttribute('id', `specialty_${index1}_${index2}_${index3}`);
-                staffInfoElement3.style.height = "fit-content";
-                staffInfoElement3.style.width = "80%";
-                staffInfoElement3.style.borderRadius = "10px";
-                staffInfoElement3.style.boxShadow = "3px 3px 3px 3px gray";
-                staffInfoElement3.style.padding = "5px"
-                
-                
-                console.log(); // 응답 결과를 콘솔에 출력
-                //console.log(data[0].Specialty["산미"][1]); // 응답 결과의 두 번째 값을 콘솔에 출력
-                console.log(Object.keys(data[0].Specialty)); // Specialty 객체의 키들을 콘솔에 출력
-                
-                staffInfoElement3.innerHTML = `
-                            <div >
-                                ${key}
-                            </div>
-                `;
-                staffInfoContainer3.appendChild(staffInfoElement3);
-
-                
-            });
-        });
-    });
-}
-
-    
-</script>
+        </div>
+    </div>
+</div>
