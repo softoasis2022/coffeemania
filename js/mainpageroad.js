@@ -15,7 +15,6 @@ main.listen(serverstart_port, () => {
 main.set("views", "./mainpage");
 
 const templatePath = path.join(__dirname, "/../page/mainpage/tamplate/coffeemainpagetample.html");
-const sellertemplatePath = path.join(__dirname, "/../page/sellerpage/tamplate/sellerpagetamplate.html");
 const ref_database = "D:";
 
 main.get("/", (req, res) => {
@@ -23,40 +22,39 @@ main.get("/", (req, res) => {
     let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
     res.send(renderedTemplate);
 });
+
 main.get("/login", (req, res) => {
     const pagePath = path.join(__dirname, "/../page/mainpage/main/coffeemania_login.html");
     let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
     res.send(renderedTemplate);
 });
+
 main.get("/join", (req, res) => {
     const pagePath = path.join(__dirname, "/../page/mainpage/main/coffeemania_register.html");
     let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
     res.send(renderedTemplate);
 });
+
 main.get("/buisness", (req, res) => {
     const pagePath = path.join(__dirname, "/../page/mainpage/main/coffeemania_buisness.html");
     let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
     res.send(renderedTemplate);
 });
+
 main.get("/eventpage", (req, res) => {
     const pagePath = path.join(__dirname, "/../page/mainpage/main/coffeemania_event.html");
     let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
     res.send(renderedTemplate);
 });
+
 main.get("/operation", (req, res) => {
     const pagePath = path.join(__dirname, "/../page/mainpage/main/coffeemania_operation.html");
     let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
     res.send(renderedTemplate);
 });
-main.get("/product", (req, res) => {
-    const productId = req.query.productid;
-    const pagePath = path.join(__dirname, "/../page/mainpage/main/coffeemania_product.html");
-    let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
-    renderedTemplate = renderedTemplate.replace('<p id="product_id"></p>', `<p id="product_id">${productId}</p>`);
-    res.send(renderedTemplate);
-});
-main.get("/operationinfo", (req, res) => {
-    const pagePath = path.join(__dirname, "/../page/mainpage/main/coffeemania_operationinfo.html");
+
+main.get("/pay", (req, res) => {
+    const pagePath = path.join(__dirname, "/../page/mainpage/main/coffeemania_pay.html");
     let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
     res.send(renderedTemplate);
 });
@@ -65,32 +63,7 @@ main.get("/operationinfo", (req, res) => {
     let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
     res.send(renderedTemplate);
 });
-main.get("/brendstory", (req, res) => {
-    const pagePath = path.join(__dirname, "/../page/mainpage/main/coffeemania_brendstory.html");
-    let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
-    res.send(renderedTemplate);
-});
-main.get("/test", (req, res) => {
-    const pagePath = path.join(__dirname, "/../testhtml/test.html");
-    let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
-    res.send(renderedTemplate);
-});
-main.post('/product', (req, res) => {
-    const data = req.body;
-    console.log(data);
-    productfind(data.productid, (productdata) => {
-        console.log(productdata);
-        res.status(200).json(productdata);
-    });
-});
-main.post('/', (req, res) => {
-    const data = req.body;
-    if(data.action == "DOMContentLoaded"){
-        let pagedata = mainpageUI();
-        
-        res.status(200).json(pagedata);
-    }
-});
+
 main.post('/login_pass', (req, res) => {
     const { email, password } = req.body;
     login_file(email, password, (err, token) => {
@@ -101,6 +74,7 @@ main.post('/login_pass', (req, res) => {
         }
     });
 });
+
 main.post('/buisness', (req, res) => {
     const data = req.body;
     res.json({ message: "buisness_successfully" });
@@ -128,7 +102,8 @@ main.post('/operationinput', (req, res) => {
         }
     });
 });
-//메인 이미지 
+
+
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
 function applyPageToTemplate(templatePath, pagePath) {
     let template = loadTemplate(templatePath);
@@ -313,43 +288,5 @@ function operation_input(filePath, newData, callback) {
                 callback('error_parsing_existing_data');
             }
         });
-    }
-}
-//---------------------------------------------------------------------------------------------------------------------------------------------------------
-function mainpageUI() {
-    const filePath = path.join(__dirname, '/../UIUX/mainpage.json'); // mainpage.json 파일의 경로
-    try {
-        const jsonData = fs.readFileSync(filePath, 'utf8'); // 파일 동기적으로 읽기
-        const data = JSON.parse(jsonData); // JSON 데이터 파싱
-        return data; // 파싱된 JSON 데이터 반환
-    } catch (error) {
-        console.error('Error reading mainpage.json file:', error);
-        return null; // 에러 발생 시 null 반환
-    }
-}
-function productfind(product, callback) {
-    const productfilePath = path.join(ref_database, "database", "product", `${product}.json`);
-    console.log(product);
-
-    if (fileExists(productfilePath)) {  
-        fs.readFile(productfilePath, 'utf8', (err, data) => {
-            if (err) {
-                console.error('Error reading product file:', err);
-                callback(null);
-            } else {
-                console.log('Product JSON data:', data);
-                try {
-                    const jsonData = JSON.parse(data);
-                    console.log('Product JSON data:', jsonData);
-                    callback(jsonData);
-                } catch (parseError) {
-                    console.error('Error parsing JSON:', parseError);
-                    callback(null);
-                }
-            }
-        });
-    } else { 
-        console.log("상품이 존재하지 않습니다");
-        callback(null);
     }
 }
