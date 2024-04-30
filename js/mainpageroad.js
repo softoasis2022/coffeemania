@@ -8,6 +8,31 @@ const fs = require('fs');
 const cheerio = require('cheerio');
 const http = require('http');
 
+//npm install firebase
+
+const { initializeApp } = require('firebase/app');
+const { getDatabase, ref, set } = require('firebase/database');
+
+// TODO: Replace the following with your app's Firebase project configuration
+const firebaseConfig = JSON.parse(fs.readFileSync(path.join(__dirname,"/../softoasis.json"), 'utf-8'))["firebaseConfig"];
+
+const app = initializeApp(firebaseConfig);
+//const analytics = getAnalytics(app);
+const database = getDatabase(app);
+
+writeUserData("사용자 아이디","사용자이름" ,"사용자이메일","링크");
+function writeUserData(userId, name, email, imageUrl) {
+    set(ref(database, 'users/' + userId), {
+        username: name,
+        email: email,
+        profile_picture: imageUrl
+    }).then(() => {
+        console.log('Data write successful.');
+    }).catch((error) => {
+        console.error('Error writing data: ', error);
+    });
+}
+
 const serverstart_port = 3001;
 
 const pageref = "/../page";
