@@ -2,6 +2,7 @@
 import json
 import time
 import requests
+import random
 
 import firebase_admin
 from firebase_admin import credentials
@@ -33,13 +34,17 @@ import pandas as pd
 from openpyxl import load_workbook
 import os
 from urllib.parse import urljoin
-
+import string
 
 driver = webdriver.Chrome()
 productsetdata = []
+database = "D:/database/"
+filename= []
 
+
+storelist = []
 #현재 인의 적인 url, 추후 json파일내의 url 로 받아옴
-storeurl = "https://smartstore.naver.com/blackbeans/products/310288062?n_media=11068&n_query=%EC%9B%90%EB%91%90&n_rank=3&n_ad_group=grp-a001-02-000000024283216&n_ad=nad-a001-02-000000160651984&n_campaign_type=2&n_mall_id=coffeblack&n_mall_pid=310288062&n_ad_group_type=2&n_match=3&NaPm=ct%3Dlvotnwpk%7Cci%3D0yK0001B%2D3bAUyC%5F%5FKZt%7Ctr%3Dpla%7Chk%3D6924c522f04c75abdb4f91cddf76d6a6830eeb70"
+storeurl = ""
 
 def scroll():
 
@@ -67,6 +72,51 @@ def htmlparsing(htmlsource):
 def settingurl(url):
     url = urljoin(driver.current_url,url)
     driver.get(url)
+def randomstring(n):
+    rand_str = ''
+    for i in range(n):
+        rand_str += str(random.choice(string.ascii_uppercase + string.digits))
+    return rand_str
+def data_save(taget_fileroot,fileroot,filename,data):
+    if taget_fileroot != "":
+        for i in fileroot:
+            folder_rootpath = os.path.join(i)
+        folder_path = os.path.join(database,folder_rootpath)
+    else:     #타겟 루트가 있으면
+        for i in fileroot:
+            folder_rootpath = os.path.join(i)
+        folder_path = os.path.join(database,taget_fileroot,folder_rootpath)
+
+    # 안전한 경로 구성
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
+
+    # 파일 경로 설정
+    file_path = os.path.join(folder_path, filename+".json")
+
+    # 파일 쓰기
+    with open(file_path, 'w', encoding='utf-8') as json_file:
+        json.dump(data, json_file, ensure_ascii=False, indent=6)
+
+def list_folder_without_extension(directory):
+    folderlist = []
+
+    for root, dirs, files in os.walk(directory):
+        for subdir in dirs:
+            folderlist.append(subdir)
+    return folderlist
+def list_file_without_extension(directory):
+    filelist = []
+
+    for item in os.listdir(directory):
+        item_path = os.path.join(directory, item)
+        if os.path.isfile(item_path) and item.endswith('.json'):
+            with open(item_path, 'r', encoding='utf-8') as file:
+                data = json.load(file)
+                filelist.append(data)
+
+    return data
+    
 
 
 def productdata(product_miniinfo):
@@ -81,6 +131,10 @@ def productdata(product_miniinfo):
             "product_name" : product_name
         }
         productsetdata.append(productdata)
+        filename = randomstring(30)
+        fileroot = ["product"]
+        data_save("",fileroot,filename,productdata)
+
 
 def findallproduct(productlist,maxpage):
     print(maxpage)
@@ -99,24 +153,50 @@ def findallproductspace():
     storeallitemlist = htmlparsing(str(pageallinfo.find_all("div","_24ymbi99eC")))
     #print(str(len(list(storeallitemlist.find_all("div", '_1HJarNZHiI _2UJrM31-Ry')))))
     maxpage=len(list(storeallitemlist.find_all("a", 'UWN4IvaQza')))
-    print(maxpage)
+    #print(maxpage)
     findallproduct(str(pageallinfo.find_all("div","_24ymbi99eC")),maxpage)
 
 def findstoreallproduct(pagesource):
-    pageallinfo = htmlparsing(pagesource).find_all("li","_2jm5JW3D5W type_white_gnb YI_nVHGI_0 N=a:lca.all")
-    btn_allproduct = htmlparsing(str(pageallinfo)).find("a")["href"]
-    print(str(btn_allproduct))
+    targetclassname=[
+        "_2jm5JW3D5W type_white_gnb YI_nVHGI_0 N=a:lca.all",
+        "_2auCM7OXk9 N=a:lca.all",
+        
+    ]
+    targetclassname_number = 0
+    pageallinfo = htmlparsing(pagesource).find_all("li",targetclassname[targetclassname_number])
+    try:
+        btn_allproduct = htmlparsing(str(pageallinfo)).find("a")["href"]
+        # 여기에 추가적인 처리를 수행합니다.
+    except (TypeError, KeyError, AttributeError) as e:
+        print("첫 번째 에러 발생:", e)
+        targetclassname_number = targetclassname_number+1
+        print("clasnumber "+ str(targetclassname_number))
+        pageallinfo = htmlparsing(pagesource).find_all("li",targetclassname[targetclassname_number])
+        
+        try:
+            btn_allproduct = htmlparsing(str(pageallinfo)).find("a")["href"]
+        except (TypeError, KeyError, AttributeError) as e:
+            return
+        
+    #print(str(btn_allproduct))
     settingurl(str(btn_allproduct))
     findallproductspace()
 
-
 def storecrolling(storeurl):
-    print(storeurl)
+    #print(storeurl)
     driver.get(storeurl)
     scroll() #매 페이지 마다 스크롤을 해준다
     soup = htmlparsing(driver.page_source)
     pagesource = htmlparsing(str(soup))
     findstoreallproduct(str(pagesource))
 
-storecrolling(storeurl)
-print(len(productsetdata))
+def localproductdata_crolling_start():
+    product_tagetdataroot= os.path.join(database,"매장 및 제품정보", "원두","네이버")
+    storelist = list_folder_without_extension(product_tagetdataroot)
+    for i in storelist:
+        product_tagetdataroot_path = os.path.join(product_tagetdataroot,i)
+        localproductdata= list_file_without_extension(product_tagetdataroot_path) 
+        print(localproductdata["link"])
+        storecrolling(localproductdata["link"])
+    
+localproductdata_crolling_start()
