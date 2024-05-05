@@ -51,8 +51,35 @@ const ref_searchmainkeyword = path.join("database", "search", "keyword", "mainke
 
 
 main.get("/", (req, res) => {
+       // URL을 파싱하여 query 객체를 가져옴
+    const parsedUrl = url.parse(req.url);
+    const query = querystring.parse(parsedUrl.query);
+    
+    // token 값을 가져옴
+    const token = query.token;
+    let renderedTemplate;
     const pagePath = path.join(__dirname, "/../page/mainpage/main/coffeemania_mainhome.html");
-    let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
+    
+    try{
+        const userinfo_path = path.join(ref_userinfodata,`${token}.json`);s
+        console.log(token); // 토큰 값 출력
+        const userdata= fs.readFileSync(userinfo_path, 'utf-8');
+        console.log(userdata);
+        
+        renderedTemplate = applyPageToTemplate(templatePath, pagePath);
+        //헤드테그 안에 script테그안에 userdata데이터 넣기
+        const scriptTag = `<script>var userdata = ${userdata};</script>`;
+        renderedTemplate = renderedTemplate.replace("</head>", scriptTag + "</head>");
+        const keyword = fs.readFileSync(ref_searchmainkeyword, 'utf-8');
+        const keywordscriptTag = `<script>var mainkeyword = ${keyword};</script>`;
+        renderedTemplate = renderedTemplate.replace("</head>", keywordscriptTag + "</head>");  
+    }
+    catch{
+        renderedTemplate = applyPageToTemplate(templatePath, pagePath);
+        const keyword = fs.readFileSync(ref_searchmainkeyword, 'utf-8');
+        const keywordscriptTag = `<script>var mainkeyword = ${keyword};</script>`;
+        renderedTemplate = renderedTemplate.replace("</head>", keywordscriptTag + "</head>");
+    }
     res.send(renderedTemplate);
 });
 
