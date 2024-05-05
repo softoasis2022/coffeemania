@@ -6,7 +6,6 @@
     <title>커피메니아</title>
     <style>
         body{
-            
             margin: 0px;
         }
         #main_logo_page{
@@ -255,5 +254,29 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // 페이지 로드가 완료되면 실행됩니다.
+            const userinfo = userdata;
+            console.log(userinfo);
+            // 서버로부터 받은 JSON 데이터 (예시 데이터)
+            if(userinf != ""){
+                const listItem = document.getElementById("mian_logo_page_right");
+                listItem.innerHTML=``;
+                listItem.innerHTML = `
+                    <div id="userprofileimg" style="">
+                        <img style="width: 50px; height: 50px;" src="${userinfo.profileimgurl}">
+                    </div>
+                    <div style="width: fit-content; height: 50px;">
+                        <p id="usernickname">${userinfo.nickname}</p>
+                    </div>
+                `;
+                // JSON 데이터를 리스트로 출력 
+            }
+            else{
+                
+            }
+        });
+    </script>
 </body>
 </html>
