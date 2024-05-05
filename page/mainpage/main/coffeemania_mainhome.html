@@ -64,5 +64,33 @@
             </div>
         </div>
     </div>
-
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // 페이지 로드가 완료되면 실행됩니다.
+            const keyword = mainkeyword;
+            console.log(keyword);
+            const keywordmaxline = 2;
+            
+            // 서버로부터 받은 JSON 데이터 (예시 데이터)
+            for (let i = 0; i < keyword[0].length; i++) {
+                const listItem = document.getElementById("sub_keywordsection1");
+                const div = document.createElement("div"); // 새로운 div 요소 생성
+                div.id = "keyword"; // div 요소에 id 속성 설정
+                div.textContent = keyword[0][i]; // div 요소에 텍스트 내용 추가
+                listItem.appendChild(div); // listItem에 새로 생성한 div 요소 추가
+            }
+            for (let i = 0; i < keyword[1].length; i++) {
+                const listItem = document.getElementById("sub_keywordsection2");
+                const div = document.createElement("div"); // 새로운 div 요소 생성
+                div.id = "keyword"; // div 요소에 id 속성 설정
+                div.textContent = keyword[1][i]; // div 요소에 텍스트 내용 추가
+                listItem.appendChild(div); // listItem에 새로 생성한 div 요소 추가
+            }
+            // JSON 데이터를 리스트로 출력
+            
+        });
+        function userinfo_page(){
+            
+        }
+    </script>
 </div>
