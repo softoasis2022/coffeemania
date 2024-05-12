@@ -63,9 +63,22 @@
                 <p style="justify-content: center; font-size: 70px; margin: 0px;" >specialty</p>
             </div>
         </div>
+        <div id="specialtyproduct">
+            <div>
+                
+            </div>
+        </div>
+    </div>
+    <div >
+        
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            mainkeywordinput();
+            // JSON 데이터를 리스트로 출력
+            specialtysection();
+        });
+        function mainkeywordinput(){
             // 페이지 로드가 완료되면 실행됩니다.
             const keyword = mainkeyword;
             console.log(keyword);
@@ -86,10 +99,8 @@
                 div.textContent = keyword[1][i]; // div 요소에 텍스트 내용 추가
                 listItem.appendChild(div); // listItem에 새로 생성한 div 요소 추가
             }
-            // JSON 데이터를 리스트로 출력
-            
-        });
-        function userinfo_page(){
+        }
+        function specialtysection(){
             
         }
     </script>
