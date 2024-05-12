@@ -64,30 +64,31 @@ main.get("/", (req, res) => {
     
     // token 값을 가져옴
     const token = query.token;
+    console.log(token);
     let renderedTemplate;
     const pagePath = path.join(__dirname, "/../page/mainpage/main/coffeemania_mainhome.html");
-    
-    try{
-        const userinfo_path = path.join(ref_userinfodata,`${token}.json`);s
+    if(token){
+        const userinfo_path = path.join(ref_userinfodata,`${token}.json`);
         console.log(token); // 토큰 값 출력
         const userdata= fs.readFileSync(userinfo_path, 'utf-8');
         console.log(userdata);
-        
+
         renderedTemplate = applyPageToTemplate(templatePath, pagePath);
         //헤드테그 안에 script테그안에 userdata데이터 넣기
-        const scriptTag = `<script>var userdata = ${userdata};</script>`;
-        renderedTemplate = renderedTemplate.replace("</head>", scriptTag + "</head>");
+        const usertag = `<script>var userdata = ${userdata};</script>`;
+        
         const keyword = fs.readFileSync(ref_searchmainkeyword, 'utf-8');
         const keywordscriptTag = `<script>var mainkeyword = ${keyword};</script>`;
-        renderedTemplate = renderedTemplate.replace("</head>", keywordscriptTag + "</head>");  
+        renderedTemplate = renderedTemplate.replace("</head>", keywordscriptTag+usertag + "</head>");  
     }
-    catch{
+    else{
         renderedTemplate = applyPageToTemplate(templatePath, pagePath);
         const keyword = fs.readFileSync(ref_searchmainkeyword, 'utf-8');
         const keywordscriptTag = `<script>var mainkeyword = ${keyword};</script>`;
         renderedTemplate = renderedTemplate.replace("</head>", keywordscriptTag + "</head>");
     }
     res.send(renderedTemplate);
+    
 });
 main.get("/search", (req, res) => {
     const search = req.query.search;
@@ -195,9 +196,14 @@ main.post('/search', (req, res) => {
 });
 main.post('/login_pass', (req, res) => {
     const { email, password } = req.body;
-    const token = userlogin(email, password);
-    console.log(token);
-    res.status(200).json({token : token});
+    userlogin(email, password, (token, err) => {
+        if (err) {
+            //console.error('Error during login:', err);
+        } else {
+            console.log(token);
+            res.status(200).json({ token: token });
+        }
+    });
 });
 
 main.post('/buisness', (req, res) => {
@@ -243,75 +249,6 @@ function loadPage(pagePath) {
     return fs.readFileSync(pagePath, 'utf-8');
 }
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
-function login_file(email, pw, callback) {
-    const loginfilePath = `D:/database/useraccount/${email}.json`;
-    fs.access(loginfilePath, fs.constants.F_OK, (err) => {
-        if (err) {
-            callback('no_user');
-            return;
-        } else {
-            fs.readFile(loginfilePath, 'utf8', (readErr, data) => {
-                if (readErr) {
-                    callback('error_reading_file');
-                    return;
-                }
-                let userData = {};
-                try {
-                    userData = JSON.parse(data);
-                } catch (parseError) {
-                    callback('error_parsing_json');
-                    return;
-                }
-                if (userData.pw === pw) {
-                    saveTokenToFile(email, (err) => {
-                        if (err) {
-                            callback('error_saving_token');
-                        } else {
-                            callback(null, randomString);
-                        }
-                    });
-                } else {
-                    callback('password_mismatch');
-                }
-            });
-        }
-    });
-}
-function generateRandomString(length) {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let randomString = '';
-    for (let i = 0; i < length; i++) {
-        const randomIndex = Math.floor(Math.random() * characters.length);
-        randomString += characters.charAt(randomIndex);
-    }
-    return randomString;
-}
-function saveTokenToFile(email,callback) {
-    const loginfilePath = `D:/user/${email}.json`;
-    fs.readFile(loginfilePath, 'utf8', (err, data) => {
-        if (err) {
-            callback('error_reading_file');
-            return;
-        }
-        let userData = {};
-        try {
-            userData = JSON.parse(data);
-        } catch (parseError) {
-            callback('error_parsing_json');
-            return;
-        }
-        fs.writeFile(loginfilePath, JSON.stringify(userData), 'utf8', (writeErr) => {
-            if (writeErr) {
-                callback('error_writing_file');
-                return;
-            }
-            callback(null);
-        });
-    });
-}
-function user(){
-
-}
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
 function saveDataToFile(data, action, callback) {
     const directoryPath = getDirectoryPath(action, data); // 저장 경로 설정
@@ -422,30 +359,26 @@ function mainkeyword(keyword){
     let searchmainkeyword = JSON.parse(fs.readFileSync(pagePath, 'utf-8'));
     console.log(searchmainkeyword);
 }
-function userlogin(email, password){
-    email = email+'@coffeemanias.com';
+function userlogin(email, password, callback) {
+    email = email + '@coffeemanias.com';
+    console.log(email);
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        console.log(user);
-        // ...
+        const accessToken = user.accessToken;
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                // User is signed in, see docs for a list of available properties
-                // https://firebase.google.com/docs/reference/js/auth.user
+                // User is signed in
                 const uid = user.uid;
-                console.log(uid);
-                
-                // ...
+                callback(uid, null); // 토큰 전달
             } else {
                 // User is signed out
-                // ...
+                callback(new Error('User is signed out'), null); // 오류 전달
             }
         });
     })
     .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        callback(error, null); // 에러 전달
     });
 }
