@@ -7,11 +7,15 @@ const fs = require('fs');
 
 const cheerio = require('cheerio');
 const http = require('http');
+const url = require('url');
+const querystring = require('querystring');
+
 
 //npm install firebase
 
 const { initializeApp } = require('firebase/app');
 const { getDatabase, ref, set } = require('firebase/database');
+const { getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword ,onAuthStateChanged   } = require('firebase/auth');
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = JSON.parse(fs.readFileSync(path.join(__dirname,"/../softoasis.json"), 'utf-8'))["firebaseConfig"];
@@ -19,8 +23,9 @@ const firebaseConfig = JSON.parse(fs.readFileSync(path.join(__dirname,"/../softo
 const app = initializeApp(firebaseConfig);
 //const analytics = getAnalytics(app);
 const database = getDatabase(app);
+const auth = getAuth(app);
 
-writeUserData("사용자 아이디","사용자이름" ,"사용자이메일","링크");
+//writeUserData("사용자 아이디","사용자이름" ,"사용자이메일","링크");
 function writeUserData(userId, name, email, imageUrl) {
     set(ref(database, 'users/' + userId), {
         username: name,
@@ -32,6 +37,7 @@ function writeUserData(userId, name, email, imageUrl) {
         console.error('Error writing data: ', error);
     });
 }
+
 
 const serverstart_port = 3001;
 
@@ -46,12 +52,13 @@ main.set("views", "./mainpage");
 
 const templatePath = path.join(__dirname,pageref+  "/mainpage/tamplate/coffeemainpagetample.html");
 const ref_database = "D:";
-const ref_searchmainkeyword = path.join("database", "search", "keyword", "mainkeyword");
-
-
+const ref_searchmainkeyword = path.join(ref_database,"database", "search", "keyword", "mainkeyword.json");
+const ref_userinfodata=path.join(ref_database,"database", "userinfo");
+const sellertemplatePath = path.join(__dirname, "/../page/sellerpage/tamplate/sellerpagetamplate.html");
+const ref_searchkeyword = path.join("database", "search", "keyword", "searchkeyword");
 
 main.get("/", (req, res) => {
-       // URL을 파싱하여 query 객체를 가져옴
+    // URL을 파싱하여 query 객체를 가져옴
     const parsedUrl = url.parse(req.url);
     const query = querystring.parse(parsedUrl.query);
     
@@ -82,7 +89,55 @@ main.get("/", (req, res) => {
     }
     res.send(renderedTemplate);
 });
+main.get("/search", (req, res) => {
+    const search = req.query.search;
+    const pagePath = path.join(__dirname, "/../page/mainpage/main/coffeemania_search.html");
+    const filePath = path.join(ref_database, ref_searchkeyword, `${search}.json`);
+    let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
+    //완성된 html정보에 해드테그 안에 스크립트테그를 추가하고 스크립트 테그에 아이디값과 아래의 json데이터를 넣는다.
+    //{
+    //    "key1": "value1",
+    //    "key2": "value2"
+    //    // 필요한 만큼의 데이터 추가
+    //}
+    
+    //console.log(typeof(productdata[0])); 타입 : string
+    
+    let responsedata= [];
+    if(fileExists(filePath)){
+        const jsonData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+        const productdata = jsonData["product"];
+        const findproduct = searchproduct(productdata);
+        if(findproduct.length > 0){
+            const scriptTag = `<script id="json-data">${JSON.stringify(findproduct)}</script>`;
+        
+            // 템플릿에 스크립트 태그 추가
+            renderedTemplate = renderedTemplate.replace('</head>', `${scriptTag}</head>`);
+            res.send(renderedTemplate);
+        }
+    }
+    else{
+        //해당하는 상품이 없음
+        res.send(renderedTemplate);
+    }
+    /** 
+    const jsonData = {
+        "key1": "value1",
+        "key2": "value2"
+        // 필요한 만큼의 데이터 추가
+    }; //데이터를 가져오는 함수로 변경 예정
+    */
+    // HTML 페이지에 스크립트 태그 추가
 
+    //console.log(findproduct);
+    //console.log(findproduct);
+    
+
+    
+
+    // 최종 HTML 페이지 응답
+    
+});
 main.get("/login", (req, res) => {
     const pagePath = path.join(__dirname, "/../page/mainpage/main/coffeemania_login.html");
     let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
@@ -128,6 +183,8 @@ main.get("/brendstory", (req, res) => {
     let renderedTemplate = applyPageToTemplate(templatePath, pagePath);
     res.send(renderedTemplate);
 });
+
+
 main.post('/search', (req, res) => {
     const { search } = req.body;
     let mainkeyword = mainkeyword();
@@ -138,13 +195,9 @@ main.post('/search', (req, res) => {
 });
 main.post('/login_pass', (req, res) => {
     const { email, password } = req.body;
-    login_file(email, password, (err, token) => {
-        if (err) {
-            res.status(200).json({ "token": err });
-        } else {
-            res.status(200).json({ "token": token });
-        }
-    });
+    const token = userlogin(email, password);
+    console.log(token);
+    res.status(200).json({token : token});
 });
 
 main.post('/buisness', (req, res) => {
@@ -191,7 +244,7 @@ function loadPage(pagePath) {
 }
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
 function login_file(email, pw, callback) {
-    const loginfilePath = `D:/database/user/${email}.json`;
+    const loginfilePath = `D:/database/useraccount/${email}.json`;
     fs.access(loginfilePath, fs.constants.F_OK, (err) => {
         if (err) {
             callback('no_user');
@@ -210,8 +263,7 @@ function login_file(email, pw, callback) {
                     return;
                 }
                 if (userData.pw === pw) {
-                    let randomString = generateRandomString(30);
-                    saveTokenToFile(email, randomString, (err) => {
+                    saveTokenToFile(email, (err) => {
                         if (err) {
                             callback('error_saving_token');
                         } else {
@@ -234,7 +286,7 @@ function generateRandomString(length) {
     }
     return randomString;
 }
-function saveTokenToFile(email, token, callback) {
+function saveTokenToFile(email,callback) {
     const loginfilePath = `D:/user/${email}.json`;
     fs.readFile(loginfilePath, 'utf8', (err, data) => {
         if (err) {
@@ -248,7 +300,6 @@ function saveTokenToFile(email, token, callback) {
             callback('error_parsing_json');
             return;
         }
-        userData.token = token;
         fs.writeFile(loginfilePath, JSON.stringify(userData), 'utf8', (writeErr) => {
             if (writeErr) {
                 callback('error_writing_file');
@@ -257,6 +308,9 @@ function saveTokenToFile(email, token, callback) {
             callback(null);
         });
     });
+}
+function user(){
+
 }
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
 function saveDataToFile(data, action, callback) {
@@ -367,4 +421,31 @@ function mainkeyword(keyword){
     //d 드리이브에 검색메인 키워드파일에 작성된 키워드 정보를 받아옴
     let searchmainkeyword = JSON.parse(fs.readFileSync(pagePath, 'utf-8'));
     console.log(searchmainkeyword);
+}
+function userlogin(email, password){
+    email = email+'@coffeemanias.com';
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        console.log(user);
+        // ...
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/auth.user
+                const uid = user.uid;
+                console.log(uid);
+                
+                // ...
+            } else {
+                // User is signed out
+                // ...
+            }
+        });
+    })
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+    });
 }
