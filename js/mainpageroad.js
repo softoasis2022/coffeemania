@@ -56,6 +56,7 @@ const ref_searchmainkeyword = path.join(ref_database,"database", "search", "keyw
 const ref_userinfodata=path.join(ref_database,"database", "userinfo");
 const sellertemplatePath = path.join(__dirname, "/../page/sellerpage/tamplate/sellerpagetamplate.html");
 const ref_searchkeyword = path.join("database", "search", "keyword", "searchkeyword");
+const ref_useremail = path.join(ref_database, "database","user");
 
 main.get("/", (req, res) => {
     // URL을 파싱하여 query 객체를 가져옴
@@ -64,31 +65,30 @@ main.get("/", (req, res) => {
     
     // token 값을 가져옴
     const token = query.token;
-    console.log(token);
     let renderedTemplate;
     const pagePath = path.join(__dirname, "/../page/mainpage/main/coffeemania_mainhome.html");
-    if(token){
-        const userinfo_path = path.join(ref_userinfodata,`${token}.json`);
+    
+    try{
+        const userinfo_path = path.join(ref_userinfodata,`${token}.json`);s
         console.log(token); // 토큰 값 출력
         const userdata= fs.readFileSync(userinfo_path, 'utf-8');
         console.log(userdata);
-
+        
         renderedTemplate = applyPageToTemplate(templatePath, pagePath);
         //헤드테그 안에 script테그안에 userdata데이터 넣기
-        const usertag = `<script>var userdata = ${userdata};</script>`;
-        
+        const scriptTag = `<script>var userdata = ${userdata};</script>`;
+        renderedTemplate = renderedTemplate.replace("</head>", scriptTag + "</head>");
         const keyword = fs.readFileSync(ref_searchmainkeyword, 'utf-8');
         const keywordscriptTag = `<script>var mainkeyword = ${keyword};</script>`;
-        renderedTemplate = renderedTemplate.replace("</head>", keywordscriptTag+usertag + "</head>");  
+        renderedTemplate = renderedTemplate.replace("</head>", keywordscriptTag + "</head>");  
     }
-    else{
+    catch{
         renderedTemplate = applyPageToTemplate(templatePath, pagePath);
         const keyword = fs.readFileSync(ref_searchmainkeyword, 'utf-8');
         const keywordscriptTag = `<script>var mainkeyword = ${keyword};</script>`;
         renderedTemplate = renderedTemplate.replace("</head>", keywordscriptTag + "</head>");
     }
     res.send(renderedTemplate);
-    
 });
 main.get("/search", (req, res) => {
     const search = req.query.search;
@@ -194,17 +194,48 @@ main.post('/search', (req, res) => {
         
     }
 });
-main.post('/login_pass', (req, res) => {
+main.post('/login_pass', async (req, res) => {
     const { email, password } = req.body;
-    userlogin(email, password, (token, err) => {
-        if (err) {
-            //console.error('Error during login:', err);
-        } else {
-            console.log(token);
-            res.status(200).json({ token: token });
-        }
-    });
+    try {
+        const token = await userlogin(email, password);  // userlogin 함수가 반환하는 Promise를 기다립니다.
+        console.log(token);
+        res.status(200).json({ token: token });  // 토큰을 응답으로 보냅니다.
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: error.message });  // 에러가 발생하면 에러 메시지를 응답으로 보냅니다.
+    }
 });
+main.post('/join_pass', async (req, res) => {
+    const { email,password } = req.body;
+    console.log(email,password);
+    if(email == "0000"){
+        res.status(200).json({ race : "이미 이메일 이존재 합니다" });
+    }
+    try {
+        const token = await userjoin(email, password);  // userlogin 함수가 반환하는 Promise를 기다립니다.
+        console.log(token);
+        res.status(200).json({ token: token });  // 토큰을 응답으로 보냅니다.
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: error.message });  // 에러가 발생하면 에러 메시지를 응답으로 보냅니다.
+    }
+});
+main.post('/email_pass', (req, res) => {
+    const { email } = req.body;
+    console.log(email+"@coffeemanias.com");
+    const useremail = path.join(ref_useremail , `${email}.json`);
+    try {
+        const data = fs.readFileSync(useremail, 'utf-8');
+        console.log(data);
+        console.log("이미존재 하는 이메일 입니다.");
+        res.status(200).json({ message : "이미 존재 하는 이메일 입니다." });  // 토큰을 응답으로 보냅니다.
+    } catch (error) {
+        console.error('Error reading file:', error.errno);
+        console.log("사용 가능한 이메일입니다.");
+        res.status(200).json({ message : "사용 가능한 이메일입니다." });  // 토큰을 응답으로 보냅니다.
+    }
+});
+
 
 main.post('/buisness', (req, res) => {
     const data = req.body;
@@ -249,6 +280,21 @@ function loadPage(pagePath) {
     return fs.readFileSync(pagePath, 'utf-8');
 }
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
+function saveTokenToFile(data,callback) {
+    console.log(data);
+    const loginfilePath = `D:/database/user/${data.Uid}.json`;
+    
+    fs.writeFile(loginfilePath, JSON.stringify(data), 'utf8', (writeErr) => {
+        if (writeErr) {
+            callback('error_writing_file');
+            return;
+        }
+        callback(null);
+    });
+}
+function user(){
+
+}
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
 function saveDataToFile(data, action, callback) {
     const directoryPath = getDirectoryPath(action, data); // 저장 경로 설정
@@ -359,26 +405,54 @@ function mainkeyword(keyword){
     let searchmainkeyword = JSON.parse(fs.readFileSync(pagePath, 'utf-8'));
     console.log(searchmainkeyword);
 }
-function userlogin(email, password, callback) {
-    email = email + '@coffeemanias.com';
-    console.log(email);
-    signInWithEmailAndPassword(auth, email, password)
+function userlogin(email, password){
+    return new Promise((resolve, reject) => {
+        email = email + '@coffeemanias.com';
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential;
+            console.log(user);
+            
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    const uid = user.uid;
+                    console.log(uid);
+                    resolve(uid);  // Promise를 uid로 해결합니다.
+                } else {
+                    reject(new Error('User is signed out'));  // 유저가 로그아웃된 경우 Promise를 거부합니다.
+                }
+            });
+        })
+        .catch((error) => {
+            reject(error);  // 에러가 발생하면 Promise를 거부합니다.
+        });
+    });
+}
+function userjoin(email,password){
+    console.log(email,password );
+    createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
         // Signed in 
-        const user = userCredential.user;
-        const accessToken = user.accessToken;
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // User is signed in
-                const uid = user.uid;
-                callback(uid, null); // 토큰 전달
+        const user = userCredential;
+        //console.log(user);
+        const data = {
+            email : email,
+            password : password,
+            Uid : userCredential.user.uid
+        }
+        saveTokenToFile(data, (err) => {
+            if (err) {
+                console.error('Error writing file:', err);
             } else {
-                // User is signed out
-                callback(new Error('User is signed out'), null); // 오류 전달
+                console.log('File written successfully');
             }
         });
+        // ...
     })
     .catch((error) => {
-        callback(error, null); // 에러 전달
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+        // ..
     });
 }
