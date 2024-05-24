@@ -6,7 +6,6 @@
     <title>커피메니아</title>
     <style>
         body{
-            
             margin: 0px;
         }
         #main_logo_page{
@@ -42,7 +41,6 @@
             display: flex;
         }
     </style>
-    
 </head>
 <body>
     <div id="main_logo_page">
@@ -68,7 +66,7 @@
         </style>
         <div id="mian_logo_page_left">
             <a id="btn_login_page_move" onclick="location.href='/'">
-                커피매니아
+                <img style="width: 300px;" src="https://firebasestorage.googleapis.com/v0/b/softoasis-763c2.appspot.com/o/brandlogo%2Ftextlogo.png?alt=media&token=348f56a8-5ec9-4b74-846c-f6a88d996c46">
             </a>
         </div>
         <div id="mian_logo_page_right">
@@ -125,19 +123,26 @@
     </div>
     <div id="search_section">
         <div style="width: 500px; height: 50px; padding: 5px; border: 2px solid blue;">
-            <input id="search_query" style="width: 100%; height: 100%; margin: auto; font-size: 20px; border:none" value="" onkeypress="search(this.value)">
+            <input id="search_query" style="width: 100%; height: 100%; margin: auto; font-size: 20px; border:none" value="" onkeypress="inputkey(this.value)">
         </div>
         <div style="width: fit-content; height: 50px; display: block; justify-content: center; padding: 5px;">
-            <button style="width: fit-content; height: 100%;  border: 2px solid blue; padding: 15px; background-color: white;" onclick="search(document.getElementById('search_query').value)">
+            <button id="search_btn" style="width: fit-content; height: 100%;  border: 2px solid blue; padding: 15px; background-color: white;" onclick="search(document.getElementById('search_query').value)">
                 검색
             </button>
         </div>
         <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                userdatainput();
-            });
-
+            function inputkey(){
+                input = document.getElementById("search_query");
+                input.addEventListener("keyup", function (event) {
+                    if (event.keyCode === 13) {
+                        event.preventDefault();
+                        document.getElementById("search_btn").click();
+                    }
+                    });
+            }
             function search(search_input){
+                
+
                 if (search_input.trim() !== '') {
                     // 검색어를 encodeURIComponent 함수를 사용하여 URL에 안전하게 인코딩합니다.
                     const encodedSearchValue = encodeURIComponent(search_input);
@@ -148,17 +153,6 @@
                 else {
                     // 입력값이 없을 경우에는 아무런 동작을 하지 않습니다.
                     console.log('검색어를 입력해주세요.');
-                }
-            }
-            function userdatainput(){
-                const userdataUI = userdata;
-                //console.log(userdataUI.nickname);
-
-                const mainLogoPageRight = document.querySelector('#mian_logo_page_right');
-                if (mainLogoPageRight) {
-                    mainLogoPageRight.innerHTML = userdataUI.nickname;
-                } else {
-                    console.error('Element with id "mian_logo_page_right" not found.');
                 }
             }
         </script>
@@ -198,13 +192,13 @@
                     SNS
                 </p>
                 <a href="https://www.instagram.com/life_para3/">
-                    <img src="" style="width: 40px; height: 40px; margin: 6px;">
+                    <img style="width: 40px; height: 40px; margin: 6px;">
                 </a>
                 <a href="https://www.facebook.com/profile.php?id=61552411303231">
-                    <img src="" style="width: 40px; height: 40px; margin: 6px;">
+                    <img style="width: 40px; height: 40px; margin: 6px;">
                 </a>
                 <a href="https://open.kakao.com/o/sxTCML7f">
-                    <img src="" style="width: 40px; height: 40px; margin: 6px;">
+                    <img style="width: 40px; height: 40px; margin: 6px;">
                 </a>
                 <a>
                     네이버블로그
@@ -290,18 +284,34 @@
                     buisness 문의
                 </p>
                 <a href="https://open.kakao.com/o/grwHIL7f">
-                    <img src="" style="width: 40px; height: 40px;">
+                    <img src="kakao.jpg" style="width: 40px; height: 40px;">
                 </a>
-            </div>
-            <div>
-                <p>
-                    테스트 스페이스
-                </p>
-                <div style="width: 100px; height: 100px; background-color: black;" onclick="location.href='/tamplelate'">
-                    
-                </div>
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // 페이지 로드가 완료되면 실행됩니다.
+            const userinfo = userdata;
+            console.log(userinfo);
+            // 서버로부터 받은 JSON 데이터 (예시 데이터)
+            if(userinf != ""){
+                const listItem = document.getElementById("mian_logo_page_right");
+                listItem.innerHTML=``;
+                listItem.innerHTML = `
+                    <div id="userprofileimg" style="">
+                        <img style="width: 50px; height: 50px;" src="${userinfo.profileimgurl}">
+                    </div>
+                    <div style="width: fit-content; height: 50px;">
+                        <p id="usernickname">${userinfo.nickname}</p>
+                    </div>
+                `;
+                // JSON 데이터를 리스트로 출력 
+            }
+            else{
+                
+            }
+        });
+    </script>
 </body>
 </html>
