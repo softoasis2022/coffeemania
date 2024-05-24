@@ -52,17 +52,28 @@ main.set("views", "./mainpage");
 
 const templatePath = path.join(__dirname,pageref+  "/mainpage/tamplate/coffeemainpagetample.html");
 const ref_database = "D:";
-const ref_searchmainkeyword = path.join(ref_database,"database", "search", "keyword", "mainkeyword.json");
+
 const ref_userinfodata=path.join(ref_database,"database", "userinfo");
 const sellertemplatePath = path.join(__dirname, "/../page/sellerpage/tamplate/sellerpagetamplate.html");
-const ref_searchkeyword = path.join("database", "search", "keyword", "searchkeyword");
+const UIdb = path.join(ref_database,"database","UI");
 const ref_useremail = path.join(ref_database, "database","user");
+
 
 main.get("/", (req, res) => {
     // URL을 파싱하여 query 객체를 가져옴
     const parsedUrl = url.parse(req.url);
     const query = querystring.parse(parsedUrl.query);
     
+    
+    const ref_searchmainkeyword = path.join(UIdb, "search", "keyword", "mainkeyword.json");
+    const ref_searchkeyword = path.join(UIdb, "search", "keyword", "searchkeyword.json");
+    const ref_specialty = path.join(UIdb, "specialty", "specialty.json");
+    const ref_youtube = path.join(UIdb, "youtube", "youtube.json");
+    const ref_youtubesellect = path.join(UIdb, "youtube", "youtubesellect.json");
+    const ref_youtubeproduct = path.join(UIdb, "youtube", "youtubeproduct.json");
+    const ref_newbrendproduct = path.join(UIdb, "newbrend", "newbrend.json");
+
+
     // token 값을 가져옴
     const token = query.token;
     let renderedTemplate;
@@ -78,16 +89,53 @@ main.get("/", (req, res) => {
         //헤드테그 안에 script테그안에 userdata데이터 넣기
         const scriptTag = `<script>var userdata = ${userdata};</script>`;
         renderedTemplate = renderedTemplate.replace("</head>", scriptTag + "</head>");
-        const keyword = fs.readFileSync(ref_searchmainkeyword, 'utf-8');
-        const keywordscriptTag = `<script>var mainkeyword = ${keyword};</script>`;
-        renderedTemplate = renderedTemplate.replace("</head>", keywordscriptTag + "</head>");  
+         
     }
     catch{
         renderedTemplate = applyPageToTemplate(templatePath, pagePath);
-        const keyword = fs.readFileSync(ref_searchmainkeyword, 'utf-8');
-        const keywordscriptTag = `<script>var mainkeyword = ${keyword};</script>`;
-        renderedTemplate = renderedTemplate.replace("</head>", keywordscriptTag + "</head>");
     }
+    const keyword = fs.readFileSync(ref_searchmainkeyword, 'utf-8');
+    const keywordscriptTag = `<script>var mainkeyword = ${keyword};</script>`;
+    renderedTemplate = renderedTemplate.replace("</head>", keywordscriptTag + "</head>"); 
+    const specialty = fs.readFileSync(ref_specialty, 'utf-8');
+    const specialtyscriptTag = `<script>var specialty = ${specialty};</script>`;
+    renderedTemplate = renderedTemplate.replace("</head>", specialtyscriptTag + "</head>");  
+
+    const youtubeselletdata = fs.readFileSync(ref_youtubesellect, 'utf-8');
+    const youtubeUIdata = fs.readFileSync(ref_youtubeproduct, 'utf-8');
+    //console.log(JSON.parse(youtubeselletdata));
+    //console.log(JSON.parse(youtubeselletdata).length);
+    //console.log(youtubeUIdata);
+    let youtubeUI = [];
+    for (let i= 0; i< JSON.parse(youtubeselletdata).length; i++){
+        //console.log(i);
+        //console.log(JSON.parse(youtubeselletdata)[i]);
+        youtubeUI.push(JSON.parse(youtubeUIdata)[JSON.parse(youtubeselletdata)[i]]);
+        
+    }   
+    //console.log(youtubeUI);
+    const youtubeUIscriptTag = `<script>var youtubeUI = ${JSON.stringify(youtubeUI)};</script>`;
+    renderedTemplate = renderedTemplate.replace("</head>", youtubeUIscriptTag + "</head>");
+    
+    const marketinfofolder = path.join("database", "market");
+    const newbrendUIdata= fs.readFileSync(ref_newbrendproduct, 'utf-8');
+    let newbrenddata =[];
+    for(let i = 0; i<JSON.parse(newbrendUIdata).length; i++ ){
+        //console.log(JSON.parse(newbrendUIdata)[i]);
+        let brenddata = JSON.parse(fs.readFileSync(path.join(ref_database,marketinfofolder,JSON.parse(newbrendUIdata)[i]+".json"), 'utf-8'));
+        newbrenddata.push(
+            {
+                brendname : brenddata["brendname"],
+                brendurl : brenddata["storeurl"],
+                brendimgurl : brenddata["storlogourl"]
+            }
+        );
+        //console.log(newbrenddata);
+    }
+    console.log(newbrenddata);
+    const newbrendUIscriptTag = `<script>var newbrend = ${JSON.stringify(newbrenddata)};</script>`;
+    renderedTemplate = renderedTemplate.replace("</head>", newbrendUIscriptTag + "</head>");
+    
     res.send(renderedTemplate);
 });
 main.get("/search", (req, res) => {
@@ -199,20 +247,19 @@ main.post('/login_pass', async (req, res) => {
     try {
         const token = await userlogin(email, password);  // userlogin 함수가 반환하는 Promise를 기다립니다.
         console.log(token);
-        res.status(200).json({ token: token });  // 토큰을 응답으로 보냅니다.
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: error.message });  // 에러가 발생하면 에러 메시지를 응답으로 보냅니다.
     }
 });
 main.post('/join_pass', async (req, res) => {
-    const { email,password } = req.body;
-    console.log(email,password);
+    const { id,password } = req.body;
+    console.log(id,password);
     if(email == "0000"){
         res.status(200).json({ race : "이미 이메일 이존재 합니다" });
     }
     try {
-        const token = await userjoin(email, password);  // userlogin 함수가 반환하는 Promise를 기다립니다.
+        const token = await userjoin(id, password);  // userlogin 함수가 반환하는 Promise를 기다립니다.
         console.log(token);
         res.status(200).json({ token: token });  // 토큰을 응답으로 보냅니다.
     } catch (error) {
@@ -424,7 +471,7 @@ function userlogin(email, password){
             });
         })
         .catch((error) => {
-            reject(error);  // 에러가 발생하면 Promise를 거부합니다.
+            //reject(error);  // 에러가 발생하면 Promise를 거부합니다.
         });
     });
 }
