@@ -1,0 +1,128 @@
+<style>
+    #Product{
+        width: 900px;
+        height: fit-content;
+    }
+</style>
+<div id="mainpage">
+    
+</div>
+<script>
+    /**
+     * 받은데이터
+     * [
+            {
+                peoductname: '에티오피아 G1 훈쿠테 내추럴 1kg',
+                price: 3000,
+                sale: 3000,
+                like: 10,
+                share: 100
+            },
+            {
+                peoductname: '에티오피아 G1 훈쿠테 내추럴 1kg',
+                price: 3000,
+                sale: 3000,
+                like: 10,
+                share: 100
+            }
+        ]
+    */
+   //페이지가 로드되면 roadproduct()를 실행
+
+   window.onload = function() {
+        // JSON 데이터를 파싱하여 받은 데이터로 사용
+        var receivedData = JSON.parse(document.getElementById('json-data').textContent);
+        
+        // UI로 받은 데이터를 표시하는 함수
+        function roadproduct() {
+            var mainpageDiv = document.getElementById('mainpage');
+            
+            // 서버에서 받은 데이터를 반복하여 UI로 추가
+            receivedData.forEach(function(data) {
+                var productDiv = document.createElement('div');
+                //productDiv.textContent = 'Product Name: ' + data.productname + ', Price: ' + data.price;
+                productDiv.id = "Product";
+                productDiv.innerHTML = `
+                <style>
+                    #Product{
+                        width: 900px;
+                        height: 400px;
+                        background-color: white;
+                    }
+                    #warp_Productimg{
+                        width: 300px;
+                        height: fit-content;
+                    }
+                    #warp_Productinfo_name{
+                        width: 100%;
+                        height: fit-content;
+                    }
+                    #warp_Productinfo_sub{
+                        display: flex;
+                    }
+                    #warp_Productinfo_sub_main{
+                        width: fit-content;
+                        height: fit-content;
+                    }
+                    #warp_Productinfo_name_sub{
+                        width: fit-content;
+                        height: fit-content;
+                    }
+                </style>
+                <div id="Product">
+                    <div id="warp_Productimg">
+                        
+                    </div>
+                    <div id="warp_Productinfo">
+                        <div id="warp_Productinfo_sub">
+                            <div id="warp_Productinfo_sub_main">
+                                상품이름
+                            </div>
+                            <div id="warp_Productinfo_name_sub">
+                                ${data.productname}
+                            </div>
+                        </div>
+                        <div id="warp_Productinfo_sub">
+                            <div id="warp_Productinfo_sub_main">
+                                상품가격
+                            </div>
+                            <div id="warp_Productinfo_name_sub">
+                                ${data.price}
+                            </div>
+                        </div>
+                        <div id="warp_Productinfo_sub">
+                            <div id="warp_Productinfo_sub_main">
+                                상품할인
+                            </div>
+                            <div id="warp_Productinfo_name_sub">
+                                ${data.sale}
+                            </div>
+                        </div>
+                        <div id="warp_Productinfo_sub">
+                            <div id="warp_Productinfo_sub_main">
+                                조아요
+                            </div>
+                            <div id="warp_Productinfo_name_sub">
+                                ${data.like}
+                            </div>
+                        </div>
+                        <div id="warp_Productinfo_sub">
+                            <div id="warp_Productinfo_sub_main">
+                                공유
+                            </div>
+                            <div id="warp_Productinfo_name_sub">
+                                ${data.share}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `;
+
+                mainpageDiv.appendChild(productDiv);
+            });
+        }
+
+        // roadproduct 함수 실행
+        roadproduct();
+    };
+</script>

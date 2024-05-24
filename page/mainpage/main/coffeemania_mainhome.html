@@ -1,21 +1,34 @@
 <div id="mainpage">
+    <script>
+        //background-color: #8F67FF;
+        //background-color: #C0DD70;
+        //background-color: #73E4D0;
+    </script>
     <style>
         #maineventpage{
             width: 100%;
             height: 500px;
-            background-color: #8F67FF;
+            
         }
         #keywordsection{
             width: 100%;
             height: fit-content;
-            background-color: #C0DD70;
+            
             padding: 5px;
         }
         #specialtysection{
             width: 100%;
             height: fit-content;
-            background-color: #73E4D0;
+            
             padding: 20px;
+        }
+        #youtubesection{
+            width: 100%;
+            height: fit-content;
+        }
+        #newbrend{
+            width: 100%;
+            height: fit-content;
         }
     </style>
     <div id="maineventpage">
@@ -58,18 +71,50 @@
     <div id="specialtysection">
         <!--상품 이름, 상품 링크, 좋아요, 공유갯수 정보를 받는다. 좋아요와 공유 버튼을 만들어 좋아요는 1개 추가 기능, 공유는 공유수를 1개 올리고 링크를 사용자 디바이스에 복사 기능을 넣는다.-->
         <!--가로 슬라이드 구조로 페이지는 4개씩 한 페이지로 이룬다. 상품추가 시 div테그로 추가한다-->
+        <style>
+            #specialty{
+                width: fit-content;
+                height: fit-content;
+            }
+        </style>
         <div style="width: 100%;">
             <div style="width: 100%; text-align: center;">
                 <p style="justify-content: center; font-size: 70px; margin: 0px;" >specialty</p>
             </div>
         </div>
-        <div id="specialtyproduct">
-            <div>
-                
+        <div id="specialtyproduct" style="display: flex; margin-top: 20xp; justify-content: center;">
+            
+        </div>
+    </div>
+    <div id="youtubesection">
+        <div style="width: 100%;">
+            <div style="width: 100%; text-align: center;">
+                <p style="justify-content: center; font-size: 70px; margin: 0px;" >Youtube</p>
             </div>
         </div>
     </div>
-    <div >
+    <div id="newbrend">
+        <style>
+            #brendinfo{
+                width: fit-content;
+                justify-content: center;
+            }
+            #brendname{
+                width: 100%;
+                height: fit-content;
+                text-align: center;
+            }
+            #brendimg{
+                width:100%;
+                height:100%;
+            }
+            
+        </style>
+        <div style="width: 100%;">
+            <div style="width: 100%; text-align: center;">
+                <p style="justify-content: center; font-size: 70px; margin: 0px;" >NEW Brend</p>
+            </div>
+        </div>
         
     </div>
     <script>
@@ -77,6 +122,8 @@
             mainkeywordinput();
             // JSON 데이터를 리스트로 출력
             specialtysection();
+            //youtubesection();
+            newbrendsection();
         });
         function mainkeywordinput(){
             // 페이지 로드가 완료되면 실행됩니다.
@@ -102,6 +149,169 @@
         }
         function specialtysection(){
             
+            for (let i = 0; i < specialty.length; i++) {
+                console.log(specialty[i]);
+                const listItem = document.getElementById("specialtyproduct");
+                const div = document.createElement("div"); // 새로운 div 요소 생성
+                div.id = "specialty";
+                div.style.margin = "30px"
+                div.style.padding = "20px"
+                div.style.border = "1px solid black"
+                div.style.borderRadius = "20px"
+                const name = specialty[i]["name"] = specialty[i]["name"].substring(0, 20);
+                div.innerHTML = `
+                <style>
+                    #img_warp{
+                        width: 300px;
+                        height: 300px;
+                    }
+                    #imgurl{
+                        width: 300px;
+                        height: 300px;
+                    }
+                </style>
+                <div id="img_warp" >
+                    <img id="imgurl" src="${specialty[i]["imgurl"]}">    
+                </div>
+                <div id="name_warp">
+                    ${name}
+                </div> 
+                <div id="name_warp">
+                    <div>좋아요</div>
+                    <div>
+                        ${specialty[i]["like"]}
+                    </div>
+                </div>     
+                `;
+                listItem.appendChild(div);
+            }
         }
+        function youtubesection(){
+            const listItem = document.getElementById("youtubesection");
+            const youtube_sub_section1 = document.createElement("div"); // 새로운 div 요소 생성
+            youtube_sub_section1.id="youtube_sub_section1";
+            youtube_sub_section1.style.display = "flex";
+            youtube_sub_section1.style.justifyContent = "center";
+            listItem.appendChild(youtube_sub_section1);
+            const youtube_sub_section2 = document.createElement("div"); // 새로운 div 요소 생성
+            youtube_sub_section2.id="youtube_sub_section2";
+            youtube_sub_section2.style.display = "flex";
+            youtube_sub_section2.style.justifyContent = "center";
+            listItem.appendChild(youtube_sub_section2);
+            
+            for(let  i =0; i< 3; i++){
+                console.log(youtubeUI[i]);
+                const intargrt1 = document.getElementById("youtube_sub_section1");
+                const youtube_sub_section = document.createElement("div"); // 새로운 div 요소 생성
+                youtube_sub_section.id = "youtubepro";
+                youtube_sub_section.style.width = "fit-content";
+                let replaceUrl = youtubeUI[i]["url"]
+                console.log(replaceUrl);
+                replaceUrl = replaceUrl.replace("https://youtu.be/", '');
+                replaceUrl = replaceUrl.replace("https://www.youtube.com/embed/", '');
+                replaceUrl = replaceUrl.replace("https://www.youtube.com/watch?v=", '');
+                img.setAttribute("src", `https://img.youtube.com/vi/${thum}/mqdefault.jpg`)
+                youtube_sub_section.innerHTML = `
+                <div>
+                    <a >
+                        <img src="${replaceUrl}">
+                    </a>
+                    <a>
+                        <div>${youtubeUI[i]["name"]}</div>
+                    </a>
+                    <div style="display: flex;">
+                        <div style="display: flex;">
+                            <p>좋아요</p>
+                            <a>
+                                ${youtubeUI[i]["comment"]}
+                            </a>
+                        </div>
+                        <div style="display: flex;">
+                            <p>댓글 수</p>
+                            <a>
+                                ${youtubeUI[i]["like"]}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                `
+                intargrt1.appendChild(youtube_sub_section);
+            }
+            for(let  i =3; i< 6; i++){
+                console.log(youtubeUI[i]);
+                const intargrt2 = document.getElementById("youtube_sub_section2");
+                const youtube_sub_section = document.createElement("div"); // 새로운 div 요소 생성
+                youtube_sub_section.id = "youtubepro";
+                youtube_sub_section.style.width = "fit-content";
+                youtube_sub_section.innerHTML = `
+                <div>
+                    <a >
+                        <img src="https://www.youtube.com/watch?v=HqwrGus1bVs">
+                    </a>
+                    <a>
+                        <div>${youtubeUI[i]["name"]}</div>
+                    </a>
+                    <div style="display: flex;">
+                        <div style="display: flex;">
+                            <p>좋아요</p>
+                            <a>
+                                ${youtubeUI[i]["comment"]}
+                            </a>
+                        </div>
+                        <div style="display: flex;">
+                            <p>댓글 수</p>
+                            <a>
+                                ${youtubeUI[i]["like"]}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                `
+                intargrt2.appendChild(youtube_sub_section);
+            }
+        }
+        function newbrendsection(){
+            console.log(newbrend);
+            for (let i = 0; i < 4; i++) {
+                const brend = document.getElementById("newbrend");
+                const brend_div = document.createElement("div"); // 새로운 div 요소 생성
+                brend_div.id = `brend${i}`;
+                brend_div.style.display = "flex";
+                brend_div.style.justifyContent = "center";
+                brend.appendChild(brend_div); // brend_div를 DOM에 추가
+
+                for (let j = 0; j < 4; j++) {
+                    //console.log(newbrend[(4 * i) + j]);
+                    // 이제 brend_div가 DOM에 추가되었으므로, 여기에서 appendChild를 호출할 수 있습니다
+                    if (newbrend[(4 * i) + j]) {
+                        // console.log(newbrend[(4 * i) + j]["brendurl"]);
+                        const brend_subdiv_in = document.createElement("a");
+                        brend_subdiv_in.id = `brendinfo`;
+                        brend_subdiv_in.href = newbrend[(4 * i) + j]["brendurl"];
+                        brend_subdiv_in.style.padding = "10px";
+                        brend_subdiv_in.style.border = "1px solid black";
+                        brend_subdiv_in.style.borderRadius = "10px";
+                        brend_subdiv_in.style.margin = "10px";
+                        brend_subdiv_in.style.color = "black";
+                        brend_subdiv_in.style.textDecoration = "none";
+                        
+                        brend_subdiv_in.innerHTML = `
+                        <div style="width: 200px; height: 150px; justify-content: center; text-align: center;" >
+                            <img id="brendimg" src="${newbrend[(4 * i) + j]["brendimgurl"]}" >
+                        </div>
+                        <p id="brendname"">${newbrend[(4 * i) + j]["brendname"]}</p>
+                        `;
+                        brend_div.appendChild(brend_subdiv_in); // brend_subdiv_in을 brend_div에 추가
+                    }
+                }
+            }
+
+            
+            
+            
+            
+            
+        }
+
     </script>
 </div>

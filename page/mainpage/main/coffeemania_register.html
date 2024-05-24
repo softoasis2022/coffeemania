@@ -1,20 +1,176 @@
 
-
+<style>
+    #redister_info_name{
+        width: 200px;
+    }
+</style>
 <div id="mainpage">
     <div style="display: flex;">
-        <p>아이디</p>
+        <p id="redister_info_name">아이디</p>
         <input id="email_input">
         <button onclick="join_pass_email()">
-            이메일 가입 여부 확인 하기
+            아이디 중복 확인
         </button>
         <p id="email_input_check"></p>
     </div>
     <div style="display: flex;">
-        <p>비밀번호</p>
+        <p id="redister_info_name">비밀번호</p>
+        <input id="pw_input_first">
+    </div>
+    <div style="display: flex;">
+        <p id="redister_info_name">비밀번호 확인</p>
         <input id="pw_input">
         <button onclick="join_pass_password()">
             비밀번호 사용 가능 여부 확인 하기
         </button>
+        <p id="pw_check">
+            
+        </p>
+    </div>
+    <div style="display: flex;">
+        <p id="redister_info_name">
+            닉네임
+        </p>
+        <input id="nickname_input">
+    </div>
+    <div style="display: flex;">
+        <P id="redister_info_name">
+            주소
+        </P>
+        <div>
+            <input id="address_first_input">
+            <ul id="address_first" style="list-style: none; display: none;">
+                <li>
+                    서울특별시
+                </li>
+                <li>
+                    경기도
+                </li>
+                <li>
+                    충청북도
+                </li>
+                <li>
+                    충청남도
+                </li>
+                <li>
+                    대전광역시
+                </li>
+                <li>
+                    경상남도
+                </li>
+                <li>
+                    경상남도
+                </li>
+                <li>
+                    광주광역시
+                </li>
+                <li>
+                    전라북도
+                </li>
+                <li>
+                    전라남도
+                </li>
+                <li>
+                    
+                </li>
+            </ul>
+        </div>
+        <div>
+            <input id="address_sub">
+        </div>
+        <div>
+            <input id="address_info">
+        </div>
+    </div>
+    <div style="display: flex;"> 
+        <p id="redister_info_name">휴대폰 번호</p>
+        <input id="phone_number_1">
+        <input id="phone_number_2">
+        <input id="phone_number_1">
+        <button>
+            휴대폰인증
+        </button>
+    </div>
+    <div style="display: flex;"> 
+        <p id="redister_info_name">sns 광고 수신 여부</p>
+        <div style="display: flex;">
+            <input type="checkbox" id="marketing_check" name="scales"/>
+            <p>예</p>
+        </div>
+        <div style="display: flex;">
+            <input type="checkbox" id="marketing_check" name="scales"/>
+            <p>아니요</p>
+        </div>
+    </div>
+    <div style="display: flex;">
+        <p id="redister_info_name">생년월일</p>
+        <div style="display: flex;">
+            <input id="input_barth_years" >
+            <p>년</p>
+        </div>
+        <div style="display: flex;">
+            <div style="display: flex;">
+                <input id="input_barth_month" onclick="document.getElementById('month_ul').style.display = 'block'">
+                <ul id="month_ul" style="display: none; list-style: none;">
+                    
+                </ul>
+                
+            </div>
+            <p>월</p>
+        </div>
+        <div style="display: flex;">
+            <div style="display: flex;">
+                <input id="input_barth_day" onclick="document.getElementById('day_ul').style.display = 'block'">
+                <ul id="day_ul" style="display: none; list-style: none;">
+                    
+                </ul>
+            </div>
+            <p>일</p>
+        </div>
+    </div>
+    <div style="display: flex;">
+        <p id="redister_info_name">
+            이메일
+        </p>
+        <div style="display: flex;">
+            <input>
+            <p>@</p>
+            <input>
+        </div>
+    </div>
+    <div style="display: flex;">
+        <p id="redister_info_name">
+            이메일 광고 수신 여부
+        </p>
+        <div style="display: flex;">
+            <div style="display: flex;">
+                <input type="checkbox" id="marketing_check" name="scales"/>
+                <p>예</p>
+            </div>
+            <div style="display: flex;">
+                <input type="checkbox" id="marketing_check" name="scales"/>
+                <p>아니요</p>
+            </div>
+        </div>
+    </div>
+    <div style="display: flex;">
+        <P id="redister_info_name">
+            만 14세 여부
+        </P>
+        <div style="display: flex;">
+            <input type="checkbox" id="scales" name="scales"/>
+            <p>14세 이상입니다</p>
+        </div>
+        <div style="display: flex;">
+            <input type="checkbox" id="scales" name="scales"/>
+            <p>14세 미만입니다</p>
+        </div>
+    </div>
+    <div style="display: flex;">
+        <p id="redister_info_name">
+            추천인 아이디
+        </p>
+        <input>
     </div>
     <div>
         <button onclick="join_pass()">
@@ -22,6 +178,9 @@
         </button>
     </div>
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            barth_input_set();
+        });
         function join_pass_email(){
             console.log('이메일 가입 가능 여부 확인 클릭 이벤트');
             const email_wrap = document.getElementById('email_input'); // ID가 'email_input'인 요소를 찾음
@@ -58,9 +217,22 @@
             }
         }
         function join_pass_password(){
-            const pw_wrap = document.getElementById('pw_input'); // ID가 'email_input'인 요소를 찾음
-            console.log(pw_wrap.value);
-            alert("비밀번호는 8자 이상입니다.");
+            const pw_wrap = document.getElementById('pw_input'); // ID가 'pw_input'인 요소를 찾음 (부모 요소)
+            const pw_input_first = document.getElementById('pw_input_first'); // ID가 'pw_input_first'인 요소를 찾음 (비밀번호 입력 필드)
+            const pw_check = document.getElementById('pw_check'); // ID가 'pw_input_first'인 요소를 찾음 (비밀번호 입력 필드)
+            
+            console.log(pw_input_first.value); // 비밀번호 입력 필드의 값을 콘솔에 출력
+
+            if (pw_input_first.value.length >= 8) { // 비밀번호 길이가 8자 이상인지 확인
+                if (pw_input_first.value === pw_wrap.value) { // 두 비밀번호 필드가 같은지 확인
+                    // 비밀번호가 일치할 때의 동작
+                    pw_check.textContent = "비밀번호가 일치 합니다."
+                } else {
+                    alert("비밀번호가 일치하지 않습니다.");
+                }
+            } else {
+                alert("비밀번호는 8자 이상이어야 합니다.");
+            }
         }
         function join_pass(){
             const email_wrap = document.getElementById('email_input'); // ID가 'email_input'인 요소를 찾음
@@ -97,10 +269,39 @@
                         
                     }
                     
+                    
                 })
             }
+        }
+        function barth_input_set() {
+            const year = [1950, new Date().getFullYear()];
+            const month = 12;
+            const day = 31;
 
+            const monthUl = document.getElementById("month_ul");
+            const dayul = document.getElementById("day_ul");
             
+
+            // 기존 목록을 비웁니다
+            monthUl.innerHTML = '';
+            dayul.innerHTML = '';
+
+            for (let i = 1; i <= month; i++) {
+                const li = document.createElement("li");
+                li.id = "barth_month_click";
+                li.textContent = i;
+                li.setAttribute("onclick", `barth_month_input({month: ${i}})`);
+
+                monthUl.appendChild(li);
+            }
+            for (let i = 1; i <= day; i++) {
+                const li = document.createElement("li");
+                li.id = "barth_day_click";
+                li.textContent = i;
+                li.setAttribute("onclick", `barth_day_input({month: ${i}})`);
+
+                dayul.appendChild(li);
+            }
         }
     </script>
 </div>
