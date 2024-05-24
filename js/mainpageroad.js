@@ -53,11 +53,11 @@ main.set("views", "./mainpage");
 const templatePath = path.join(__dirname,pageref+  "/mainpage/tamplate/coffeemainpagetample.html");
 const ref_database = "D:";
 
+
 const ref_userinfodata=path.join(ref_database,"database", "userinfo");
 const sellertemplatePath = path.join(__dirname, "/../page/sellerpage/tamplate/sellerpagetamplate.html");
 const UIdb = path.join(ref_database,"database","UI");
 const ref_useremail = path.join(ref_database, "database","user");
-
 
 main.get("/", (req, res) => {
     // URL을 파싱하여 query 객체를 가져옴
@@ -83,7 +83,7 @@ main.get("/", (req, res) => {
         const userinfo_path = path.join(ref_userinfodata,`${token}.json`);s
         console.log(token); // 토큰 값 출력
         const userdata= fs.readFileSync(userinfo_path, 'utf-8');
-        console.log(userdata);
+        //console.log(userdata);
         
         renderedTemplate = applyPageToTemplate(templatePath, pagePath);
         //헤드테그 안에 script테그안에 userdata데이터 넣기
@@ -132,7 +132,7 @@ main.get("/", (req, res) => {
         );
         //console.log(newbrenddata);
     }
-    console.log(newbrenddata);
+    //console.log(newbrenddata);
     const newbrendUIscriptTag = `<script>var newbrend = ${JSON.stringify(newbrenddata)};</script>`;
     renderedTemplate = renderedTemplate.replace("</head>", newbrendUIscriptTag + "</head>");
     
@@ -247,19 +247,21 @@ main.post('/login_pass', async (req, res) => {
     try {
         const token = await userlogin(email, password);  // userlogin 함수가 반환하는 Promise를 기다립니다.
         console.log(token);
+        res.status(200).json({ token: token });  // 토큰을 응답으로 보냅니다.
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: error.message });  // 에러가 발생하면 에러 메시지를 응답으로 보냅니다.
     }
 });
+
 main.post('/join_pass', async (req, res) => {
-    const { id,password } = req.body;
-    console.log(id,password);
+    const { email,password } = req.body;
+    console.log(email,password);
     if(email == "0000"){
         res.status(200).json({ race : "이미 이메일 이존재 합니다" });
     }
     try {
-        const token = await userjoin(id, password);  // userlogin 함수가 반환하는 Promise를 기다립니다.
+        const token = await userjoin(email, password);  // userlogin 함수가 반환하는 Promise를 기다립니다.
         console.log(token);
         res.status(200).json({ token: token });  // 토큰을 응답으로 보냅니다.
     } catch (error) {
@@ -471,7 +473,7 @@ function userlogin(email, password){
             });
         })
         .catch((error) => {
-            //reject(error);  // 에러가 발생하면 Promise를 거부합니다.
+            reject(error);  // 에러가 발생하면 Promise를 거부합니다.
         });
     });
 }
